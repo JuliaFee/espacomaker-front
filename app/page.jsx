@@ -1,29 +1,40 @@
-import Image from "next/image";
+
 import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "./components/header/page";
 
+
 export default function Home() {
   return (
     <div className={styles.page}>
+      
       <Header></Header> 
-      <div className={styles.section0}>
-        <div className={styles.title}>
-          <p>SENAI Lab</p>
-        </div>
-      </div>
-
       <div className={styles.imagecontainer}>
         <img className={styles.img} src="bannerSM.png"></img>
       </div>
       <div className={styles.section1}>
         <div className={styles.title2}>
-         <p>Serviços</p>
+         <p className={styles.title2}>SERVIÇOS</p>
          </div>
-         <div className={styles.linkSection}>
-          <Link className={styles.link} href={""}>Realizar Reserva</Link>
+
+         <div className={styles.linkSection}> 
+          <div class="reserva-section">
+            <div class="reserva-content">
+            <Link className={styles.link} href={""}>Realizar Reserva</Link>
+            </div>
+            <div class="reserva-image">
+              <img src="reserva.png" alt="Ferramentas"></img>
+            </div>
+
+       </div>
+      
+          
           <Link className={styles.link} href={""}>Acompanhar Andamento</Link>
          </div>
+         <div className={styles.linkSection}>
+          
+         </div>
+
       </div>
 
 
