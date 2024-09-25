@@ -1,11 +1,12 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
+import Header from "./components/header/page";
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      {/* <Header></Header> */}
+      <Header></Header> 
       <div className={styles.section0}>
         <div className={styles.title}>
           <p>SENAI Lab</p>
