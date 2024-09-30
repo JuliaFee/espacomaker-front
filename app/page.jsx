@@ -1,4 +1,3 @@
-
 import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "./components/header/page";
@@ -20,7 +19,7 @@ export default function Home() {
          <div className={styles.linkSection}> 
           <div class="reserva-section">
             <div class="reserva-content">
-            <Link className={styles.link} href={""}>Realizar Reserva</Link>
+            <Link className={styles.link} href={"./reservas/reserva"}>Realizar Reserva</Link>
             </div>
             <div class="reserva-image">
               <img src="reserva.png" alt="Ferramentas"></img>
@@ -30,6 +29,7 @@ export default function Home() {
       
           
           <Link className={styles.link} href={""}>Acompanhar Andamento</Link>
+          <Link className={styles.link} href={"./ferramentas/"}>Ferramentas</Link>
          </div>
          <div className={styles.linkSection}>
           
