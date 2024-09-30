@@ -18,11 +18,11 @@ export default function Home() {
          </div>
 
          <div className={styles.linkSection}> 
-          <div className="reserva-section">
-            <div className="reserva-content">
+          <div class="reserva-section">
+            <div class="reserva-content">
             <Link className={styles.link} href={""}>Realizar Reserva</Link>
             </div>
-            <div className="reserva-image">
+            <div class="reserva-image">
               <img src="reserva.png" alt="Ferramentas"></img>
             </div>
 
