@@ -1,0 +1,34 @@
+.global {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1e73be; /* Azul similar ao da imagem */
+    padding: 10px 20px;
+}
+
+.nav p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    color: white; /* Cor branca para o texto */
+}
+
+.senai {
+    color: white; /* Cor branca para 'SENAI' */
+}
+.lab {
+    color: #f0c040; /* Cor amarela para 'Lab' */
+}
+.tools {
+    display: flex;
+    gap: 20px;
+}
+.icon {
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.icon:hover {
+    color: #f0c040; /* Mudar cor ao passar o mouse */
+}

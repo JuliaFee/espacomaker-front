@@ -6,11 +6,11 @@ const Header = () => {
         <>
         <div className={styles.global}>
             <div className={styles.nav}>
-                <p>SENAI Lab</p>
+                <p><span className={styles.senai}>SENAI</span> <span className={styles.lab}>Lab</span></p>
               </div>
             <div className={styles.tools}>
-                    <a href="#"><VscTools/></a>
-                    <a href="#"><CiCalendar/></a>
+                    <a href="#"><VscTools className={styles.icon}/></a>
+                    <a href="#"><CiCalendar className={styles.icon}/></a>
 
 
                 </div>
