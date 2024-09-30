@@ -2,6 +2,7 @@
 import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "./components/header/page";
+import Footer from "./components/footer/page";
 
 
 export default function Home() {
@@ -40,7 +41,7 @@ export default function Home() {
 
 
   
-      {/* <footer className={styles.footer}></footer> */}
+      <Footer></Footer>
     </div>
   );
 }

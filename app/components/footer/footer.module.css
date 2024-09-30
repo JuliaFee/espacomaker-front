@@ -2,9 +2,11 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    background-image: linear-gradient(to right, #252536, #616189);
+    background-image: linear-gradient(to right, #2365b1, #328bf1);
     width: 100%;
     padding: 70px 30px 20px;
+    display: flex;
+    flex-direction: row;
 
 }
 .container{
@@ -15,8 +17,9 @@
     text-decoration: none;
     padding: 10px;
     margin: 5px;
+    margin-top: 10px;
   
-    font-size: 2rem;
+    font-size: 4rem;
     color: white;
     opacity: 0.9;
 }
@@ -37,4 +40,10 @@
 }
 .logo {
     text-align: center;
+}
+.escrito {
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
 }
