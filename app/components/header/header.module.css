@@ -1,0 +1,44 @@
+.global {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2365B1; 
+    padding: 10px 30px;
+    height: 80px;
+    width: 100%;
+}
+
+.nav p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.senai {
+    color: white; 
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+}
+
+.lab {
+    color: #E6AC47;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+}
+
+.tools {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.icon {
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.icon:hover {
+    color: #E6AC47; 
+}
