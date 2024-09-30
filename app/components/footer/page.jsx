@@ -5,10 +5,11 @@ const Footer = () => {
     return (
         <div className={style.global}>
             <div className={style.container}>
-                <a href='#'><FaInstagram /></a>
+                <a href='https://www.instagram.com/senaivalinhos/'><FaInstagram /></a>
+               
             </div>
             <div>
-            <image  className={style.logo} src={'/./public/logoSenaiLab.png'}/>
+
             </div>
             <div className={style.escrito}>
                 <p> ©Todos os Direitos Reservados - 2024 <span className={style.span}>By Inova Tech</span></p>
