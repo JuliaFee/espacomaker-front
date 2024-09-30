@@ -5,8 +5,7 @@ const Footer = () => {
     return (
         <div className={style.global}>
             <div className={style.container}>
-                <a href='https://www.instagram.com/senaivalinhos/'><FaInstagram /></a>
-               
+            <p><span className={style.senai}>SENAI</span> <span className={style.lab}>Lab</span></p>
             </div>
             <div>
 
