@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <div className={style.global}>
             <div className={style.container}>
-            <p><span className={style.senai}>SENAI</span> <span className={style.lab}>Lab</span></p>
+            <p><span className={style.senai}>SENAI</span> <span className={style.lab}>lab</span></p>
             </div>
             <div>
 
