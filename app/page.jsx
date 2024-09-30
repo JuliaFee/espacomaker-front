@@ -18,15 +18,11 @@ export default function Home() {
          </div>
 
          <div className={styles.linkSection}> 
-<<<<<<< HEAD
+
           <div className="reserva-section">
             <div className="reserva-content">
             <Link className={styles.link} href={""}>Realizar Reserva</Link>
-=======
-          <div class="reserva-section">
-            <div class="reserva-content">
-            <Link className={styles.link} href={"./reservas/reserva"}>Realizar Reserva</Link>
->>>>>>> 648f8088515e93c9775c643c5000e6cc34202a30
+
             </div>
             <div className="reserva-image">
               <img src="reserva.png" alt="Ferramentas"></img>
