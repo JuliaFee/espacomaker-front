@@ -6,7 +6,7 @@ const Footer = () => {
         <div className={style.global}>
             <div className={style.container}>
                 <a href='https://www.instagram.com/senaivalinhos/'><FaInstagram /></a>
-                <a href='https://www.instagram.com/senaivalinhos/'><img className={style.logo} src={"/public/logoSenaiBranca.png"}/></a>
+               
             </div>
             <div>
 
