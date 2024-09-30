@@ -1,5 +1,5 @@
 {
-  "name": "espacomaker-front",
+  "name": "teste",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,14 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "axios": "^1.7.7",
-    "next": "14.2.13",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^5.3.0"
-  },
-  "devDependencies": {
-    "eslint": "^8",
-    "eslint-config-next": "14.2.13"
+    "next": "14.2.13"
   }
 }

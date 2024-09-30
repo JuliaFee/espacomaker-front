@@ -1,0 +1,18 @@
+
+
+.body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+  }
+  
+@media screen and (max-width: 480px) {
+  .body {
+    background-color: blue;
+  }  
+}
