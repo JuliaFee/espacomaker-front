@@ -1,33 +1,46 @@
 "use client";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
 
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
-export default function Ferramentas(){
-    const[ferramentas,setFerramentas] = useState([]);
-    const[descricao, setDescricao] =useState([]);
-    const router = useRouter();
+function Ferramentas() {
+    const [ferramentas, setFerramentas] = useState([]);
 
-    useEffect(()=>{
-        async function fetchFerramentas() {
-            try{
-                const response = await axios.get(`/api/ferramentas?nome${setFerramentas.nome}`);
-                setFerramentas(response.data.data);
-                setDescricao(response.data.data);
-            }catch (error){
-              console.error("Error fetching data:",error);
-            
+    useEffect (() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("http://localhost:3000/api/ferramentas");
+                console.log('Dados recebidos da API:', response.data);
+                setFerramentas(response.data);
+            } catch (error) {
+                console.error('Erro ao obter os dados da API:', error);
             }
-           
-}
-fetchFerramentas();
-}, []);
-const handleFerramentas = (e) =>{
+        };
+        fetchData();
+        
+    }, []);
+
+    return (
+        <div>
+            <p>Ferramentas</p>
+            <ul>
+                {Array.isArray(ferramentas) && ferramentas.length > 0 ?(
+                    ferramentas.map(ferramenta => (
+                        <li key={ferramenta.id}>
+                            {ferramenta.nome}
+                            {ferramenta.descricao}
+                            {ferramenta.img}
+                        </li>
+                    ))
+                ) : (
+                    <p>Nenhuma ferramenta encontrada</p>
+                )}
+            </ul>
+        </div>
+    )
 
 }
-
-}
-            
+  export default Ferramentas;          
     
     
 
