@@ -4,7 +4,7 @@
     align-items: center;
     background-color: #2365B1; 
     padding: 10px 30px;
-    height: 80px;
+    height: 130px;
     width: 100%;
 }
 
@@ -17,13 +17,13 @@
 .senai {
     color: white; 
     font-family: Arial, sans-serif;
-    font-size: 30px;
+    font-size: 40px;
 }
 
 .lab {
     color: #E6AC47;
     font-family: Arial, sans-serif;
-    font-size: 30px;
+    font-size: 40px;
 }
 
 .tools {
@@ -34,7 +34,7 @@
 
 .icon {
     color: white;
-    font-size: 22px;
+    font-size: 35px;
     cursor: pointer;
     transition: color 0.3s ease;
 }
