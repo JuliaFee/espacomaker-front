@@ -1,14 +1,14 @@
 import styles from "./registro.module.css";
 import Link from "next/link";
-// import Header from "./components/header/page";
-// import Footer from "./components/footer/page";
+import Header from "./../components/header/page";
+import Footer from "./../components/footer/page";
 
 
 export default function Registros() {
   return (
     <div className={styles.page}>
       
-      {/* <Header></Header>  */}
+       <Header></Header>  
      
       <div className={styles.section1}>
         <div className={styles.title2}>
@@ -19,7 +19,7 @@ export default function Registros() {
 
           <div className="reserva-section">
             <div className="reserva-content">
-            <Link className={styles.link} href={""}>Faça o registro de docentes</Link>
+            <p className={styles.title3}>Faça o registro de docentes</p>
 
             </div>
             <div className={styles.inputs}>
@@ -27,7 +27,7 @@ export default function Registros() {
                 <input type="text" placeholder="Email"/>
                 <input type="text" placeholder="Senha"/>
             </div>
-            <div><button className={styles.button}>Registrar</button></div>
+            <div><button className={styles.button}>Registre-se</button></div>
 
        </div>
       
@@ -40,7 +40,7 @@ export default function Registros() {
 
 
   
-      {/* <Footer></Footer> */}
+       <Footer></Footer> 
     </div>
   );
 }
