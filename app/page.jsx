@@ -44,6 +44,16 @@ export default function Home() {
         <div className={styles.linkSection}>
 
         </div>
+       </div>
+      
+          
+          <Link className={styles.link} href={""}>Acompanhar Andamento</Link>
+          <Link className={styles.link} href={"./ferramentas/"}>Ferramentas</Link>
+          <Link className={styles.link} href={"./registros/"}>Registros</Link>
+         </div>
+         <div className={styles.linkSection}>
+          
+         </div>
 
       </div>
 
