@@ -7,43 +7,45 @@ import Footer from "./components/footer/page";
 export default function Home() {
   return (
     <div className={styles.page}>
-      
-      <Header></Header> 
+
+      <Header></Header>
       <div className={styles.imagecontainer}>
-        <img className={styles.img} src="bannerSM.png"></img>
+        <img className={styles.imgBanner} src="bannerSM.png"></img>
       </div>
       <div className={styles.section1}>
         <div className={styles.title2}>
-         <p className={styles.title2}>SERVIÇOS</p>
-         </div>
+          <p className={styles.title2}>SERVIÇOS</p>
+        </div>
 
-         <div className={styles.linkSection}> 
+        <div className={styles.linkSection}>
 
           <div className="reserva-section">
             <div className="reserva-content">
-            <Link className={styles.link} href={""}>Realizar Reserva</Link>
-
+              <Link className={styles.link} href={""}>Realizar Reserva</Link>
+              <img className={styles.img1} src="reserva.png" alt="Ferramentas" />
             </div>
-            <div className="reserva-image">
-              <img src="reserva.png" alt="Ferramentas"></img>
-            </div>
+          </div>
+          <div className="reserva-content">
+            <Link className={styles.link} href={""}>Acompanhar Andamento</Link>
+            <img className={styles.img2} src="reserva.png" alt="Ferramentas" />
+          </div>
+          <div className="reserva-content">
+            <Link className={styles.link} href={"./ferramentas/"}>Ferramentas</Link>
+            <img className={styles.img3} src="reserva.png" alt="Ferramentas" />
+          </div>
+          <div className="reserva-content">
+            <Link className={styles.link} href={"./registros/"}>Registros</Link>
+          </div>
+        </div>
+        <div className={styles.linkSection}>
 
-       </div>
-      
-          
-          <Link className={styles.link} href={""}>Acompanhar Andamento</Link>
-          <Link className={styles.link} href={"./ferramentas/"}>Ferramentas</Link>
-          <Link className={styles.link} href={"./registros/"}>Registros</Link>
-         </div>
-         <div className={styles.linkSection}>
-          
-         </div>
+        </div>
 
       </div>
 
 
 
-  
+
       <Footer></Footer>
     </div>
   );

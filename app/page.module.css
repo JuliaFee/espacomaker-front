@@ -19,7 +19,7 @@
   margin-top: 10px;
 }
 
-.img {
+.imgBanner {
   width: 100%;
   max-width: 900px;
   border-radius: 20px;
@@ -82,7 +82,7 @@
   background-color: #2E83E3;
 }
 
-.resrva-section{
+.reserva-section{
 position: relative;
 width: 300px;
 height: 150px;
@@ -95,7 +95,7 @@ overflow: hidden;
 padding: 10px;
 }
 
-.resrva-container link.resrva-link{
+.reserva-container link.resrva-link{
   color: white;
   font-size: 24px;
   z-index: 2;
@@ -118,4 +118,27 @@ padding: 10px;
   width: 150px;
   height: auto;
   opacity: 1;
+}
+
+.img1{
+  width: 15rem;
+  position: absolute;
+  right: 29rem;
+  top: 49rem
+}
+.img2{
+  width: 15rem;
+  position: absolute;
+  right: 29rem;
+  top: 59rem
+}
+.img3{
+  width: 14rem;
+  position: absolute;
+  right: 29rem;
+  top: 69rem;
+  margin-bottom: 5rem;
+}
+.reserva-content{
+  margin-bottom: 6rem;
 }
