@@ -1,4 +1,4 @@
-import styles from "./adm.module.css";
+import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "./../components/header/page";
 import Footer from "./../components/footer/page";
@@ -21,8 +21,10 @@ export default function Home() {
 
           <div className="reserva-section">
             <div className="reserva-content">
+              <div className={styles.card-1}>
               <Link className={styles.link} href={""}>CONTROLE DE RESERVAS</Link>
               <img className={styles.img1} src="reserva.png" alt="Ferramentas" />
+              </div>
             </div>
           </div>
           <div className="reserva-content">
