@@ -1,4 +1,4 @@
-import styles from "./registro.module.css";
+import styles from "./pageregistro.module.css";
 import Link from "next/link";
 import Header from "./../components/header/page";
 import Footer from "./../components/footer/page";
