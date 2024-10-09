@@ -4,13 +4,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-color: #ff0000; */
-  /* min-height: 100vh; */
-  
-  background-image: url("/bckg.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  background-color: #f9f9f9;
+  min-height: 100vh;
 }
 
 .title {
@@ -28,8 +23,9 @@
   width: 100%;
   max-width: 900px;
   border-radius: 20px;
-  margin-left: 185px;
   align-items: center;
+  margin-top: 50px;
+  margin-left: 185px;
 }
 
 .section1 {
@@ -51,19 +47,23 @@
   padding: 30px;
   text-align: center;
   border-radius: 20px;
-  text-decoration: none;
   font-size: 50px;
   font-family: "Chau Philomene One";
+  margin-top: 22px;
 }
 
 .linkSection {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 80px;
+  gap: 90px; /* Aumente o gap entre os cards */
   padding: 70px 0;
+  position: relative;
 }
 
+.reserva-section {
+  margin-bottom: 50px; /* Adiciona um espaçamento extra abaixo do primeiro card */
+}
 .link {
   display: flex;
   align-items: center;
@@ -78,73 +78,43 @@
   text-decoration: none;
   font-size: 50px;
   font-family: "Chau Philomene One";
+  position: relative;
 }
 
 .link:hover {
   background-color: #2E83E3;
 }
 
-.reservaSection{
-position: relative;
-width: 300px;
-height: 150px;
-border-radius: 10px;
-display: flex;
-align-items: center;
-justify-content: center;
-text-align: center;
-overflow: hidden;
-padding: 10px;
-flex-direction: column;
-}
-
-.reserva-container link.resrva-link{
-  color: white;
-  font-size: 24px;
+/* Ajuste para sobreposição das imagens */
+.img1, .img2, .img3 {
+  width: 10rem;
+  position: absolute;
   z-index: 2;
+}
+
+.img1 {
+  width: 25%;
+  right: -3rem;
+  bottom: 1rem;
+
+}
+
+.img2 {
+  top: 1rem; 
+  right: -4rem;
+  width: 25%;
+}
+
+.img3 {
+  top: -5rem; 
+  right: -5rem;
+}
+
+.reserva-content {
   position: relative;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* .resrva-link:houver{
-  text-decoration: underline;
-} */
-.resrva-image{
-  position: absolute;
-  bottom: -20px;
-  right: -20px;
-  z-index: 1;
-}
-
-.resrva-image img{
-  width: 150px;
-  height: auto;
-  opacity: 1;
-}
-
-.img1{
-  position: absolute;
-  left: 78rem;
-  top: 49rem;
-  width: 15rem;  
-}
-.img2{
-  position: absolute;
-  left: 78rem;
-  top: 62rem;
-  width: 15rem; 
-}
-.img3{
-  position: absolute;
-  left: 78rem;
-  top: 75rem;
-  width: 15rem; 
-}
-.reservaContent{
+  margin-bottom: 6rem; 
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-
-  gap: 20px;
+ 
 }

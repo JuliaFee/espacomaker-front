@@ -23,7 +23,7 @@ export default function Home() {
             <div className="reserva-content">
               <div className={styles.card-1}>
               <Link className={styles.link} href={""}>CONTROLE DE RESERVAS</Link>
-              <img className={styles.img1} src="reserva.png" alt="Ferramentas" />
+              <img className={styles.img1} src="controlar_andamentos.png" alt="Ferramentas" />
               </div>
             </div>
           </div>

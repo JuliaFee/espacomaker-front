@@ -14,27 +14,27 @@ export default function Home() {
       </div>
       <div className={styles.section1}>
         <div className={styles.title2}>
-          <p className={styles.title2}>SERVIÇOS</p>
+          <p className={styles.link}>SERVIÇOS</p>
         </div>
 
         <div className={styles.linkSection}>
 
             <div className="reservaContent">
               <Link className={styles.link} href={""}>Realizar Reserva</Link>
-              {/* <img className={styles.img1} src="reserva.png" alt="Ferramentas" /> */}
+               <img className={styles.img1} src="controlar_andamentos.png" alt="Ferramentas" /> 
             </div>
           
           <div className="reservaContent">
             <Link className={styles.link} href={""}>Acompanhar Andamento</Link>
-            {/* <img className={styles.img2} src="reserva.png" alt="Ferramentas" /> */}
+             <img className={styles.img2} src="reserva.png" alt="Ferramentas" /> 
           </div>
-          <div className="reservaContent">
+          {/* <div className="reservaContent">
             <Link className={styles.link} href={"./ferramentas/"}>Ferramentas</Link>
-            {/* <img className={styles.img3} src="reserva.png" alt="Ferramentas" /> */}
+             <img className={styles.img3} src="reserva.png" alt="Ferramentas" /> 
           </div>
           <div className="reservaContent">
             <Link className={styles.link} href={"./registros/"}>Registros</Link>
-          </div>
+          </div> */}
         </div>
         <div className={styles.linkSection}>
 
