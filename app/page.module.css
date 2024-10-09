@@ -4,8 +4,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f9f9f9;
-  min-height: 100vh;
+  /* background-color: #ff0000; */
+  /* min-height: 100vh; */
+  
+  background-image: url("/bckg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .title {
@@ -25,7 +30,6 @@
   border-radius: 20px;
   margin-left: 185px;
   align-items: center;
-
 }
 
 .section1 {
@@ -50,15 +54,13 @@
   text-decoration: none;
   font-size: 50px;
   font-family: "Chau Philomene One";
-  
-  
 }
 
 .linkSection {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 80px;
   padding: 70px 0;
 }
 
@@ -82,7 +84,7 @@
   background-color: #2E83E3;
 }
 
-.reserva-section{
+.reservaSection{
 position: relative;
 width: 300px;
 height: 150px;
@@ -93,6 +95,7 @@ justify-content: center;
 text-align: center;
 overflow: hidden;
 padding: 10px;
+flex-direction: column;
 }
 
 .reserva-container link.resrva-link{
@@ -121,24 +124,27 @@ padding: 10px;
 }
 
 .img1{
-  width: 15rem;
   position: absolute;
-  right: 29rem;
-  top: 49rem
+  left: 78rem;
+  top: 49rem;
+  width: 15rem;  
 }
 .img2{
-  width: 15rem;
   position: absolute;
-  right: 29rem;
-  top: 59rem
+  left: 78rem;
+  top: 62rem;
+  width: 15rem; 
 }
 .img3{
-  width: 14rem;
   position: absolute;
-  right: 29rem;
-  top: 69rem;
-  margin-bottom: 5rem;
+  left: 78rem;
+  top: 75rem;
+  width: 15rem; 
 }
-.reserva-content{
-  margin-bottom: 6rem;
+.reservaContent{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 20px;
 }
