@@ -23,11 +23,11 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Base URL:", process.env.BASE_URL);
+    console.log("Base URL:", process.env.NEXT_PUBLIC_BASE_URL);
     const fetchFerramentas = async () => {
       try {
         console.log("Buscando ferramentas...");
-        const response = await axios.get("/api/ferramentas");
+        const response = await axios.get("api/ferramentas");
         console.log("Response:", response);
         setFerramentas(response.data);
       } catch (error) {
