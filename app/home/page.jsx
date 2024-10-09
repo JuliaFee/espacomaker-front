@@ -10,28 +10,20 @@ const Home = () => {
 
   const getDeviceType = () => {
     const userAgent = navigator.userAgent;
-
-    if (
-      /android/i.test(userAgent) ||
-      (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream)
-    ) {
-      return "Mobile";
-    } else {
-      return "Desktop";
-    }
+    return /android/i.test(userAgent) || (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) ? "Mobile" : "Desktop";
   };
 
   useEffect(() => {
     const deviceType = getDeviceType();
     document.body.classList.add(deviceType);
     setDeviceType(deviceType);
-
     return () => {
       document.body.classList.remove(deviceType);
     };
   }, []);
 
   useEffect(() => {
+    console.log("Base URL:", process.env.BASE_URL);
     const fetchFerramentas = async () => {
       try {
         console.log("Buscando ferramentas...");
@@ -48,7 +40,7 @@ const Home = () => {
 
   return (
     <div className={style.body}>
-      <h1>Hello World !!!</h1>
+      <h1>Ferramentas Disponíveis</h1>
       <h3>{deviceType}</h3>
       {error && <p className={style.error}>{error}</p>} {/* Exibe mensagem de erro */}
       <ul>
