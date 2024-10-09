@@ -25,6 +25,8 @@
   border-radius: 20px;
   align-items: center;
   margin-top: 50px;
+  margin-left: 185px;
+
 }
 
 .section1 {
@@ -113,8 +115,9 @@
 
 .reserva-content {
   position: relative;
-  margin-bottom: 6rem; /* Você pode ajustar esse valor para aumentar ou diminuir o espaçamento geral */
+  margin-bottom: 6rem; 
   display: flex;
   justify-content: center;
   align-items: center;
+ 
 }
