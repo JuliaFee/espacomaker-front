@@ -7,6 +7,7 @@ const Home = () => {
   const [ferramentas, setFerramentas] = useState([]);
   const [deviceType, setDeviceType] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const getDeviceType = () => {
     const userAgent = navigator.userAgent;
@@ -23,16 +24,23 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Base URL:", process.env.NEXT_PUBLIC_BASE_URL);
     const fetchFerramentas = async () => {
       try {
         console.log("Buscando ferramentas...");
         const response = await axios.get("api/ferramentas");
         console.log("Response:", response);
-        setFerramentas(response.data);
+
+        if (response.data && Array.isArray(response.data.ferramentas)) {
+          setFerramentas(response.data.ferramentas);
+        } else {
+          console.error("Dados inesperados:", response.data);
+          setError("Formato de dados inesperado!");
+        }
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
-        setError("Erro interno do servidor!"); // Atualiza o estado de erro
+        setError("Erro interno do servidor!");
+      } finally {
+        setLoading(false);
       }
     };
     fetchFerramentas();
@@ -42,16 +50,23 @@ const Home = () => {
     <div className={style.body}>
       <h1>Ferramentas Disponíveis</h1>
       <h3>{deviceType}</h3>
-      {error && <p className={style.error}>{error}</p>} {/* Exibe mensagem de erro */}
-      <ul>
-        {ferramentas.length > 0 ? (
-          ferramentas.map((ferramenta, index) => (
-            <li key={index}>{ferramenta.nome}</li>
-          ))
-        ) : (
-          <li>Nenhuma ferramenta encontrada.</li>
-        )}
-      </ul>
+      {loading ? (
+        <p>Carregando...</p>
+      ) : (
+        <>
+          {error && <p className={style.error}>{error}</p>}
+          <ul>
+            {ferramentas.length > 0 ? (
+              ferramentas.map((ferramenta, index) => (
+                <li key={index}>{ferramenta.nome}</li>
+               
+              ))
+            ) : (
+              <li>Nenhuma ferramenta encontrada.</li>
+            )}
+          </ul>
+        </>
+      )}
     </div>
   );
 };
