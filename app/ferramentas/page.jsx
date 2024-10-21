@@ -22,10 +22,6 @@ const Ferramentas = () => {
     };
   }, []);
 
-
-  }, []);
-
-
   return (
     <div className={style.body}>
       <h1>Ferramentas Disponíveis</h1>
