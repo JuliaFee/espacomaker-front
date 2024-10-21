@@ -1,6 +1,9 @@
 "use client";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import Header from "../components/header/page";
+import Footer from "../components/footer/page";
+import styles from './pageferramentas.module.css';
 
 
 function Ferramentas() {
@@ -21,7 +24,8 @@ function Ferramentas() {
     }, []);
 
     return (
-        <div>
+        <div className={styles.pageContainer}>
+            <Header></Header>
             <p>Ferramentas</p>
             <ul>
                 {Array.isArray(ferramentas) && ferramentas.length > 0 ?(
@@ -36,6 +40,7 @@ function Ferramentas() {
                     <p>Nenhuma ferramenta encontrada</p>
                 )}
             </ul>
+            <Footer></Footer>
         </div>
     )
 
