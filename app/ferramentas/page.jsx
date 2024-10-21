@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import style from "./pageferramentas.module.css";
 
 const Ferramentas = () => {
   const [ferramentas, setFerramentas] = useState([]);
@@ -23,25 +22,9 @@ const Ferramentas = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const fetchFerramentas = async () => {
-      try {
-        const response = await axios.get("/api/ferramentas");
-        if (response.data && Array.isArray(response.data.ferramentas)) {
-          setFerramentas(response.data.ferramentas);
-        } else {
-          console.error("Dados inesperados:", response.data);
-          setError("Formato de dados inesperado!");
-        }
-      } catch (error) {
-        console.error("Erro ao buscar dados:", error);
-        setError("Erro interno do servidor!");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchFerramentas();
+
   }, []);
+
 
   return (
     <div className={style.body}>
