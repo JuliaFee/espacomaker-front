@@ -1,52 +1,57 @@
 "use client";
-import React, {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "../components/header/page";
-import Footer from "../components/footer/page";
-import styles from './pageferramentas.module.css';
+
+const Ferramentas = () => {
+  const [ferramentas, setFerramentas] = useState([]);
+  const [deviceType, setDeviceType] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const getDeviceType = () => {
+    const userAgent = navigator.userAgent;
+    return /android/i.test(userAgent) || (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) ? "Mobile" : "Desktop";
+  };
+
+  useEffect(() => {
+    const deviceType = getDeviceType();
+    document.body.classList.add(deviceType);
+    setDeviceType(deviceType);
+    return () => {
+      document.body.classList.remove(deviceType);
+    };
+  }, []);
 
 
-function Ferramentas() {
-    const [ferramentas, setFerramentas] = useState([]);
+  }, []);
 
-    useEffect (() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get("http://localhost:3000/api/ferramentas");
-                console.log('Dados recebidos da API:', response.data);
-                setFerramentas(response.data);
-            } catch (error) {
-                console.error('Erro ao obter os dados da API:', error);
-            }
-        };
-        fetchData();
-        
-    }, []);
 
-    return (
-        <div className={styles.pageContainer}>
-            <Header></Header>
-            <p>Ferramentas</p>
-            <ul>
-                {Array.isArray(ferramentas) && ferramentas.length > 0 ?(
-                    ferramentas.map(ferramenta => (
-                        <li key={ferramenta.id}>
-                            {ferramenta.nome}
-                            {ferramenta.descricao}
-                            {ferramenta.img}
-                        </li>
-                    ))
-                ) : (
-                    <p>Nenhuma ferramenta encontrada</p>
-                )}
-            </ul>
-            <Footer></Footer>
-        </div>
-    )
+  return (
+    <div className={style.body}>
+      <h1>Ferramentas Disponíveis</h1>
+      <h3>{deviceType}</h3>
+      {loading ? (
+        <p>Carregando...</p>
+      ) : (
+        <>
+          {error && <p className={style.error}>{error}</p>}
+          <div className={style.container}>
+            {ferramentas.length > 0 ? (
+              ferramentas.map((ferramenta) => (
+                <div key={ferramenta.id} className={style.card}>
+                  <img src={ferramenta.img} alt={ferramenta.nome} className={style.imagem} />
+                  <h2>{ferramenta.nome}</h2>
+                  <p>{ferramenta.descricao}</p>
+                </div>
+              ))
+            ) : (
+              <p>Nenhuma ferramenta encontrada.</p>
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
-}
-  export default Ferramentas;          
-    
-    
-
-    
+export default Ferramentas;
