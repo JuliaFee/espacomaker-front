@@ -27,7 +27,7 @@ const Ferramentas = () => {
     const fetchFerramentas = async () => {
       try {
         console.log("Buscando ferramentas...");
-        const response = await axios.get("http://localhost:5001/ferramentas"); // Certifique-se de usar a URL correta
+        const response = await axios.get("http://localhost:5000/ferramentas"); // Certifique-se de usar a URL correta
         console.log("Response:", response);
 
         if (response.data && Array.isArray(response.data.ferramentas)) {
