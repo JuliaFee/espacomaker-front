@@ -6,7 +6,7 @@ import axios from 'axios';
 // import Footer from "./login";
 
 
-const LoginForm = () => {
+const LoginADMForm = () => {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -61,7 +61,7 @@ const LoginForm = () => {
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
-                        <p className={styles.title}>Login de usuário</p>
+                        <p className={styles.title}>Login Docente</p>
                         <label htmlFor="nome" className={styles.label}>Nome:</label>
                         <input
                             type="text"
@@ -96,18 +96,6 @@ const LoginForm = () => {
                             required
                         />
                     </div>
-
-                    <div className={styles.formGroup}>
-                        <label htmlFor="tipo" className={styles.label}>tipo:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="tipo"
-                            value={tipo}
-                            onChange={(e) => setTipo(e.target.value)}
-                            required
-                        />
-                    </div>
                     <button
                         type="submit"
                         className={`${styles.button} ${styles.submitButton}`}
@@ -123,4 +111,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default LoginADMForm;

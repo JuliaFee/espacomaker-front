@@ -11,8 +11,6 @@ const CadastroForm = () => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [dados, setDados] = useState('');
-    const [tipo, setTipo] = useState('');
-
 
     useEffect (() => {
         const fetchData = async () => {
@@ -38,7 +36,6 @@ const CadastroForm = () => {
             nome,
             email,
             senha,
-            tipo,
         };
     
         console.log(novoUsuario); // Para verificar o objeto que será enviado
@@ -97,17 +94,6 @@ const CadastroForm = () => {
                         />
                     </div>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="tipo" className={styles.label}>tipo:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="tipo"
-                            value={tipo}
-                            onChange={(e) => setTipo(e.target.value)}
-                            required
-                        />
-                    </div>
                     <button
                         type="submit"
                         className={`${styles.button} ${styles.submitButton}`}
