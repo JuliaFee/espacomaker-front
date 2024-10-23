@@ -58,11 +58,11 @@ const Impressora = () => {
           <ul>
             {impressoras.length > 0 ? (
               impressoras.map((impressoras) => (
-                <li key={impressoras.id}>{impressoras.nome}
+                <li key={impressoras.id}>
                 <img src={impressoras.img} alt={impressoras.nome}/>   
                 <h2>{impressoras.nome}</h2>
                 <p>{impressoras.descricao}</p>
-                <p>{impressoras.valor}</p>
+                <p>{impressoras.statusI}</p>
                 </li>           
               ))
             ) : (
