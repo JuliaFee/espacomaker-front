@@ -1,124 +1,95 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './login.module.css';
 import axios from 'axios';
-// import Header from "./login";
-// import Footer from "./login";
-
 
 const LoginForm = () => {
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
+    const [nome, setNome] = useState(''); // Adicionando estado para o nome
+    const [email, setEmail] = useState(''); // Adicionando estado para o email
     const [senha, setSenha] = useState('');
-    const [dados, setDados] = useState('');
-    const [tipo, setTipo] = useState('');
-
-
-    useEffect (() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get("http://localhost:5000/users");
-                console.log('Dados recebidos da API:', response.data);
-                console.log('Esta funfando tomaaa macetabdo');
-                setDados(response.data);
-            } catch (error) {
-                console.error('Erro ao obter os dados da API:', error);
-                console.error('teste', error);
-            }
-        };
-        fetchData();
-        
-    }, []);
+    const [mensagem, setMensagem] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // Crie um objeto com os dados que você deseja enviar
-        const novoUsuario = {
-            nome,
-            email,
-            senha,
-            tipo,
-        };
-    
-        console.log(novoUsuario); // Para verificar o objeto que será enviado
-    
+
         try {
-            // Envie o objeto como o segundo argumento para a requisição POST
-            const response = await axios.post("http://localhost:5000/users", novoUsuario);
-            console.log('Usuário cadastrado:', response.data);
+            // Envia nome, email e senha para o backend via GET
+            const response = await axios.get('http://localhost:5000/users/login', {
+                params: {
+                    nome: nome,
+                    email: email,
+                    senha: senha,
+                },
+            });
+
+            // Verifica a resposta do backend
+            if (response.data.success) {
+                setMensagem('Login realizado com sucesso!');
+                // Aqui você pode redirecionar o usuário ou realizar outras ações
+            } else {
+                setMensagem(response.data.message); // Mensagem de erro do backend
+            }
         } catch (error) {
-            console.error('Erro ao cadastrar usuário:', error);
+            console.error('Erro ao realizar login:', error);
+            setMensagem('Erro ao tentar logar. Tente novamente.');
         }
-    
     };
-    
 
     return (
-
         <div className={styles.pageContainer}>
-            {/* <Header></Header> */}
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
                         <p className={styles.title}>Login de usuário</p>
-                        <label htmlFor="nome" className={styles.label}>Nome:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="nome"
-                            value={nome}
-                            onChange={(e) => setNome(e.target.value)}
-                            required
-                        />
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="nome" className={styles.label}>Nome:</label>
+                            <input
+                                type="text"
+                                className={styles.input}
+                                id="nome"
+                                value={nome}
+                                onChange={(e) => setNome(e.target.value)}
+                                required
+                            />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="email" className={styles.label}>Email:</label>
+                            <input
+                                type="email"
+                                className={styles.input}
+                                id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="senha" className={styles.label}>Senha:</label>
+                            <input
+                                type="password"
+                                className={styles.input}
+                                id="senha"
+                                value={senha}
+                                onChange={(e) => setSenha(e.target.value)}
+                                required
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            className={`${styles.button} ${styles.submitButton}`}
+                        >
+                            Entrar
+                        </button>
                     </div>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="email" className={styles.label}>Email:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label htmlFor="senha" className={styles.label}>Senha:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="senha"
-                            value={senha}
-                            onChange={(e) => setSenha(e.target.value)}
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label htmlFor="tipo" className={styles.label}>tipo:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="tipo"
-                            value={tipo}
-                            onChange={(e) => setTipo(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <button
-                        type="submit"
-                        className={`${styles.button} ${styles.submitButton}`}
-                    >
-                        Entrar
-                    </button>
+                    {/* Exibe a mensagem de sucesso ou erro */}
+                    {mensagem && <p className={styles.message}>{mensagem}</p>}
                 </form>
-         
             </div>
-
-            {/* <Footer></Footer> */}
         </div>
     );
 };
