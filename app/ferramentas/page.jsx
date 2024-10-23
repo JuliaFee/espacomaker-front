@@ -1,7 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Header from "../components/header/page";
+import Footer from "../components/footer/page";
 import style from "./pageferramentas.module.css";
+import { MdOutlineDelete } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
 import { useRouter } from 'next/navigation'; // Adicionando o hook para redirecionar
 
 const Ferramentas = () => {
@@ -24,7 +28,6 @@ const Ferramentas = () => {
       document.body.classList.remove(deviceType);
     };
   }, []);
-
 
   useEffect(() => {
     const fetchFerramentas = async () => {
@@ -61,22 +64,23 @@ const Ferramentas = () => {
 
   return (
     <div className={style.body}>
-      <h1>Ferramentas Disponíveis</h1>
-      <h3>Tipo de dispositivo: {deviceType}</h3>
+      <Header />
+      <h1 className={style.h1}>Ferramentas Disponíveis</h1>
+      <h3 className={style.h3}>Tipo de dispositivo: {deviceType}</h3>
       {loading ? (
-        <p>Carregando...</p>
+        <p className={style.loading}>Carregando...</p>
       ) : (
         <>
           {error && <p className={style.error}>{error}</p>}
-          <ul>
+          <ul className={style.container}>
             {ferramentas.length > 0 ? (
               ferramentas.map((ferramenta) => (
                 <li key={ferramenta.id} className={style.card}>
                   <img src={ferramenta.img} alt={ferramenta.nome} className={style.imagem} />
                   <h2>{ferramenta.nome}</h2>
                   <p>{ferramenta.descricao}</p>
-                  <button onClick={() => handleEdit(ferramenta.id)} className={style.editButton}>Editar</button>
-                  <button onClick={() => handleDelete(ferramenta.id)} className={style.deleteButton}>Excluir</button>
+                  <button onClick={() => handleEdit(ferramenta.id)} className={style.editButton}><FaRegEdit /></button>
+                  <button onClick={() => handleDelete(ferramenta.id)} className={style.deleteButton}><MdOutlineDelete /></button>
                 </li>
               ))
             ) : (
@@ -85,6 +89,7 @@ const Ferramentas = () => {
           </ul>
         </>
       )}
+      <Footer />
     </div>
   );
 };
