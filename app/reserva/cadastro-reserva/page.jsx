@@ -1,154 +1,105 @@
-"use client";
+'use client';
 import React, { useState, useEffect } from 'react';
-import styles from './cadastroreserva.module.css';
 import axios from 'axios';
-// import Header from "./login";
-// import Footer from "./login";
+import Calendar from 'react-calendar';
 
+const BookingForm = () => {
+  const [ferramentas, setFerramentas] = useState([]);
+  const [impressoras, setImpressoras] = useState([]);
+  const [selectedFerramenta, setSelectedFerramenta] = useState('');
+  const [selectedImpressora, setSelectedImpressora] = useState('');
+  const [dataReserva, setDataReserva] = useState(new Date());
+  const [horaInicio, setHoraInicio] = useState('');
+  const [horaFim, setHoraFim] = useState('');
+  const [loading, setLoading] = useState(true); // Estado para controle de loading
+  const [error, setError] = useState(null); // Estado para erros
 
-const ReservaForm = () => {
-    const [nome, setNome] = useState('');
-    const [ferramenta, setFerramenta] = useState('');
-    const [impressora, setImpressora] = useState('');
-    const [horario, setHorario] = useState('');
-    const [data, setData] = useState('');
-    const [status, setStatus] = useState('');
-
-
-    useEffect (() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get("http://localhost:5000/reservas");
-                console.log('Dados recebidos da API:', response.data);
-                console.log('Esta funfando tomaaa macetabdo');
-                setDados(response.data);
-            } catch (error) {
-                console.error('Erro ao obter os dados da API:', error);
-                console.error('teste', error);
-            }
-        };
-        fetchData();
-        
-    }, []);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
-        // Crie um objeto com os dados que você deseja enviar
-        const novaReserva = {
-            nome,
-            ferramenta,
-            impressora,
-            horario,
-            data,
-            status,
-        };
-    
-        console.log(novaReserva); // Para verificar o objeto que será enviado
-    
-        try {
-            // Envie o objeto como o segundo argumento para a requisição POST
-            const response = await axios.post("http://localhost:5000/reservas", novoUsuario);
-            console.log('Reserva realizada:', response.data);
-        } catch (error) {
-            console.error('Erro ao realizar reserva:', error);
-        }
-    
+  useEffect(() => {
+    const fetchFerramentas = async () => {
+      try {
+        const response = await axios.get("http://localhost:5001/ferramentas"); // URL da API de ferramentas
+        setFerramentas(response.data.ferramentas);
+      } catch (error) {
+        console.error("Erro ao buscar ferramentas:", error.response ? error.response.data : error.message);
+        setError("Erro ao carregar ferramentas.");
+      } finally {
+        setLoading(false); // Finaliza o loading
+      }
     };
-    
 
-    return (
+    const fetchImpressoras = async () => {
+      try {
+        const response = await axios.get("http://localhost:5001/impressoras"); // URL da API de impressoras
+        setImpressoras(response.data.impressoras);
+      } catch (error) {
+        console.error("Erro ao buscar impressoras:", error.response ? error.response.data : error.message);
+        setError("Erro ao carregar impressoras.");
+      } finally {
+        setLoading(false); // Finaliza o loading
+      }
+    };
 
-        <div className={styles.pageContainer}>
-            {/* <Header></Header> */}
-            <div className={styles.container}>
-                <form onSubmit={handleSubmit}>
-                    <div className={styles.formGroup}>
-                        <p className={styles.title}>Login</p>
-                        <label htmlFor="nome" className={styles.label}>Nome:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="nome"
-                            value={nome}
-                            onChange={(e) => setNome(e.target.value)}
-                            required
-                        />
-                    </div>
+    fetchFerramentas();
+    fetchImpressoras();
+  }, []);
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="ferramenta" className={styles.label}>Ferramenta:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="ferramenta"
-                            value={ferramenta}
-                            onChange={(e) => setFerramenta(e.target.value)}
-                            required
-                        />
-                    </div>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const reserva = {
+      id_user: 1, // Substitua pelo ID real do usuário
+      id_ferramenta: selectedFerramenta,
+      id_impressora: selectedImpressora,
+      data_reserva: dataReserva.toISOString().split('T')[0],
+      hora_inicio: horaInicio,
+      hora_fim: horaFim,
+    };
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="impressora" className={styles.label}>Impressora:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="impressora"
-                            value={impressora}
-                            onChange={(e) => setImpressora(e.target.value)}
-                            required
-                        />
-                    </div>
+    try {
+      const response = await axios.post("http://localhost:5001/reservas", reserva); // URL da API de reservas
+      console.log("Reserva realizada:", response.data);
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="horario" className={styles.label}>Horário:</label>
-                        <input
-                            type="time"
-                            className={styles.input}
-                            id="horario"
-                            value={horario}
-                            onChange={(e) => setHorario(e.target.value)}
-                            required
-                        />
-                    </div>
+      // Atualizar status da ferramenta e impressora para false
+      await axios.put(`http://localhost:5001/ferramentas/${selectedFerramenta}`, { statusF: false });
+      await axios.put(`http://localhost:5001/impressoras/${selectedImpressora}`, { statusI: false });
+    } catch (error) {
+      console.error("Erro ao realizar reserva:", error.response ? error.response.data : error.message);
+      setError("Erro ao realizar reserva.");
+    }
+  };
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="data" className={styles.label}>Data:</label>
-                        <input
-                            type="date"
-                            className={styles.input}
-                            id="data"
-                            value={data}
-                            onChange={(e) => setData(e.target.value)}
-                            required
-                        />
-                    </div>
+  if (loading) {
+    return <div>Loading...</div>; // Exibe mensagem de carregamento
+  }
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="status" className={styles.label}>Staus:</label>
-                        <input
-                            type="select"
-                            className={styles.input}
-                            id="status"
-                            value={status}
-                            onChange={(e) => setStatus(e.target.value)}
-                            required
-                        />
-                    </div>
-                    
-                    <button
-                        type="submit"
-                        className={`${styles.button} ${styles.submitButton}`}
-                    >
-                        Entrar
-                    </button>
-                </form>
-         
-            </div>
-
-            {/* <Footer></Footer> */}
-        </div>
-    );
+  return (
+    <form onSubmit={handleSubmit}>
+      <h2>Booking Form</h2>
+      {error && <div style={{ color: 'red' }}>{error}</div>} {/* Exibe mensagem de erro se houver */}
+      <select onChange={(e) => setSelectedFerramenta(e.target.value)} value={selectedFerramenta}>
+        <option value="">Select Ferramenta</option>
+        {ferramentas.map((ferramenta) => (
+          <option key={ferramenta.id} value={ferramenta.id}>
+            {ferramenta.nome}
+          </option>
+        ))}
+      </select>
+      <select onChange={(e) => setSelectedImpressora(e.target.value)} value={selectedImpressora}>
+        <option value="">Select Impressora</option>
+        {impressoras.map((impressora) => (
+          <option key={impressora.id} value={impressora.id}>
+            {impressora.nome}
+          </option>
+        ))}
+      </select>
+      <Calendar
+        onChange={setDataReserva}
+        value={dataReserva}
+      />
+      <input type="time" value={horaInicio} onChange={(e) => setHoraInicio(e.target.value)} />
+      <input type="time" value={horaFim} onChange={(e) => setHoraFim(e.target.value)} />
+      <button type="submit">Book</button>
+    </form>
+  );
 };
 
-export default ReservaForm;
+export default BookingForm;
