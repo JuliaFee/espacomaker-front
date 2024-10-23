@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import axios from "axios";
 
-const url = process.env.BASE_URL + "/impressora";
+const url = process.env.BASE_URL + "/impressoras";
 
 export async function GET() {
     try {

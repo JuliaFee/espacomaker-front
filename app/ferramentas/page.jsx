@@ -23,6 +23,7 @@ const Ferramentas = () => {
     };
   }, []);
 
+
   useEffect(() => {
     const fetchFerramentas = async () => {
       try {
