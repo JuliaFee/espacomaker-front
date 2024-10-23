@@ -115,6 +115,7 @@ const CadastroImpressora = () => {
                     <button
                         type="submit"
                         className={`${styles.button} ${styles.submitButton}`}
+                        onChange={handleSubmit}
                     >
                         Cadastrar
                     </button>
