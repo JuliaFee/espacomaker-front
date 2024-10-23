@@ -1,0 +1,60 @@
+/* reserva.module.css */
+
+/* General Calendar Styles */
+.react-calendar {
+    width: 100%;
+    max-width: 500px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Navigation Styles */
+  .react-calendar__navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .react-calendar__navigation button {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  /* Weekdays Styles */
+  .react-calendar__month-view__weekdays {
+    text-align: center;
+    font-weight: bold;
+    color: black; /* Set weekdays to black */
+  }
+  
+  /* Days Styles */
+  .react-calendar__month-view__days__day {
+    padding: 0.5em;
+    text-align: center;
+    cursor: pointer;
+    color: black; /* Set day numbers to black */
+  }
+  
+  /* Active Day Styles */
+  .react-calendar__tile--active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  /* Current Day Styles */
+  .react-calendar__tile--now {
+    background-color: #e6f7ff;
+  }
+  
+  /* Hover Styles */
+  .react-calendar__tile--hover {
+    background-color: #f0f0f0;
+  }
