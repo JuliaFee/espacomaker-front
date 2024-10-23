@@ -17,7 +17,7 @@ const BookingForm = () => {
   useEffect(() => {
     const fetchFerramentas = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/ferramentas");
+        const response = await axios.get("http://localhost:5000/ferramentas");
         setFerramentas(response.data.ferramentas);
       } catch (error) {
         console.error("Erro ao buscar ferramentas:", error.response ? error.response.data : error.message);
@@ -27,7 +27,7 @@ const BookingForm = () => {
   
     const fetchImpressoras = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/impressoras");
+        const response = await axios.get("http://localhost:5000/impressoras");
         setImpressoras(response.data.impressoras);
       } catch (error) {
         console.error("Erro ao buscar impressoras:", error.response ? error.response.data : error.message);
@@ -55,12 +55,12 @@ const BookingForm = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:5001/reservas", reserva); // URL da API de reservas
+      const response = await axios.post("http://localhost:5000/reservas", reserva); // URL da API de reservas
       console.log("Reserva realizada:", response.data);
 
       // Atualizar status da ferramenta e impressora para false
-      await axios.put(`http://localhost:5001/ferramentas/${selectedFerramenta}`, { statusF: false });
-      await axios.put(`http://localhost:5001/impressoras/${selectedImpressora}`, { statusI: false });
+      await axios.put(`http://localhost:5000/ferramentas/${selectedFerramenta}`, { statusF: false });
+      await axios.put(`http://localhost:5000/impressoras/${selectedImpressora}`, { statusI: false });
     } catch (error) {
       console.error("Erro ao realizar reserva:", error.response ? error.response.data : error.message);
       setError("Erro ao realizar reserva.");
