@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import style from "./pageferramentas.module.css";
 
 const Ferramentas = () => {
   const [ferramentas, setFerramentas] = useState([]);
@@ -22,28 +23,52 @@ const Ferramentas = () => {
     };
   }, []);
 
+
+  useEffect(() => {
+    const fetchFerramentas = async () => {
+      try {
+        console.log("Buscando ferramentas...");
+        const response = await axios.get("http://localhost:5000/ferramentas"); // Certifique-se de usar a URL correta
+        console.log("Response:", response);
+
+        if (response.data && Array.isArray(response.data.ferramentas)) {
+          setFerramentas(response.data.ferramentas);
+        } else {
+          console.error("Dados inesperados:", response.data);
+          setError("Formato de dados inesperado!");
+        }
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+        setError("Erro interno do servidor!");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchFerramentas();
+  }, []);
+
   return (
     <div className={style.body}>
       <h1>Ferramentas Disponíveis</h1>
-      <h3>{deviceType}</h3>
+      <h3>Tipo de dispositivo: {deviceType}</h3>
       {loading ? (
         <p>Carregando...</p>
       ) : (
         <>
           {error && <p className={style.error}>{error}</p>}
-          <div className={style.container}>
+          <ul>
             {ferramentas.length > 0 ? (
               ferramentas.map((ferramenta) => (
-                <div key={ferramenta.id} className={style.card}>
+                <li key={ferramenta.id} className={style.card}>
                   <img src={ferramenta.img} alt={ferramenta.nome} className={style.imagem} />
                   <h2>{ferramenta.nome}</h2>
                   <p>{ferramenta.descricao}</p>
-                </div>
+                </li>
               ))
             ) : (
-              <p>Nenhuma ferramenta encontrada.</p>
+              <li>Nenhuma ferramenta encontrada.</li>
             )}
-          </div>
+          </ul>
         </>
       )}
     </div>

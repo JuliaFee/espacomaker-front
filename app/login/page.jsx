@@ -61,7 +61,7 @@ const LoginForm = () => {
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
-                        <p className={styles.title}>Login</p>
+                        <p className={styles.title}>Login de usuário</p>
                         <label htmlFor="nome" className={styles.label}>Nome:</label>
                         <input
                             type="text"
