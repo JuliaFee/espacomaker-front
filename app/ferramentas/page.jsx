@@ -2,12 +2,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import style from "./pageferramentas.module.css";
+import { useRouter } from 'next/navigation'; // Adicionando o hook para redirecionar
 
 const Ferramentas = () => {
   const [ferramentas, setFerramentas] = useState([]);
   const [deviceType, setDeviceType] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter(); // Para redirecionar o usuário
 
   const getDeviceType = () => {
     const userAgent = navigator.userAgent;
@@ -26,18 +28,13 @@ const Ferramentas = () => {
   useEffect(() => {
     const fetchFerramentas = async () => {
       try {
-        console.log("Buscando ferramentas...");
-        const response = await axios.get("http://localhost:5000/ferramentas"); // Certifique-se de usar a URL correta
-        console.log("Response:", response);
-
+        const response = await axios.get("http://localhost:5000/ferramentas");
         if (response.data && Array.isArray(response.data.ferramentas)) {
           setFerramentas(response.data.ferramentas);
         } else {
-          console.error("Dados inesperados:", response.data);
           setError("Formato de dados inesperado!");
         }
       } catch (error) {
-        console.error("Erro ao buscar dados:", error);
         setError("Erro interno do servidor!");
       } finally {
         setLoading(false);
@@ -45,6 +42,21 @@ const Ferramentas = () => {
     };
     fetchFerramentas();
   }, []);
+
+  // Função para excluir uma ferramenta
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/ferramentas/${id}`);
+      setFerramentas(ferramentas.filter((ferramenta) => ferramenta.id !== id)); // Remove da lista sem recarregar
+    } catch (error) {
+      setError("Erro ao excluir a ferramenta. Tente novamente.");
+    }
+  };
+
+  // Função para redirecionar para a página de edição
+  const handleEdit = (id) => {
+    router.push(`/ferramentas/cadastro-ferramentas?id=${id}`); // Redireciona para a página de edição com o ID da ferramenta
+  };
 
   return (
     <div className={style.body}>
@@ -62,6 +74,8 @@ const Ferramentas = () => {
                   <img src={ferramenta.img} alt={ferramenta.nome} className={style.imagem} />
                   <h2>{ferramenta.nome}</h2>
                   <p>{ferramenta.descricao}</p>
+                  <button onClick={() => handleEdit(ferramenta.id)} className={style.editButton}>Editar</button>
+                  <button onClick={() => handleDelete(ferramenta.id)} className={style.deleteButton}>Excluir</button>
                 </li>
               ))
             ) : (

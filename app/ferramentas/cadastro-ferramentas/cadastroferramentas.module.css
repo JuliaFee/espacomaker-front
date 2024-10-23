@@ -73,4 +73,11 @@
 .Header {
     position: absolute;
     margin: 0 auto;
+
+}
+.successMessage{
+    color: rgb(62, 164, 62);
+}
+.errorMessage{
+    color: red;
 }
