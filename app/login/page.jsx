@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import styles from './login.module.css';
 import axios from 'axios';
-
+import Header from "./../components/header/page";
+import Footer from "./../components/footer/page";
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -35,6 +36,7 @@ const LoginForm = () => {
 
     return (
         <div className={styles.pageContainer}>
+            <Header/>
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
@@ -84,6 +86,7 @@ const LoginForm = () => {
                     </div>
                 )}
             </div>
+            <Footer/>
         </div>
     );
 };
