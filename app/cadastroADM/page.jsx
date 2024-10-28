@@ -4,6 +4,7 @@ import styles from './cadastroADM.module.css';
 import axios from 'axios';
 import Header from "../components/header/page";
 import Footer from "../components/footer/page";
+import { useRouter } from 'next/router';
 
 const CadastroADM = () => {
     const [nome, setNome] = useState('');
@@ -31,6 +32,8 @@ const CadastroADM = () => {
             setSenha('');
             setTipo('');
             setErrorMessage(''); 
+
+            router.push('./login'); 
         } catch (error) {
             if (error.response) {
                 console.error('Erro ao cadastrar usuário:', error.response.data);
@@ -48,6 +51,7 @@ const CadastroADM = () => {
     return (
         <div className={styles.pageContainer}>
             <Header />
+            <Link ref={"./app"}>Ir para home</Link>
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
