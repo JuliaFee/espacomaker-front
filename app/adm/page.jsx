@@ -9,6 +9,7 @@ export default function Home() {
     <div className={styles.page}>
 
       <Header></Header>
+      <Link ref={"./app"}>Ir para home</Link>
       <div className={styles.imagecontainer}>
         <img className={styles.imgBanner} src="bannerSM.png"></img>
       </div>

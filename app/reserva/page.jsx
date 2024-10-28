@@ -4,6 +4,7 @@ import axios from 'axios';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; 
 import './reserva.module.css'; 
+import Link from "next/link";
 
 const BookingForm = () => {
     const [ferramentas, setFerramentas] = useState([]);
@@ -90,6 +91,7 @@ const BookingForm = () => {
     return (
       //formulario
         <form onSubmit={handleSubmit}>
+            <Link href={"../"}>Ir para home</Link>
             <h2>Booking Form</h2>
             {/* //trataçao de erro */}
             {error && <div style={{ color: 'red' }}>{error}</div>}

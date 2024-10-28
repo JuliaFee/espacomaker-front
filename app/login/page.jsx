@@ -4,6 +4,9 @@ import styles from './login.module.css';
 import axios from 'axios';
 import Header from "./../components/header/page";
 import Footer from "./../components/footer/page";
+import { useRouter } from 'next/router';
+import { Link } from '@react-navigation/native';
+
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -26,6 +29,7 @@ const LoginForm = () => {
     
             console.log('Resposta do servidor:', response.data);
     
+            router.push('/app'); 
         
         } catch (error) {
             console.error('Erro ao realizar login:', error.response ? error.response.data : error.message);
@@ -37,6 +41,7 @@ const LoginForm = () => {
     return (
         <div className={styles.pageContainer}>
             <Header/>
+            <Link ref={"./app"}>Ir para home</Link>
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
