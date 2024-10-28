@@ -8,12 +8,11 @@ import Footer from "../../components/footer/page";
 import axios from "axios";
 
 const CadastroImpressora = () => {
-    const [impressora, setImpressora] = useState({
-        nome: "",
-        descricao: "",
-        img: "",
-        filamento: "",
-    });
+    const [nome, setNome] = useState("");
+    const [descricao, setDescricao] = useState("");
+    const [img, setImg] = useState("");
+    const [filamento, setFilamento] = useState("");
+    const [statusI, setStatusI] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const router = useRouter();
@@ -26,8 +25,12 @@ const CadastroImpressora = () => {
                 try {
                     const response = await axios.get(`http://localhost:5000/impressora/${editId}`);
                     console.log("Dados recebidos:", response.data);
-                    const { nome, descricao, img, filamento } = response.data.impressora || {};
-                    setImpressora({ nome, descricao, img, filamento });
+                    const { nome, descricao, img, filamento, statusI } = response.data.impressora || {};
+                    setNome(nome || "");
+                    setDescricao(descricao || "");
+                    setImg(img || "");
+                    setFilamento(filamento || "");
+                    setStatusI(statusI || "");
                 } catch (error) {
                     console.error("Erro ao carregar a impressora:", error);
                     setErrorMessage("Erro ao carregar os dados da impressora");
@@ -41,24 +44,27 @@ const CadastroImpressora = () => {
         e.preventDefault();
         try {
             if (editId) {
-                await axios.put(`http://localhost:5000/impressora/${editId}`, impressora);
+                await axios.put(`http://localhost:5000/impressora/${editId}`, { nome, descricao, img, filamento, statusI });
                 setSuccessMessage("Impressora atualizada com sucesso!");
             } else {
-                const response = await axios.post("http://localhost:5000/impressora", impressora);
-                console.log("Resposta do servidor:", response.data); // Log para verificar a resposta do servidor
+                const response = await axios.post("http://localhost:5000/impressora", { nome, descricao, img, filamento, statusI });
+                console.log("Resposta do servidor:", response.data);
                 setSuccessMessage("Impressora cadastrada com sucesso!");
             }
-            setImpressora({ nome: "", descricao: "", img: "", filamento: "" });
+            setNome("");
+            setDescricao("");
+            setImg("");
+            setFilamento("");
+            setStatusI("");
             setTimeout(() => {
                 setSuccessMessage("");
                 router.push("/impressora");
             }, 3000);
         } catch (error) {
-            console.error("Erro ao realizar a operação:", error.response.data); // Log detalhado do erro
+            console.error("Erro ao realizar a operação:", error);
             setErrorMessage("Erro ao realizar a operação. Tente novamente.");
         }
     };
-    
 
     return (
         <div className={styles.pageContainer}>
@@ -72,8 +78,8 @@ const CadastroImpressora = () => {
                             type="text"
                             className={styles.input}
                             id="nome"
-                            value={impressora.nome}
-                            onChange={(e) => setImpressora({ ...impressora, nome: e.target.value })}
+                            value={nome}
+                            onChange={(e) => setNome(e.target.value)}
                             required
                         />
                     </div>
@@ -84,8 +90,8 @@ const CadastroImpressora = () => {
                             type="text"
                             className={styles.input}
                             id="descricao"
-                            value={impressora.descricao}
-                            onChange={(e) => setImpressora({ ...impressora, descricao: e.target.value })}
+                            value={descricao}
+                            onChange={(e) => setDescricao(e.target.value)}
                             required
                         />
                     </div>
@@ -96,8 +102,8 @@ const CadastroImpressora = () => {
                             type="text"
                             className={styles.input}
                             id="img"
-                            value={impressora.img}
-                            onChange={(e) => setImpressora({ ...impressora, img: e.target.value })}
+                            value={img}
+                            onChange={(e) => setImg(e.target.value)}
                             required
                         />
                     </div>
@@ -107,8 +113,20 @@ const CadastroImpressora = () => {
                             type="text"
                             className={styles.input}
                             id="filamento"
-                            value={impressora.filamento}
-                            onChange={(e) => setImpressora({ ...impressora, filamento: e.target.value })}
+                            value={filamento}
+                            onChange={(e) => setFilamento(e.target.value)}
+                            required
+                        />
+                    </div>
+     
+                    <div className={styles.formGroup}>
+                        <label htmlFor="statusI" className={styles.label}>Status:</label>
+                        <input
+                            type="text"
+                            className={styles.input}
+                            id="statusI"
+                            value={statusI}
+                            onChange={(e) => setStatusI(e.target.value)}
                             required
                         />
                     </div>

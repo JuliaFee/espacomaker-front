@@ -51,14 +51,14 @@ const Impressora = () => {
   
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/impressoras/${id}`);
+      await axios.delete(`http://localhost:5000/impressora/${id}`);
       setImpressoras(impressoras.filter((impressora) => impressora.id !== id));
     } catch (error) {
       setError("Erro ao excluir impressora. Tente novamente.");
     }
   };
   const handleEdit = (id) => {
-    router.push(`/impressoras/cadastro-impressora?id=${id}`);
+    router.push(`/impressora/cadastro-impressora?id=${id}`);
   }
   return (
 
