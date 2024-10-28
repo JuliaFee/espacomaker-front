@@ -1,0 +1,51 @@
+.sucesso, .erro {
+    width: 30%;
+    max-width: 400px;
+    min-width: 250px;
+    height: auto;
+    position: fixed;
+    bottom: 20%;
+    text-align: center;
+    padding: 12px 20px;
+    border-radius: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: fadeIn 0.5s forwards, fadeOut 0.5s 2.5s forwards;
+    z-index: 1000;
+}
+
+.sucesso {
+    background-color: #4CAF50; /* Tom de verde mais suave */
+}
+
+.erro {
+    background-color: #F44336; /* Tom de vermelho mais suave */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 20%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, 20%);
+    }
+}
