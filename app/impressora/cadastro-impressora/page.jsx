@@ -1,15 +1,14 @@
 "use client";
 
-import React,{ useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./cadastroimpressora.module.css";
-import Header from "../../components/header/page";	
+import Header from "../../components/header/page";
 import Footer from "../../components/footer/page";
 import axios from "axios";
 
-
- const CadastroImpressora = () =>{
-    const [impressora, setImpressora]= useState({
+const CadastroImpressora = () => {
+    const [impressora, setImpressora] = useState({
         nome: "",
         descricao: "",
         img: "",
@@ -18,55 +17,56 @@ import axios from "axios";
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const router = useRouter();
-    const searchParams= useSearchParams();
-    const editId = searchParams.get('id');
+    const searchParams = useSearchParams();
+    const editId = searchParams.get("id");
 
-
-    useEffect(()=>{
-        if(editId){
+    useEffect(() => {
+        if (editId) {
             const fetchImpressora = async () => {
                 try {
-                    const response = await axios.get(`http://localhost:5000/impressoras/${editId}`);
-                    const {nome,descricao, img, filamento} = response.data.impressora;
-                    setImpressora({nome,descricao, img, filamento});
-                } catch(error){
-                    console.error('Erro ao carregar a impressora:', error);
-                    setErrorMessage('Erro ao carregar os dados da impressora');
+                    const response = await axios.get(`http://localhost:5000/impressora/${editId}`);
+                    console.log("Dados recebidos:", response.data);
+                    const { nome, descricao, img, filamento } = response.data.impressora || {};
+                    setImpressora({ nome, descricao, img, filamento });
+                } catch (error) {
+                    console.error("Erro ao carregar a impressora:", error);
+                    setErrorMessage("Erro ao carregar os dados da impressora");
                 }
             };
             fetchImpressora();
         }
-    
-},[editId] );
+    }, [editId]);
 
- const updateImpressora = async (e) => {
-    e.prevenDefault();
-    try{
-        if(editId){
-            await axios.put(`http://localhost:5000/impressoras/${editId}`,impressora);
-            setSuccessMessage('Impressora atualizada com sucesso!');
-        } else{
-             await axios.post("http://localhost:5000/impressoras", impressora);
-             setSuccessMessage('Impressora cadastrada com sucesso!');
+    const updateImpressora = async (e) => {
+        e.preventDefault();
+        try {
+            if (editId) {
+                await axios.put(`http://localhost:5000/impressora/${editId}`, impressora);
+                setSuccessMessage("Impressora atualizada com sucesso!");
+            } else {
+                const response = await axios.post("http://localhost:5000/impressora", impressora);
+                console.log("Resposta do servidor:", response.data); // Log para verificar a resposta do servidor
+                setSuccessMessage("Impressora cadastrada com sucesso!");
+            }
+            setImpressora({ nome: "", descricao: "", img: "", filamento: "" });
+            setTimeout(() => {
+                setSuccessMessage("");
+                router.push("/impressora");
+            }, 3000);
+        } catch (error) {
+            console.error("Erro ao realizar a operação:", error.response.data); // Log detalhado do erro
+            setErrorMessage("Erro ao realizar a operação. Tente novamente.");
         }
-        setImpressora({nome: '', descricao: '', img: '', filamento: ''});
-        setTimeout(()=> {
-            setSuccessMessage('');
-            router.push("/impressoras");
-        },3000);
-    } catch(error){
-        console.error('Erro ao realizar a operação:', error);
-        setErrorMessage('Erro ao realizar a operação. Tente novamente.');
-    }
- };
+    };
+    
 
-return(
-    <div className={styles.pageContainer}>
-    <Header />
-    <div className={styles.container}>
-        <form onSubmit={updateImpressora}>
-        <div className={styles.formGroup}>
-                        <p className={styles.title}>{editId ? 'Editar Impressora' : 'Cadastro de Impressora'}</p>
+    return (
+        <div className={styles.pageContainer}>
+            <Header />
+            <div className={styles.container}>
+                <form onSubmit={updateImpressora}>
+                    <div className={styles.formGroup}>
+                        <p className={styles.title}>{editId ? "Editar Impressora" : "Cadastro de Impressora"}</p>
                         <label htmlFor="nome" className={styles.label}>Nome:</label>
                         <input
                             type="text"
@@ -117,18 +117,15 @@ return(
                         type="submit"
                         className={`${styles.button} ${styles.submitButton}`}
                     >
-                        {editId ? 'Atualizar' : 'Cadastrar'}
+                        {editId ? "Atualizar" : "Cadastrar"}
                     </button>
-        </form>
-        {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
-        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
-
-    </div>
-   
-    <Footer />
-</div>
-)
-
+                </form>
+                {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
+                {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
+            </div>
+            <Footer />
+        </div>
+    );
 };
 
 export default CadastroImpressora;
