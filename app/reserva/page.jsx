@@ -17,6 +17,7 @@ const BookingForm = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+      //fetch das ferramentas
         const fetchFerramentas = async () => {
             try {
                 const response = await axios.get("http://localhost:5000/ferramentas");
@@ -27,6 +28,7 @@ const BookingForm = () => {
             }
         };
 
+        //fetch das impressoras
         const fetchImpressoras = async () => {
             try {
                 const response = await axios.get("http://localhost:5000/impressora");
@@ -37,6 +39,8 @@ const BookingForm = () => {
             }
         };
 
+
+        //fetch dos dados
         const fetchData = async () => {
             setLoading(true);
             await Promise.all([fetchFerramentas(), fetchImpressoras()]);
@@ -48,45 +52,50 @@ const BookingForm = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
+      
+      // verificacao
       if (!selectedFerramenta || !selectedImpressora || !horaInicio || !horaFim) {
           setError("Por favor, preencha todos os campos.");
           return;
       }
   
       const reserva = {
-          id_user: 1, // Substitua pelo ID real do usuário
+          id_user: 1, // <---- provisorio
           id_ferramenta: selectedFerramenta,
           id_impressora: selectedImpressora,
           data_reserva: dataReserva.toISOString().split('T')[0],
           hora_inicio: horaInicio,
           hora_fim: horaFim,
-          status_reserva: 'false', // Set a default status
+          status_reserva: 'true',
       };
   
       try {
           const response = await axios.post("http://localhost:5000/reservas", reserva);
           console.log("Reserva realizada:", response.data);
   
-          // Update the status of ferramenta and impressora
-          await axios.put(`http://localhost:5000/ferramentas/${selectedFerramenta}`, { statusF: false });
-          await axios.put(`http://localhost:5000/impressoras/${selectedImpressora}`, { statusI: false });
-          
-          setError(null); // Clear error after successful booking
+          // put q altera so o status da ferramenta e impressora para true
+          await axios.put(`http://localhost:5000/ferramentas/${selectedFerramenta}`, { statusF: true });
+          await axios.put(`http://localhost:5000/impressora/${selectedImpressora}`, { statusI: true });
+  
+          setError(null); 
       } catch (error) {
           console.error("Erro ao realizar reserva:", error.response ? error.response.data : error.message);
           setError("Erro ao realizar reserva.");
       }
   };
-    if (loading) {
-        return <div>Carregando...</div>;
-    }
-
+  //loadings
+  if (loading) {
+      return <div>Carregando...</div>;
+  }
     return (
+      //formulario
         <form onSubmit={handleSubmit}>
             <h2>Booking Form</h2>
+            {/* //trataçao de erro */}
             {error && <div style={{ color: 'red' }}>{error}</div>}
             <select onChange={(e) => setSelectedFerramenta(e.target.value)} value={selectedFerramenta}>
                 <option value="">Select Ferramenta</option>
+                {/* map de ferramentas */}
                 {ferramentas.map((ferramenta) => (
                     <option key={ferramenta.id} value={ferramenta.id}>
                         {ferramenta.nome}
@@ -95,15 +104,16 @@ const BookingForm = () => {
             </select>
             <select onChange={(e) => setSelectedImpressora(e.target.value)} value={selectedImpressora}>
                 <option value="">Select Impressora</option>
+                {/* map de impressoras */}
                 {impressoras.map((impressora) => (
                     <option key={impressora.id} value={impressora.id}>
                         {impressora.nome}
                     </option>
                 ))}
             </select>
-
+{/* calendario */}
             <Calendar onChange={setDataReserva} value={dataReserva} />
-
+{/* inputs de hora */}
             <input type="time" value={horaInicio} onChange={(e) => setHoraInicio(e.target.value)} />
             <input type="time" value={horaFim} onChange={(e) => setHoraFim(e.target.value)} />
             <button type="submit">Book</button>
