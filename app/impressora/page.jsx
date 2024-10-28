@@ -2,12 +2,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import style from "./impressora.module.css";
+import Header from "../components/header/page";
+import Footer from "../components/footer/page";
+import {MdOutlineDelete} from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
+import { useRouter } from 'next/navigation';
 
 const Impressora = () => {
   const [impressoras, setImpressoras] = useState([]);
   const [deviceType, setDeviceType] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const getDeviceType = () => {
     const userAgent = navigator.userAgent;
@@ -42,9 +48,22 @@ const Impressora = () => {
     };
     fetchImpressoras();
   }, []);
-
+  
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/impressoras/${id}`);
+      setImpressoras(impressoras.filter((impressora) => impressora.id !== id));
+    } catch (error) {
+      setError("Erro ao excluir impressora. Tente novamente.");
+    }
+  };
+  const handleEdit = (id) => {
+    router.push(`/impressoras/cadastro-impressora?id=${id}`);
+  }
   return (
+
     <div className={style.body}>
+      <Header/>
       <h1>Impressoras Disponíveis</h1>
       <h3>{deviceType}</h3>
       {loading ? (
@@ -55,18 +74,22 @@ const Impressora = () => {
           <div className={style.container}>
             {impressoras.length > 0 ? (
               impressoras.map((impressora) => (
-                <div key={impressora.id} className={style.card}>
+                <li key={impressora.id} className={style.card}>
                   <img src={impressora.img} alt={impressora.nome} className={style.imagem} />
                   <h2>{impressora.nome}</h2>
                   <p>{impressora.descricao}</p>
-                </div>
+                  <p>{impressora.filamento}</p>
+                  <button onClick={() => handleEdit(impressora.id)} className={style.editButton}><FaRegEdit /></button>
+                  <button onClick={() => handleDelete(impressora.id)} className={style.deleteButton}><MdOutlineDelete /></button>
+                </li>
               ))
             ) : (
-              <p>Nenhuma Impressora encontrada.</p>
+              <li>Nenhuma Impressora encontrada.</li>
             )}
           </div>
         </>
       )}
+      <Footer/>
     </div>
   );
 };

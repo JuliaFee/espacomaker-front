@@ -1,128 +1,134 @@
 "use client";
-import axios from "axios";
-import{ useState, useEffect} from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link"
+
+import React,{ useState, useEffect} from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./cadastroimpressora.module.css";
+import Header from "../../components/header/page";	
+import Footer from "../../components/footer/page";
+import axios from "axios";
 
 
-export default function CadastroImpressora ({params}){
-    const[nome, setNome] = useState("");
-    const[descricao, setDescricao] = useState("");
-    const[img, setImg] = useState("");
-    const[value, setValue] = useState("");
-    const[valor, setValor] = useState("");
+ const CadastroImpressora = () =>{
+    const [impressora, setImpressora]= useState({
+        nome: "",
+        descricao: "",
+        img: "",
+        filamento: "",
+    });
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const router = useRouter();
-    const {id} = params;
+    const searchParams= useSearchParams();
+    const editId = searchParams.get('id');
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      try {
-        await axios.post("/api/impressora", {nome, descricao, img, valor});
-        setNome("");
-        setDescricao("");
-        setImg("");
-        setValor("");
-        router.push(`/impressora`);
-      } catch (error){
-        alert("erro ao criar impressora")
-      }
-    };
 
     useEffect(()=>{
-        async function fetchImpressora(){
-        try{
-            const response = await axios.get(`/api/impressora/${id}`);
-            const impressora = response.data;
-            setNome(imppressora.nome);
-            setDescricao(impressora.descricao);
-            setImg(impressora.img);
-            setValor(impressora.img);
-        }  catch(error){
-            console.error("error fetching impressora:",error);
+        if(editId){
+            const fetchImpressora = async () => {
+                try {
+                    const response = await axios.get(`http://localhost:5000/impressoras/${editId}`);
+                    const {nome,descricao, img, filamento} = response.data.impressora;
+                    setImpressora({nome,descricao, img, filamento});
+                } catch(error){
+                    console.error('Erro ao carregar a impressora:', error);
+                    setErrorMessage('Erro ao carregar os dados da impressora');
+                }
+            };
+            fetchImpressora();
         }
+    
+},[editId] );
+
+ const updateImpressora = async (e) => {
+    e.prevenDefault();
+    try{
+        if(editId){
+            await axios.put(`http://localhost:5000/impressoras/${editId}`,impressora);
+            setSuccessMessage('Impressora atualizada com sucesso!');
+        } else{
+             await axios.post("http://localhost:5000/impressoras", impressora);
+             setSuccessMessage('Impressora cadastrada com sucesso!');
+        }
+        setImpressora({nome: '', descricao: '', img: '', filamento: ''});
+        setTimeout(()=> {
+            setSuccessMessage('');
+            router.push("/impressoras");
+        },3000);
+    } catch(error){
+        console.error('Erro ao realizar a operação:', error);
+        setErrorMessage('Erro ao realizar a operação. Tente novamente.');
     }
-    fetchImpressora();
-},[] );
+ };
 
 return(
+    <div className={styles.pageContainer}>
+    <Header />
     <div className={styles.container}>
-        {/* <Header/> */}
-        <div className={styles.action}>
-            <Link href="/impressora">
-            <button className={`${styles.button} ${styles.primaryButton}`}>
-                Voltar para Impressora
-            </button>
-            </Link>
-        </div>
-        <div className={styles.cadastroContainer}>
-            <h1 className={styles.text}>Cadastrar Impressora</h1>
-            <form onSubmit={handleSubmit}>
-                <div className={styles.form}>
-                    <label htmlFor="nome" className={styles.label}>
-                        Nome:
-                    </label>
-                    <input
-                    type="text"
-                    className={styles.input}
-                    id="nome"
-                    value={nome}
-                    onChange={(e)=> setNome(e.target.value)}
-                    required
-                    />
+        <form onSubmit={updateImpressora}>
+        <div className={styles.formGroup}>
+                        <p className={styles.title}>{editId ? 'Editar Impressora' : 'Cadastro de Impressora'}</p>
+                        <label htmlFor="nome" className={styles.label}>Nome:</label>
+                        <input
+                            type="text"
+                            className={styles.input}
+                            id="nome"
+                            value={impressora.nome}
+                            onChange={(e) => setImpressora({ ...impressora, nome: e.target.value })}
+                            required
+                        />
+                    </div>
 
-                </div>
-                <div className={styles.form}>
-                    <label htmlFor="descricao" className={styles.label}>
-                       Descrição :
-                    </label>
-                    <input
-                    type="text"
-                    className={styles.input}
-                    id="descricao"
-                    value={descricao}
-                    onChange={(e)=> setDescricao(e.target.value)}
-                    required
-                    />
+                    <div className={styles.formGroup}>
+                        <label htmlFor="descricao" className={styles.label}>Descrição:</label>
+                        <input
+                            type="text"
+                            className={styles.input}
+                            id="descricao"
+                            value={impressora.descricao}
+                            onChange={(e) => setImpressora({ ...impressora, descricao: e.target.value })}
+                            required
+                        />
+                    </div>
 
-                </div>
-                <div className={styles.form}>
-                    <label htmlFor="img" className={styles.label}>
-                        Imagem:
-                    </label>
-                    <input
-                    type="text"
-                    className={styles.input}
-                    id="img"
-                    value={img}
-                    onChange={(e)=> setImg(e.target.value)}
-                    required
-                    />
+                    <div className={styles.formGroup}>
+                        <label htmlFor="img" className={styles.label}>Imagem:</label>
+                        <input
+                            type="text"
+                            className={styles.input}
+                            id="img"
+                            value={impressora.img}
+                            onChange={(e) => setImpressora({ ...impressora, img: e.target.value })}
+                            required
+                        />
+                    </div>
+                    <div className={styles.formGroup}>
+                        <label htmlFor="filamento" className={styles.label}>Filamento:</label>
+                        <input
+                            type="text"
+                            className={styles.input}
+                            id="filamento"
+                            value={impressora.filamento}
+                            onChange={(e) => setImpressora({ ...impressora, filamento: e.target.value })}
+                            required
+                        />
+                    </div>
 
-                </div>
-                <div className={styles.form}>
-                    <label htmlFor="valor" className={styles.label}>
-                        Valor:
-                    </label>
-                    <input
-                    type="text"
-                    className={styles.input}
-                    id="valor"
-                    value={valor}
-                    onChange={(e)=> setValor(e.target.value)}
-                    required
-                    />
-
-                </div>
-                <button type="submit" classeName={`${styles.button} ${styles.submitButton}`}>
-                 Cadastrar
-                </button>
-            </form>
-
-        </div>
-        {/* <Footer/> */}
+                    <button
+                        type="submit"
+                        className={`${styles.button} ${styles.submitButton}`}
+                    >
+                        {editId ? 'Atualizar' : 'Cadastrar'}
+                    </button>
+        </form>
+        {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
+        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
 
     </div>
+   
+    <Footer />
+</div>
 )
 
-}
+};
+
+export default CadastroImpressora;
