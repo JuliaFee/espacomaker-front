@@ -4,36 +4,34 @@ import styles from './login.module.css';
 import axios from 'axios';
 
 const LoginForm = () => {
-    const [nome, setNome] = useState(''); // Adicionando estado para o nome
-    const [email, setEmail] = useState(''); // Adicionando estado para o email
+    const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [mensagem, setMensagem] = useState('');
+    const [usuario, setUsuario] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        
+        const trimmedEmail = email.trim();
+        const trimmedSenha = senha.trim();
+        
+        console.log('Dados enviados:', { trimmedEmail, trimmedSenha }); // Verifique aqui
+    
         try {
-            // Envia nome, email e senha para o backend via GET
-            const response = await axios.get('http://localhost:5000/users/login', {
-                params: {
-                    nome: nome,
-                    email: email,
-                    senha: senha,
-                },
+            const response = await axios.post('http://localhost:5000/login', {
+                email: trimmedEmail,
+                senha: trimmedSenha,
             });
-
-            // Verifica a resposta do backend
-            if (response.data.success) {
-                setMensagem('Login realizado com sucesso!');
-                // Aqui você pode redirecionar o usuário ou realizar outras ações
-            } else {
-                setMensagem(response.data.message); // Mensagem de erro do backend
-            }
+    
+            console.log('Resposta do servidor:', response.data);
+    
+            // Resto do código...
         } catch (error) {
-            console.error('Erro ao realizar login:', error);
-            setMensagem('Erro ao tentar logar. Tente novamente.');
+            console.error('Erro ao realizar login:', error.response ? error.response.data : error.message);
+            setMensagem(error.response ? error.response.data.message : 'Erro ao tentar logar. Tente novamente.');
         }
     };
+    
 
     return (
         <div className={styles.pageContainer}>
@@ -41,18 +39,6 @@ const LoginForm = () => {
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
                         <p className={styles.title}>Login de usuário</p>
-
-                        <div className={styles.formGroup}>
-                            <label htmlFor="nome" className={styles.label}>Nome:</label>
-                            <input
-                                type="text"
-                                className={styles.input}
-                                id="nome"
-                                value={nome}
-                                onChange={(e) => setNome(e.target.value)}
-                                required
-                            />
-                        </div>
 
                         <div className={styles.formGroup}>
                             <label htmlFor="email" className={styles.label}>Email:</label>
@@ -86,9 +72,17 @@ const LoginForm = () => {
                         </button>
                     </div>
 
-                    {/* Exibe a mensagem de sucesso ou erro */}
                     {mensagem && <p className={styles.message}>{mensagem}</p>}
                 </form>
+
+                {usuario && (
+                    <div className={styles.profile}>
+                        <h2>Perfil do Usuário</h2>
+                        <p><strong>Nome:</strong> {usuario.nome}</p>
+                        <p><strong>Email:</strong> {usuario.email}</p>
+                        <p><strong>Tipo:</strong> {usuario.tipo === 'adm' ? 'Admin' : 'Usuário'}</p>
+                    </div>
+                )}
             </div>
         </div>
     );
