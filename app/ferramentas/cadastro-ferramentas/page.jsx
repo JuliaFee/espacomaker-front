@@ -1,9 +1,10 @@
-"use client"; // Adiciona esta linha no topo
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import styles from './cadastroferramentas.module.css';
 import Header from '@/app/components/header/page';
 import Footer from '@/app/components/footer/page';
+import PopUp from "@/app/components/popUp/PopUp";
 import axios from 'axios';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -13,8 +14,9 @@ const CadastroFerramentas = () => {
         descricao: '',
         img: '',
     });
-    const [successMessage, setSuccessMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [popupMessage, setPopupMessage] = useState('');
+    const [popupTypeColor, setPopupTypeColor] = useState('');
     const router = useRouter();
     const searchParams = useSearchParams();
     const editId = searchParams.get('id');
@@ -28,7 +30,9 @@ const CadastroFerramentas = () => {
                     setFerramenta({ nome, descricao, img });
                 } catch (error) {
                     console.error('Erro ao carregar a ferramenta:', error);
-                    setErrorMessage('Erro ao carregar os dados da ferramenta.');
+                    setPopupMessage('Erro ao carregar os dados da ferramenta.');
+                    setPopupTypeColor('erro');
+                    setIsPopupOpen(true);
                 }
             };
             fetchFerramenta();
@@ -41,19 +45,25 @@ const CadastroFerramentas = () => {
         try {
             if (editId) {
                 await axios.put(`http://localhost:5000/ferramentas/${editId}`, ferramenta);
-                setSuccessMessage('Ferramenta atualizada com sucesso!');
+                setPopupMessage('Ferramenta atualizada com sucesso!');
+                setPopupTypeColor('sucesso');
             } else {
                 await axios.post("http://localhost:5000/ferramentas", ferramenta);
-                setSuccessMessage('Ferramenta cadastrada com sucesso!');
+                setPopupMessage('Ferramenta cadastrada com sucesso!');
+                setPopupTypeColor('sucesso');
             }
             setFerramenta({ nome: '', descricao: '', img: '' });
+            setIsPopupOpen(true);
+
             setTimeout(() => {
-                setSuccessMessage('');
+                setIsPopupOpen(false);
                 router.push("/ferramentas");
             }, 3000);
         } catch (error) {
             console.error('Erro ao realizar a operação:', error);
-            setErrorMessage('Erro ao realizar a operação. Tente novamente.');
+            setPopupMessage('Erro ao realizar a operação. Tente novamente.');
+            setPopupTypeColor('erro');
+            setIsPopupOpen(true);
         }
     };
 
@@ -106,9 +116,8 @@ const CadastroFerramentas = () => {
                         {editId ? 'Atualizar' : 'Cadastrar'}
                     </button>
                 </form>
+                {isPopupOpen && <PopUp message={popupMessage} typeColor={popupTypeColor} onClose={() => setIsPopupOpen(false)} />}
 
-                {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
-                {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
             </div>
 
             <Footer />
