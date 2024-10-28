@@ -1,5 +1,3 @@
-/* module.css */
-
 @import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap');
 
 .pageContainer {
@@ -12,7 +10,6 @@
 
 .container {
     background: linear-gradient(to bottom, #FFAD23, #FA9D02);
-    /* Gradient based on image */
     padding: 20px;
     border-radius: 10px;
     width: 30rem;
@@ -47,7 +44,6 @@
 
 .button {
     background-color: #2E83E3;
-    /* Blue button color from the image */
     color: white;
     border: none;
     border-radius: 5px;
@@ -67,7 +63,6 @@
 
 .submitButton:hover {
     background-color: #236ABF;
-    /* Darker shade of blue for hover effect */
 }
 
 .Header {
