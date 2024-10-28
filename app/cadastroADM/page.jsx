@@ -1,39 +1,18 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './cadastroADM.module.css';
 import axios from 'axios';
-// import Header from "./login";
-// import Footer from "./login";
-
 
 const CadastroADM = () => {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-    // const [dados, setDados] = useState('');
     const [tipo, setTipo] = useState('');
-
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get("http://localhost:5000/users");
-                console.log('Dados recebidos da API:', response.data);
-                console.log('Esta funfando tomaaa macetabdo');
-                setDados(response.data);
-            } catch (error) {
-                console.error('Erro ao obter os dados da API:', error);
-                console.error('teste', error);
-            }
-        };
-        fetchData();
-
-    }, []);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Crie um objeto com os dados que você deseja enviar
         const novoUsuario = {
             nome,
             email,
@@ -44,28 +23,34 @@ const CadastroADM = () => {
         console.log(novoUsuario); // Para verificar o objeto que será enviado
 
         try {
-            // Envie o objeto como o segundo argumento para a requisição POST
             const response = await axios.post("http://localhost:5000/users", novoUsuario);
             console.log('Usuário cadastrado:', response.data);
+            // Limpar os campos após o cadastro
             setNome('');
             setEmail('');
             setSenha('');
             setTipo('');
+            setErrorMessage(''); // Limpar mensagens de erro
         } catch (error) {
-            console.error('Erro ao cadastrar usuário:', error);
+            if (error.response) {
+                console.error('Erro ao cadastrar usuário:', error.response.data);
+                setErrorMessage(error.response.data.message || 'Erro desconhecido.');
+            } else if (error.request) {
+                console.error('Erro na requisição:', error.request);
+                setErrorMessage('Erro na requisição. Tente novamente.');
+            } else {
+                console.error('Erro ao configurar a requisição:', error.message);
+                setErrorMessage('Erro ao configurar a requisição.');
+            }
         }
-
     };
 
-
     return (
-
         <div className={styles.pageContainer}>
-            {/* <Header></Header> */}
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
-                        <p className={styles.title}>Login de usuário</p>
+                        <p className={styles.title}>Cadastro de Usuário</p>
                         <label htmlFor="nome" className={styles.label}>Nome:</label>
                         <input
                             type="text"
@@ -80,7 +65,7 @@ const CadastroADM = () => {
                     <div className={styles.formGroup}>
                         <label htmlFor="email" className={styles.label}>Email:</label>
                         <input
-                            type="text"
+                            type="email"
                             className={styles.input}
                             id="email"
                             value={email}
@@ -92,7 +77,7 @@ const CadastroADM = () => {
                     <div className={styles.formGroup}>
                         <label htmlFor="senha" className={styles.label}>Senha:</label>
                         <input
-                            type="text"
+                            type="password"
                             className={styles.input}
                             id="senha"
                             value={senha}
@@ -110,22 +95,22 @@ const CadastroADM = () => {
                             onChange={(e) => setTipo(e.target.value)}
                             required
                         >
-                            <option value="" disabled>Selecione um tipo</option> {/* Para deixar o campo inicialmente vazio */}
-                            <option value="adm">Admin</option> {/* Opção de administrador */}
-                            <option value="user">Usuário</option> {/* Opção de usuário */}
+                            <option value="" disabled>Selecione um tipo</option>
+                            <option value="adm">Admin</option>
+                            <option value="user">Usuário</option>
                         </select>
                     </div>
+
+                    {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+
                     <button
                         type="submit"
                         className={`${styles.button} ${styles.submitButton}`}
                     >
-                        Entrar
+                        Cadastrar
                     </button>
                 </form>
-
             </div>
-
-            {/* <Footer></Footer> */}
         </div>
     );
 };
