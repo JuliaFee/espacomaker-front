@@ -8,10 +8,21 @@ export async function GET(request, { params }) {
 
   try {
     const response = await axios.get(`${url}/${id}`);
-
     return NextResponse.json(response.data);
   } catch (error) {
     console.log("[ORDER_GET]", error);
+    return new NextResponse("Erro interno do servidor!", { status: 500 });
+  }
+}
+
+export async function POST(request) {
+  const body = await request.json();
+
+  try {
+    const response = await axios.post(url, body);
+    return NextResponse.json(response.data, { status: 201 }); // 201 Created
+  } catch (error) {
+    console.log("[ORDER_POST]", error);
     return new NextResponse("Erro interno do servidor!", { status: 500 });
   }
 }
@@ -22,7 +33,6 @@ export async function PUT(request, { params }) {
 
   try {
     const response = await axios.put(`${url}/${id}`, body);
-
     return NextResponse.json(response.data);
   } catch (error) {
     console.log("[ORDER_PUT]", error);
@@ -32,9 +42,9 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(request, { params }) {
   const { id } = params;
+
   try {
     const response = await axios.delete(`${url}/${id}`);
-
     return NextResponse.json(response.data);
   } catch (error) {
     console.log("[ORDER_DELETE]", error);

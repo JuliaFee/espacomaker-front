@@ -1,0 +1,83 @@
+/* module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap');
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+.container {
+    background: linear-gradient(to bottom, #FFAD23, #FA9D02);
+    /* Gradient based on image */
+    padding: 20px;
+    border-radius: 10px;
+    width: 30rem;
+    height: 30rem;
+   text-align: center;
+   margin-top: 5rem;
+   margin-bottom: 5rem;
+}
+
+.title {
+    font-family: 'Chau Philomene One';
+    font-size: 2rem;
+    color: white;
+}
+
+
+.label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: white;
+    font-family: 'Chau Philomene One';
+}
+
+.input {
+    margin-bottom: 20px;
+    border-radius: 5px;
+    width: 25rem;
+    height: 3rem;
+    border: none;
+}
+
+.button {
+    background-color: #2E83E3;
+    /* Blue button color from the image */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    width: 20rem;
+    height: 3rem;
+    font-family: 'Chau Philomene One';
+    margin-top: 0.5rem;
+}
+
+.submitButton {
+    width: 20rem;
+    height: 3rem;
+    margin-top: 0.5rem;
+}
+
+.submitButton:hover {
+    background-color: #236ABF;
+    /* Darker shade of blue for hover effect */
+}
+
+.Header {
+    position: absolute;
+    margin: 0 auto;
+
+}
+.successMessage{
+    color: rgb(62, 164, 62);
+}
+.errorMessage{
+    color: red;
+}
