@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import styles from './cadastroADM.module.css';
 import axios from 'axios';
+import Header from "../components/header/page";
+import Footer from "../components/footer/page";
 
 const CadastroADM = () => {
     const [nome, setNome] = useState('');
@@ -20,17 +22,15 @@ const CadastroADM = () => {
             tipo,
         };
 
-        console.log(novoUsuario); // Para verificar o objeto que será enviado
-
+        console.log(novoUsuario); 
         try {
             const response = await axios.post("http://localhost:5000/users", novoUsuario);
             console.log('Usuário cadastrado:', response.data);
-            // Limpar os campos após o cadastro
             setNome('');
             setEmail('');
             setSenha('');
             setTipo('');
-            setErrorMessage(''); // Limpar mensagens de erro
+            setErrorMessage(''); 
         } catch (error) {
             if (error.response) {
                 console.error('Erro ao cadastrar usuário:', error.response.data);
@@ -47,6 +47,7 @@ const CadastroADM = () => {
 
     return (
         <div className={styles.pageContainer}>
+            <Header />
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
@@ -111,6 +112,7 @@ const CadastroADM = () => {
                     </button>
                 </form>
             </div>
+            <Footer />
         </div>
     );
 };

@@ -15,7 +15,7 @@ const LoginForm = () => {
         const trimmedEmail = email.trim();
         const trimmedSenha = senha.trim();
         
-        console.log('Dados enviados:', { trimmedEmail, trimmedSenha }); // Verifique aqui
+        console.log('Dados enviados:', { trimmedEmail, trimmedSenha }); 
     
         try {
             const response = await axios.post('http://localhost:5000/login', {
@@ -25,7 +25,7 @@ const LoginForm = () => {
     
             console.log('Resposta do servidor:', response.data);
     
-            // Resto do código...
+        
         } catch (error) {
             console.error('Erro ao realizar login:', error.response ? error.response.data : error.message);
             setMensagem(error.response ? error.response.data.message : 'Erro ao tentar logar. Tente novamente.');
