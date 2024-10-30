@@ -5,8 +5,7 @@ import axios from 'axios';
 import Header from "./../components/header/page";
 import Footer from "./../components/footer/page";
 import { useRouter } from 'next/router';
-import { Link } from '@react-navigation/native';
-
+import Link from "next/link";
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
