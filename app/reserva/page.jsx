@@ -20,7 +20,7 @@ const BookingForm = () => {
       //fetch das ferramentas
         const fetchFerramentas = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/ferramentas");
+                const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + "/ferramentas");
                 setFerramentas(response.data.ferramentas);
             } catch (error) {
                 console.error("Erro ao buscar ferramentas:", error.response ? error.response.data : error.message);
@@ -31,7 +31,7 @@ const BookingForm = () => {
         //fetch das impressoras
         const fetchImpressoras = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/impressora");
+                const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + "/impressora");
                 setImpressoras(response.data.impressoras);
             } catch (error) {
                 console.error("Erro ao buscar impressoras:", error.response ? error.response.data : error.message);
@@ -70,12 +70,12 @@ const BookingForm = () => {
       };
   
       try {
-          const response = await axios.post("http://localhost:5000/reservas", reserva);
+          const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL + "/reservas", reserva);
           console.log("Reserva realizada:", response.data);
   
           // put q altera so o status da ferramenta e impressora para true
-          await axios.put(`http://localhost:5000/ferramentas/${selectedFerramenta}`, { statusF: true });
-          await axios.put(`http://localhost:5000/impressora/${selectedImpressora}`, { statusI: true });
+          await axios.put(process.env.NEXT_PUBLIC_BASE_URL + `/ferramentas/${selectedFerramenta}`, { statusF: true });
+          await axios.put(process.env.NEXT_PUBLIC_BASE_URL + `/impressora/${selectedImpressora}`, { statusI: true });
   
           setError(null); 
       } catch (error) {
