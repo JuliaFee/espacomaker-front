@@ -7,6 +7,7 @@ import Footer from "../components/footer/page";
 import {MdOutlineDelete} from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
+import Link from "next/link";
 
 const Impressora = () => {
   const [impressoras, setImpressoras] = useState([]);
@@ -64,7 +65,7 @@ const Impressora = () => {
 
     <div className={style.body}>
       <Header/>
-      <Link ref={"./app"}>Ir para home</Link>
+      <Link href={"../"}>Ir para home</Link>
       <h1>Impressoras Disponíveis</h1>
       <h3>{deviceType}</h3>
       {loading ? (
