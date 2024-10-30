@@ -83,7 +83,7 @@ const Ferramentas = () => {
               ferramentas.map((ferramenta) => (
                 <li key={ferramenta.id} className={styles.card}>
                   <img src={ferramenta.img} alt={ferramenta.nome} className={styles.imagem} />
-                  <h2>{ferramenta.nome}</h2>
+                  <h2 className={styles.title}>{ferramenta.nome}</h2>
                   <p>{ferramenta.descricao}</p>
                   
                   {/* Botões condicionais com base no tipo de usuário */}
