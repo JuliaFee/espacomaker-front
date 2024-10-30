@@ -4,6 +4,7 @@ import styles from './login.module.css';
 import axios from 'axios';
 import Header from "./../components/header/page";
 import Footer from "./../components/footer/page";
+import { IoCaretBack } from "react-icons/io5";
 import { useRouter } from 'next/router';
 import Link from "next/link";
 const LoginForm = () => {
@@ -39,7 +40,7 @@ const LoginForm = () => {
     return (
         <div className={styles.pageContainer}>
             <Header/>
-            <Link href={"../"} className={styles.back}>Ir para home</Link>
+            <Link href={"../"} className={styles.back}><IoCaretBack/></Link>
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>

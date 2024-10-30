@@ -141,9 +141,14 @@
 }
 
 .back {
-  font-family: 'Chau Philomene One', sans-serif;
-  font-size: 1.6rem;
-  border-bottom: 10%;
+  color: #124B8D;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-size: 64px;
+  position: fixed;
+  top: 15%;
+  left: 5%; /* Ajuste para posicionar na ponta direita */
+}
+.back:hover {
   color: #2E83E3;
-  text-align: center;
 }
