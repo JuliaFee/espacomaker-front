@@ -56,9 +56,9 @@
   margin-top: 2%;
 }
 .link2:hover {
-  background-color: rgba(46, 131, 227, 0.8); /* Cor de fundo ao passar o mouse */
-  transform: scale(1.05); /* Aumenta ligeiramente o tamanho */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Transição suave */
+  background-color: rgba(46, 131, 227, 0.8); 
+  transform: scale(1.05); 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 
 
