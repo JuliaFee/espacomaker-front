@@ -41,7 +41,7 @@ const LoginForm = () => {
     return (
         <div className={styles.pageContainer}>
             <Header/>
-            <Link ref={"./app"}>Ir para home</Link>
+            <Link href={"../"} className={styles.back}>Ir para home</Link>
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>

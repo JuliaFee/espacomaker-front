@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../components/header/page";
 import Footer from "../components/footer/page";
-import style from "./pageferramentas.module.css";
+import styles from "./pageferramentas.module.css";
 import { MdOutlineDelete } from "react-icons/md";
 import Link from "next/link";
 import { FaRegEdit } from "react-icons/fa";
@@ -66,7 +66,7 @@ const Ferramentas = () => {
   return (
     <div className={style.body}>
       <Header />
-      <Link href={"../"}>Ir para home</Link>
+      <Link href={"../"} className={styles.back}>Ir para home</Link>
       <h1 className={style.h1}>Ferramentas Disponíveis</h1>
       <h3 className={style.h3}>Tipo de dispositivo: {deviceType}</h3>
       {loading ? (
