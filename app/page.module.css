@@ -20,12 +20,14 @@
 }
 
 .imgBanner {
-  width: 60%;
+  width: 67%;
   max-width: 100%;
   border-radius: 20px;
   align-items: center;
   margin-top: 5%;
-  margin-left: 20%;
+  margin-left: 17%;
+  margin-right: 17%;
+  margin-bottom: 2%;
 }
 
 .section1 {
@@ -40,36 +42,38 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90%;
-  max-width: 905px;
+  width: 67%;
   background-color: #2E83E3;
   color: white;
   padding: 30px;
   text-align: center;
-  border-radius: 20px;
   font-size: 50px;
   font-family: "Chau Philomene One";
-  margin-top: 22px;
+  max-width: 100%;
+  border-radius: 20px;
+  align-items: center;
+  margin-top: 5%;
+  margin-top: 2%;
 }
 
 .linkSection {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 90px; /* Aumente o gap entre os cards */
+  gap: 4rem;
   padding: 70px 0;
   position: relative;
 }
 
 .reserva-section {
-  margin-bottom: 50px; /* Adiciona um espaçamento extra abaixo do primeiro card */
+  margin-bottom: 50px;
 }
+
 .link {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 900px;
-  max-width: 905px;
+  width: 65%;
   background-color: #2E83E3;
   color: white;
   padding: 30px;
@@ -79,17 +83,18 @@
   font-size: 50px;
   font-family: "Chau Philomene One";
   position: relative;
-  
+
 }
-.link2{
+
+.link2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 900px;
-  max-width: 905px;
+  width: 80rem;
+  max-width: 100%;
   background-color: #2E83E3;
   color: white;
-  padding: 30px;
+  padding: 60px;
   text-align: center;
   border-radius: 20px;
   text-decoration: none;
@@ -97,41 +102,46 @@
   font-family: "Chau Philomene One";
   position: relative;
   margin-bottom: 5%;
+  margin-top: 2%;
 }
+
 .link:hover {
   background-color: #2E83E3;
 }
 
 /* Ajuste para sobreposição das imagens */
-.img1, .img2, .img3 {
+.img1,
+.img2,
+.img3 {
   width: 10rem;
   position: absolute;
   z-index: 2;
 }
 
 .img1 {
-  width: 30%;
+  width: 28%;
   right: -3rem;
   bottom: 1rem;
 
 }
 
 .img2 {
-  top: 1rem; 
+  top: 1rem;
   right: -4rem;
-  width: 30%;
+  width: 28%;
 }
 
 .img3 {
-  top: -5rem; 
+  top: -5rem;
   right: -5rem;
 }
 
 .reserva-content {
   position: relative;
-  margin-bottom: 6rem; 
+  margin-bottom: 6rem;
   display: flex;
   justify-content: center;
   align-items: center;
- 
+  width: 67%;
+
 }

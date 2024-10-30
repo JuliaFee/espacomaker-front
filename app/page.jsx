@@ -20,24 +20,15 @@ export default function Home() {
         <div className={styles.linkSection}>
 
           <div className="reservaContent">
-            <Link className={styles.link2} href={"./reserva"}>Realizar Reserva</Link>
+            <Link className={styles.link2} href={"./reserva"}>REALIZAR RESERVA</Link>
             <img className={styles.img1} src="controlar_andamentos.png" alt="Ferramentas" />
           </div>
 
           <div className="reservaContent">
-            <Link className={styles.link2} href={"./andamento"}>Acompanhar Andamento</Link>
+            <Link className={styles.link2} href={"./andamento"}>ACOMPANHAR ANDAMENTO</Link>
             <img className={styles.img2} src="reserva.png" alt="Ferramentas" />
           </div>
-          {/* <div className="reservaContent">
-            <Link className={styles.link} href={"./ferramentas"}>Ferramentas</Link>
-            <img className={styles.img3} src="reserva.png" alt="Ferramentas" />
-          </div> */}
-          {/* <div className="reservaContent">
-            <Link className={styles.link} href={"./registros/cadastro-registro"}>Registros</Link>
-          </div> */}
-        </div>
-        <div className={styles.linkSection}>
-
+        
         </div>
 
       </div>
