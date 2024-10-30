@@ -132,3 +132,10 @@
 .deleteButton:hover {
   color: rgb(217, 17, 17); /* Vermelho mais escuro no hover */
 }
+
+.back {
+  font-family: 'Chau Philomene One', sans-serif;
+  font-size: 1.6rem;
+  border-bottom: 10%;
+  color: #2E83E3;
+}

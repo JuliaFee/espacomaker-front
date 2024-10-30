@@ -1,60 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap');
+
 /* reserva.module.css */
 
 /* General Calendar Styles */
 .react-calendar {
-    width: 100%;
-    max-width: 500px;
-    background-color: #fff;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Navigation Styles */
-  .react-calendar__navigation {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5em;
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .react-calendar__navigation button {
-    background: none;
-    border: none;
-    color: #007bff;
-    font-size: 1em;
-    cursor: pointer;
-  }
-  
-  /* Weekdays Styles */
-  .react-calendar__month-view__weekdays {
-    text-align: center;
-    font-weight: bold;
-    color: black; /* Set weekdays to black */
-  }
-  
-  /* Days Styles */
-  .react-calendar__month-view__days__day {
-    padding: 0.5em;
-    text-align: center;
-    cursor: pointer;
-    color: black; /* Set day numbers to black */
-  }
-  
-  /* Active Day Styles */
-  .react-calendar__tile--active {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  /* Current Day Styles */
-  .react-calendar__tile--now {
-    background-color: #e6f7ff;
-  }
-  
-  /* Hover Styles */
-  .react-calendar__tile--hover {
-    background-color: #f0f0f0;
-  }
+  width: 100%;
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Navigation Styles */
+.react-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ddd;
+}
+
+.react-calendar__navigation button {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+/* Weekdays Styles */
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  font-weight: bold;
+  color: black;
+  /* Set weekdays to black */
+}
+
+/* Days Styles */
+.react-calendar__month-view__days__day {
+  padding: 0.5em;
+  text-align: center;
+  cursor: pointer;
+  color: black;
+  /* Set day numbers to black */
+}
+
+/* Active Day Styles */
+.react-calendar__tile--active {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Current Day Styles */
+.react-calendar__tile--now {
+  background-color: #e6f7ff;
+}
+
+/* Hover Styles */
+.react-calendar__tile--hover {
+  background-color: #f0f0f0;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.form {
+  margin-bottom: 7%;
+  margin-top: 3%;
+  background: linear-gradient(to bottom, #FFAD23, #FA9D02);
+  padding: 3%;
+  border-radius: 3%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  font-family: 'Chau Philomene One';
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.calendar {
+  text-align: center;
+  margin-left: 12%;
+}
+
+
+.button {
+  background-color: #2E83E3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  width: 100%;
+  height: 3rem;
+  font-family: 'Chau Philomene One', sans-serif;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.button:hover {
+  background-color: #236ABF;
+  transform: translateY(-2px);
+}
+
+.back {
+  font-family: 'Chau Philomene One', sans-serif;
+  font-size: 1.6rem;
+  border-bottom: 10%;
+  color: #2E83E3;
+}
