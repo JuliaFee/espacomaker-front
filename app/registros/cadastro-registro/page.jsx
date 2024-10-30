@@ -56,7 +56,7 @@ const CadastroForm = () => {
 
         <div className={styles.pageContainer}>
             <Header></Header>
-            <Link href={"../"}>Ir para home</Link>
+            <Link href={"../"} className={styles.back}>Ir para home</Link>
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>

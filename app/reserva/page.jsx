@@ -5,6 +5,9 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; 
 import './reserva.module.css'; 
 import Link from "next/link";
+import Header from '../components/header/page';
+import Footer from '../components/footer/page';
+import styles from "./reserva.module.css";
 
 const BookingForm = () => {
     const [ferramentas, setFerramentas] = useState([]);
@@ -90,13 +93,15 @@ const BookingForm = () => {
   }
     return (
       //formulario
-        <form onSubmit={handleSubmit}>
-            <Link href={"../"}>Ir para home</Link>
+      <div className={styles.page}>
+        <Header></Header>
+        <Link href={"../"} className={styles.back}>Ir para home</Link>
+        <form onSubmit={handleSubmit} className={styles.form}>
             <h2>Booking Form</h2>
             {/* //trataçao de erro */}
             {error && <div style={{ color: 'red' }}>{error}</div>}
             <select onChange={(e) => setSelectedFerramenta(e.target.value)} value={selectedFerramenta}>
-                <option value="">Select Ferramenta</option>
+                <option value="" >Select Ferramenta</option>
                 {/* map de ferramentas */}
                 {ferramentas.map((ferramenta) => (
                     <option key={ferramenta.id} value={ferramenta.id}>
@@ -105,7 +110,7 @@ const BookingForm = () => {
                 ))}
             </select>
             <select onChange={(e) => setSelectedImpressora(e.target.value)} value={selectedImpressora}>
-                <option value="">Select Impressora</option>
+                <option value="" >Select Impressora</option>
                 {/* map de impressoras */}
                 {impressoras.map((impressora) => (
                     <option key={impressora.id} value={impressora.id}>
@@ -114,12 +119,14 @@ const BookingForm = () => {
                 ))}
             </select>
 {/* calendario */}
-            <Calendar onChange={setDataReserva} value={dataReserva} />
+            <Calendar onChange={setDataReserva} value={dataReserva} className={styles.calendar}/>
 {/* inputs de hora */}
             <input type="time" value={horaInicio} onChange={(e) => setHoraInicio(e.target.value)} />
             <input type="time" value={horaFim} onChange={(e) => setHoraFim(e.target.value)} />
-            <button type="submit">Book</button>
+            <button type="submit" className={styles.button}>Book</button>
         </form>
+        <Footer></Footer>
+        </div>
     );
 };
 

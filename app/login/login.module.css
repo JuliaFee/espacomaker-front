@@ -74,3 +74,11 @@
     position: absolute;
     margin: 0 auto;
 }
+
+.back {
+    font-family: 'Chau Philomene One', sans-serif;
+    font-size: 1.6rem;
+    border-bottom: 10%;
+    color: #2E83E3;
+  }
+  
