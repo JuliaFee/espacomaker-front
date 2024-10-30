@@ -26,15 +26,17 @@
     font-family: 'Chau Philomene One';
     font-size: 2rem;
     color: white;
+    padding: 10px;
 }
 
 
 .label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     font-size: 1.5rem;
     color: white;
     font-family: 'Chau Philomene One';
+   
 }
 
 .input {
@@ -43,11 +45,11 @@
     width: 25rem;
     height: 3rem;
     border: none;
+    
+   
 }
-
 .button {
     background-color: #2E83E3;
-    /* Blue button color from the image */
     color: white;
     border: none;
     border-radius: 5px;
@@ -56,13 +58,16 @@
     width: 20rem;
     height: 3rem;
     font-family: 'Chau Philomene One';
-    margin-top: 0.5rem;
+   
 }
+
 
 .submitButton {
     width: 20rem;
     height: 3rem;
     margin-top: 0.5rem;
+    margin-top: 10%; /* Aumente para ajustar */
+    margin-bottom: 20%;
 }
 
 .submitButton:hover {
@@ -76,9 +81,14 @@
 }
 
 .back {
-    font-family: 'Chau Philomene One', sans-serif;
-    font-size: 1.6rem;
-    border-bottom: 10%;
+    color: #124B8D;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-size: 64px;
+    position: fixed;
+    top: 15%;
+    left: 5%; /* Ajuste para posicionar na ponta direita */
+}
+.back:hover {
     color: #2E83E3;
-  }
-  
+}

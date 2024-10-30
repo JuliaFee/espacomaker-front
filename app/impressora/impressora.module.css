@@ -86,6 +86,19 @@
   object-fit: cover;
   background-color: #ececec;
 }
+.back {
+  color: #124B8D;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-size: 64px;
+  position: fixed;
+  bottom: 10%; /* Muda a posição para o canto inferior, ajuste se necessário */
+  right: 5%; /* Muda para a ponta direita */
+}
+.back:hover {
+  color: #2E83E3;
+}
+
 
 @media (max-width: 768px) {
   .container {
@@ -141,4 +154,15 @@
 .deleteButton:hover {
   color: rgb(217, 17, 17); /* Vermelho mais escuro no hover */
 }
-
+.back {
+  color: #124B8D;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-size: 64px;
+  position: fixed;
+  top: 15%;
+  left: 5%; /* Ajuste para posicionar na ponta direita */
+}
+.back:hover {
+  color: #2E83E3;
+}

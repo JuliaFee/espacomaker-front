@@ -7,6 +7,8 @@ import styles from './reserva.module.css';
 import Link from "next/link"; 
 import Header from '../components/header/page'; 
 import Footer from '../components/footer/page'; 
+import { IoCaretBack } from "react-icons/io5";
+
 
 const BookingForm = () => { 
     const [ferramentas, setFerramentas] = useState([]); 
@@ -101,7 +103,7 @@ const BookingForm = () => {
     return ( 
         <div className={styles.page}> 
             <Header /> 
-            <Link href={"../"} className={styles.back}>Ir para home</Link> 
+            <Link href={"../"} className={styles.back}> <IoCaretBack /></Link> 
             <form onSubmit={handleSubmit} className={styles.form}> 
                 <h2>Reserva</h2> 
                 {error && <div style={{ color: 'red' }}>{error}</div>} 

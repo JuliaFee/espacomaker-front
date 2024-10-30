@@ -5,6 +5,8 @@ import styles from './cadastroferramentas.module.css';
 import Header from '@/app/components/header/page';
 import Footer from '@/app/components/footer/page';
 import PopUp from "@/app/components/popUp/PopUp";
+import { IoCaretBack } from "react-icons/io5";
+import Link from 'next/link';
 import axios from 'axios';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -73,6 +75,7 @@ const CadastroFerramentas = () => {
             <div className={styles.container}>
                 <form onSubmit={updateFerramenta}>
                     <div className={styles.formGroup}>
+                    <Link href={"../"} className={styles.back}><IoCaretBack /></Link>
                         <p className={styles.title}>{editId ? 'Editar Ferramenta' : 'Cadastro de Ferramentas'}</p>
                         <label htmlFor="nome" className={styles.label}>Nome:</label>
                         <input
