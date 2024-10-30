@@ -1,58 +1,78 @@
-"use client"; // Garante que este é um componente client-side
-import React, { useState, useEffect } from 'react';
-import styles from './cadastroimpressora.module.css';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import styles from "./cadastroimpressora.module.css";
+import Header from "../../components/header/page";
+import Footer from "../../components/footer/page";
+import axios from "axios";
 
 const CadastroImpressora = () => {
-    const [nome, setNome] = useState('');
-    const [descricao, setDescricao] = useState('');
-    const [img, setImg] = useState('');
-    const [statusI, setStatusI] = useState('true'); // Inicialize com um valor padrão
-    const [filamento, setFilamento] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [nome, setNome] = useState("");
+    const [descricao, setDescricao] = useState("");
+    const [img, setImg] = useState("");
+    const [filamento, setFilamento] = useState("");
+    const [statusI, setStatusI] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const editId = searchParams.get("id");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
-        if (!nome || !descricao || !img || !statusI || !filamento) {
-            setErrorMessage('Todos os campos são obrigatórios.');
-            return;
+    useEffect(() => {
+        if (editId) {
+            const fetchImpressora = async () => {
+                try {
+                    const response = await axios.get(`http://localhost:5000/impressora/${editId}`);
+                    console.log("Dados recebidos:", response.data);
+                    const { nome, descricao, img, filamento, statusI } = response.data.impressora || {};
+                    setNome(nome || "");
+                    setDescricao(descricao || "");
+                    setImg(img || "");
+                    setFilamento(filamento || "");
+                    setStatusI(statusI || "");
+                } catch (error) {
+                    console.error("Erro ao carregar a impressora:", error);
+                    setErrorMessage("Erro ao carregar os dados da impressora");
+                }
+            };
+            fetchImpressora();
         }
+    }, [editId]);
 
-        const novaImpressora = {
-            nome,
-            descricao,
-            img,
-            statusI: statusI === 'true',
-            filamento: parseFloat(filamento)
-        };
-    
+    const updateImpressora = async (e) => {
+        e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:5000/impressora", novaImpressora);
-            setSuccessMessage('Impressora cadastrada com sucesso!');
-            setNome('');
-            setDescricao('');
-            setImg('');
-            setStatusI('true');
-            setFilamento('');
+            if (editId) {
+                await axios.put(`http://localhost:5000/impressora/${editId}`, { nome, descricao, img, filamento, statusI });
+                setSuccessMessage("Impressora atualizada com sucesso!");
+            } else {
+                const response = await axios.post("http://localhost:5000/impressora", { nome, descricao, img, filamento, statusI });
+                console.log("Resposta do servidor:", response.data);
+                setSuccessMessage("Impressora cadastrada com sucesso!");
+            }
+            setNome("");
+            setDescricao("");
+            setImg("");
+            setFilamento("");
+            setStatusI("");
             setTimeout(() => {
-                setSuccessMessage('');
+                setSuccessMessage("");
                 router.push("/impressora");
             }, 3000);
         } catch (error) {
-            setErrorMessage('Erro ao realizar o cadastro. Tente novamente.');
+            console.error("Erro ao realizar a operação:", error);
+            setErrorMessage("Erro ao realizar a operação. Tente novamente.");
         }
     };
 
     return (
         <div className={styles.pageContainer}>
+            <Header />
             <div className={styles.container}>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={updateImpressora}>
                     <div className={styles.formGroup}>
-                        <p className={styles.title}>Cadastro de Impressoras</p>
+                        <p className={styles.title}>{editId ? "Editar Impressora" : "Cadastro de Impressora"}</p>
                         <label htmlFor="nome" className={styles.label}>Nome:</label>
                         <input
                             type="text"
@@ -87,7 +107,18 @@ const CadastroImpressora = () => {
                             required
                         />
                     </div>
-
+                    <div className={styles.formGroup}>
+                        <label htmlFor="filamento" className={styles.label}>Filamento:</label>
+                        <input
+                            type="text"
+                            className={styles.input}
+                            id="filamento"
+                            value={filamento}
+                            onChange={(e) => setFilamento(e.target.value)}
+                            required
+                        />
+                    </div>
+     
                     <div className={styles.formGroup}>
                         <label htmlFor="statusI" className={styles.label}>Status:</label>
                         <input
@@ -100,31 +131,17 @@ const CadastroImpressora = () => {
                         />
                     </div>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="filamento" className={styles.label}>Filamento:</label>
-                        <input
-                            type="number"
-                            className={styles.input}
-                            id="filamento"
-                            value={filamento}
-                            onChange={(e) => setFilamento(e.target.value)}
-                            required
-                        />
-                    </div>
-
                     <button
                         type="submit"
                         className={`${styles.button} ${styles.submitButton}`}
-                        onChange={handleSubmit}
                     >
-                        Cadastrar
+                        {editId ? "Atualizar" : "Cadastrar"}
                     </button>
                 </form>
-
-                {/* Exibição de mensagens de sucesso ou erro */}
                 {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
                 {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
             </div>
+            <Footer />
         </div>
     );
 };

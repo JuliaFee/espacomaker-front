@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import styles from './cadastroregistro.module.css';
 import axios from 'axios';
-// import Header from "./login";
-// import Footer from "./login";
+import Link from "next/link";
+import Header from "../../components/header/page.jsx";
+import Footer from "../../components/footer/page.jsx";
 
 
 const CadastroForm = () => {
@@ -54,7 +55,8 @@ const CadastroForm = () => {
     return (
 
         <div className={styles.pageContainer}>
-            {/* <Header></Header> */}
+            <Header></Header>
+            <Link href={"../"}>Ir para home</Link>
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
@@ -104,7 +106,7 @@ const CadastroForm = () => {
          
             </div>
 
-            {/* <Footer></Footer> */}
+            <Footer></Footer>
         </div>
     );
 };

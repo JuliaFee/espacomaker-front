@@ -2,12 +2,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import style from "./impressora.module.css";
+import Header from "../components/header/page";
+import Footer from "../components/footer/page";
+import {MdOutlineDelete} from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
+import { useRouter } from 'next/navigation';
 
 const Impressora = () => {
   const [impressoras, setImpressoras] = useState([]);
   const [deviceType, setDeviceType] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const getDeviceType = () => {
     const userAgent = navigator.userAgent;
@@ -24,12 +30,9 @@ const Impressora = () => {
   }, []);
 
   useEffect(() => {
-    const fetchImpressora = async () => {
+    const fetchImpressoras = async () => {
       try {
-        console.log("Buscando impressoras...");
-        const response = await axios.get("http://localhost:5000/impressora");
-        console.log("Response:", response);
-
+        const response = await axios.get("/api/impressora");
         if (response.data && Array.isArray(response.data.impressoras)) {
           setImpressoras(response.data.impressoras);
         } else {
@@ -43,11 +46,25 @@ const Impressora = () => {
         setLoading(false);
       }
     };
-    fetchImpressora();
+    fetchImpressoras();
   }, []);
-
+  
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/impressora/${id}`);
+      setImpressoras(impressoras.filter((impressora) => impressora.id !== id));
+    } catch (error) {
+      setError("Erro ao excluir impressora. Tente novamente.");
+    }
+  };
+  const handleEdit = (id) => {
+    router.push(`/impressora/cadastro-impressora?id=${id}`);
+  }
   return (
+
     <div className={style.body}>
+      <Header/>
+      <Link ref={"./app"}>Ir para home</Link>
       <h1>Impressoras Disponíveis</h1>
       <h3>{deviceType}</h3>
       {loading ? (
@@ -55,22 +72,25 @@ const Impressora = () => {
       ) : (
         <>
           {error && <p className={style.error}>{error}</p>}
-          <ul>
+          <div className={style.container}>
             {impressoras.length > 0 ? (
-              impressoras.map((impressoras) => (
-                <li key={impressoras.id}>
-                <img src={impressoras.img} alt={impressoras.nome}/>   
-                <h2>{impressoras.nome}</h2>
-                <p>{impressoras.descricao}</p>
-                <p>{impressoras.statusI}</p>
-                </li>           
+              impressoras.map((impressora) => (
+                <li key={impressora.id} className={style.card}>
+                  <img src={impressora.img} alt={impressora.nome} className={style.imagem} />
+                  <h2>{impressora.nome}</h2>
+                  <p>{impressora.descricao}</p>
+                  <p>{impressora.filamento}</p>
+                  <button onClick={() => handleEdit(impressora.id)} className={style.editButton}><FaRegEdit /></button>
+                  <button onClick={() => handleDelete(impressora.id)} className={style.deleteButton}><MdOutlineDelete /></button>
+                </li>
               ))
             ) : (
               <li>Nenhuma Impressora encontrada.</li>
             )}
-          </ul>
+          </div>
         </>
       )}
+      <Footer/>
     </div>
   );
 };
