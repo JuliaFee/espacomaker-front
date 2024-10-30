@@ -15,7 +15,6 @@ const Impressora = () => {
   const [deviceType, setDeviceType] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [tipoUsuario, setTipoUsuario] = useState(""); // Verificação de tipo de usuário
   const router = useRouter();
 
   const getDeviceType = () => {
@@ -52,18 +51,22 @@ const Impressora = () => {
     fetchImpressoras();
   }, []);
 
-  // Carregar o tipo de usuário do localStorage
-  useEffect(() => {
-    const tipo = localStorage.getItem("tipoUsuario");
-    setTipoUsuario(tipo);
-  }, []);
-
   const handleDelete = async (id) => {
+    console.log(`Deleting impressora with ID: ${id}`);
     try {
-      await axios.delete(`http://localhost:5000/impressora/${id}`);
-      setImpressoras(impressoras.filter((impressora) => impressora.id !== id));
+      const response = await axios.delete(`/api/impressora/${id}`);
+      if (response.status === 200) {
+        setImpressoras(impressoras.filter((impressora) => impressora.id !== id));
+      } else {
+        setError("Erro ao excluir impressora. Tente novamente.");
+      }
     } catch (error) {
-      setError("Erro ao excluir impressora. Tente novamente.");
+      console.error("Erro ao excluir impressora:", error.response ? error.response.data : error.message);
+      if (error.response && error.response.status === 404) {
+        setError("Impressora não encontrada.");
+      } else {
+        setError("Erro ao excluir impressora. Tente novamente.");
+      }
     }
   };
 
@@ -77,6 +80,8 @@ const Impressora = () => {
       <Link href="../" className={style.back}> <IoCaretBack /> </Link>
       <h1 className={style.h1}>Impressoras Disponíveis</h1>
       <h3 className={style.h3}>Tipo de dispositivo: {deviceType}</h3>
+      <h1>Impressoras Disponíveis</h1>
+      <h3>{deviceType}</h3>
       {loading ? (
         <p>Carregando...</p>
       ) : (
@@ -87,19 +92,15 @@ const Impressora = () => {
               impressoras.map((impressora) => (
                 <li key={impressora.id} className={style.card}>
                   <img src={impressora.img} alt={impressora.nome} className={style.imagem} />
-                  <h2 className={style.title}>{impressora.nome}</h2>
+                  <h2>{impressora.nome}</h2>
                   <p>{impressora.descricao}</p>
-                  <p>filamento: {impressora.filamento}</p>
-                  {tipoUsuario === "adm" && ( // Verificação do tipo de usuário
-                    <>
-                      <button onClick={() => handleEdit(impressora.id)} className={style.editButton}>
-                        <FaRegEdit />
-                      </button>
-                      <button onClick={() => handleDelete(impressora.id)} className={style.deleteButton}>
-                        <MdOutlineDelete />
-                      </button>
-                    </>
-                  )}
+                  <p>{impressora.filamento}</p>
+                  <button onClick={() => handleEdit(impressora.id)} className={style.editButton}>
+                    <FaRegEdit />
+                  </button>
+                  <button onClick={() => handleDelete(impressora.id)} className={style.deleteButton}>
+                    <MdOutlineDelete />
+                  </button>
                 </li>
               ))
             ) : (
