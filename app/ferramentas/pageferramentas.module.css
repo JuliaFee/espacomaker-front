@@ -145,7 +145,6 @@
   cursor: pointer;
   transition: color 0.3s ease;
   font-size: 64px;
-  position: fixed;
   top: 15%;
   left: 5%; /* Ajuste para posicionar na ponta direita */
 }
