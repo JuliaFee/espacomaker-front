@@ -103,11 +103,15 @@ const BookingForm = () => {
             <Header /> 
             <Link href={"../"} className={styles.back}>Ir para home</Link> 
             <form onSubmit={handleSubmit} className={styles.form}> 
-                <h2>Booking Form</h2> 
+                <h2>Reserva</h2> 
                 {error && <div style={{ color: 'red' }}>{error}</div>} 
 
-                <select onChange={handleFerramentaChange} value={selectedFerramenta || ""}> 
-                    <option value="">Select Ferramenta</option> 
+                <select 
+                    onChange={handleFerramentaChange} 
+                    value={selectedFerramenta || ""} 
+                    className={styles.selectFerramenta}
+                > 
+                    <option value="">Selecionar Ferramenta</option> 
                     {ferramentas.map((ferramenta) => ( 
                         <option key={ferramenta.id} value={ferramenta.id}> 
                             {ferramenta.nome} 
@@ -115,8 +119,12 @@ const BookingForm = () => {
                     ))} 
                 </select> 
 
-                <select onChange={handleImpressoraChange} value={selectedImpressora || ""}> 
-                    <option value="">Select Impressora</option> 
+                <select 
+                    onChange={handleImpressoraChange} 
+                    value={selectedImpressora || ""} 
+                    className={styles.selectImpressora}
+                > 
+                    <option value="">Selecionar Impressora</option> 
                     {impressoras.map((impressora) => ( 
                         <option key={impressora.id} value={impressora.id}> 
                             {impressora.nome} 
@@ -125,26 +133,28 @@ const BookingForm = () => {
                 </select> 
 
                 <Calendar onChange={setDataReserva} value={dataReserva} className={styles.calendar} /> 
+                <label htmlFor="horaInicio" className={styles.label}>Hora de Início:</label>
+    <input 
+        type="time" 
+        id="horaInicio"
+        value={horaInicio} 
+        onChange={(e) => setHoraInicio(e.target.value)} 
+        className={styles.input} 
+    /> 
 
-                <input 
-                    type="time" 
-                    value={horaInicio} 
-                    onChange={(e) => setHoraInicio(e.target.value)} 
-                    className={styles.input} 
-                /> 
-
-                <input 
-                    type="time" 
-                    value={horaFim} 
-                    onChange={(e) => setHoraFim(e.target.value)} 
-                    className={styles.input} 
-                /> 
-
-                <button type="submit" className={styles.button}>Book</button> 
+    <label htmlFor="horaFim" className={styles.label2}>Hora de Término:</label>
+    <input 
+        type="time" 
+        id="horaFim"
+        value={horaFim} 
+        onChange={(e) => setHoraFim(e.target.value)} 
+        className={styles.input} 
+    /> 
+                <button type="submit" className={styles.button}>Realizar Reserva</button> 
             </form> 
             <Footer /> 
         </div> 
     ); 
 }; 
 
-export default BookingForm;
+export default BookingForm; 
