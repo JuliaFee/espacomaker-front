@@ -69,6 +69,13 @@
   margin: 0;
   padding: 10px;
   font-size: 18px;
+  
+}
+
+.title {
+  font-family: "Chau Philomene One";
+  font-size: 30px;
+  letter-spacing: 2px;
 }
 
 .imagem {
@@ -138,4 +145,5 @@
   font-size: 1.6rem;
   border-bottom: 10%;
   color: #2E83E3;
+  text-align: center;
 }
