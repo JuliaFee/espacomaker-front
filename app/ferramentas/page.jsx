@@ -7,19 +7,25 @@ import styles from "./pageferramentas.module.css";
 import { MdOutlineDelete } from "react-icons/md";
 import Link from "next/link";
 import { FaRegEdit } from "react-icons/fa";
-import { useRouter } from 'next/navigation'; // Adicionando o hook para redirecionar
+import { useRouter } from 'next/navigation';
 
 const Ferramentas = () => {
   const [ferramentas, setFerramentas] = useState([]);
   const [deviceType, setDeviceType] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter(); // Para redirecionar o usuário
+  const [tipoUsuario, setTipoUsuario] = useState(""); // Adiciona o tipo de usuário
+  const router = useRouter();
 
   const getDeviceType = () => {
     const userAgent = navigator.userAgent;
     return /android/i.test(userAgent) || (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) ? "Mobile" : "Desktop";
   };
+
+  useEffect(() => {
+    const tipo = localStorage.getItem("tipoUsuario");
+    setTipoUsuario(tipo); // Define o tipo de usuário
+  }, []);
 
   useEffect(() => {
     const deviceType = getDeviceType();
@@ -48,41 +54,49 @@ const Ferramentas = () => {
     fetchFerramentas();
   }, []);
 
-  // Função para excluir uma ferramenta
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/ferramentas/${id}`);
-      setFerramentas(ferramentas.filter((ferramenta) => ferramenta.id !== id)); // Remove da lista sem recarregar
+      setFerramentas(ferramentas.filter((ferramenta) => ferramenta.id !== id));
     } catch (error) {
       setError("Erro ao excluir a ferramenta. Tente novamente.");
     }
   };
 
-  // Função para redirecionar para a página de edição
   const handleEdit = (id) => {
-    router.push(`/ferramentas/cadastro-ferramentas?id=${id}`); // Redireciona para a página de edição com o ID da ferramenta
+    router.push(`/ferramentas/cadastro-ferramentas?id=${id}`);
   };
 
   return (
-    <div className={style.body}>
+    <div className={styles.body}>
       <Header />
       <Link href={"../"} className={styles.back}>Ir para home</Link>
-      <h1 className={style.h1}>Ferramentas Disponíveis</h1>
-      <h3 className={style.h3}>Tipo de dispositivo: {deviceType}</h3>
+      <h1 className={styles.h1}>Ferramentas Disponíveis</h1>
+      <h3 className={styles.h3}>Tipo de dispositivo: {deviceType}</h3>
       {loading ? (
-        <p className={style.loading}>Carregando...</p>
+        <p className={styles.loading}>Carregando...</p>
       ) : (
         <>
-          {error && <p className={style.error}>{error}</p>}
-          <ul className={style.container}>
+          {error && <p className={styles.error}>{error}</p>}
+          <ul className={styles.container}>
             {ferramentas.length > 0 ? (
               ferramentas.map((ferramenta) => (
-                <li key={ferramenta.id} className={style.card}>
-                  <img src={ferramenta.img} alt={ferramenta.nome} className={style.imagem} />
+                <li key={ferramenta.id} className={styles.card}>
+                  <img src={ferramenta.img} alt={ferramenta.nome} className={styles.imagem} />
                   <h2>{ferramenta.nome}</h2>
                   <p>{ferramenta.descricao}</p>
-                  <button onClick={() => handleEdit(ferramenta.id)} className={style.editButton}><FaRegEdit /></button>
-                  <button onClick={() => handleDelete(ferramenta.id)} className={style.deleteButton}><MdOutlineDelete /></button>
+                  
+                  {/* Botões condicionais com base no tipo de usuário */}
+                  {tipoUsuario === "adm" && (
+                    <>
+                      <button onClick={() => handleEdit(ferramenta.id)} className={styles.editButton}>
+                        <FaRegEdit />
+                      </button>
+                      <button onClick={() => handleDelete(ferramenta.id)} className={styles.deleteButton}>
+                        <MdOutlineDelete />
+                      </button>
+                    </>
+                  )}
                 </li>
               ))
             ) : (

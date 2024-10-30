@@ -19,20 +19,19 @@ const LoginForm = () => {
         const trimmedEmail = email.trim();
         const trimmedSenha = senha.trim();
         
-        console.log('Dados enviados:', { trimmedEmail, trimmedSenha }); 
-    
         try {
             const response = await axios.post('http://localhost:5000/login', {
                 email: trimmedEmail,
                 senha: trimmedSenha,
             });
     
-            console.log('Resposta do servidor:', response.data);
-    
+            const { tipo } = response.data; // Assumindo que o backend retorna o tipo de usuário
+            setUsuario(response.data);
+            localStorage.setItem("tipoUsuario", tipo); // Salvando o tipo de usuário no localStorage
+            
             router.push('/app'); 
-        
+            
         } catch (error) {
-            console.error('Erro ao realizar login:', error.response ? error.response.data : error.message);
             setMensagem(error.response ? error.response.data.message : 'Erro ao tentar logar. Tente novamente.');
         }
     };
