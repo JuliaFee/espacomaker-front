@@ -73,8 +73,8 @@ const Impressora = () => {
   return (
     <div className={style.body}>
       <Header />
-      <h1>Impressoras Disponíveis</h1>
-      <h3>{deviceType}</h3>
+      <h1 className={style.h1}>Impressoras Disponíveis</h1>
+      <h3 className={style.h3}>Tipo de dispositivo: {deviceType}</h3>
       {loading ? (
         <p>Carregando...</p>
       ) : (
