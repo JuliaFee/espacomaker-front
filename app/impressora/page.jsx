@@ -4,7 +4,7 @@ import axios from "axios";
 import style from "./impressora.module.css";
 import Header from "../components/header/page";
 import Footer from "../components/footer/page";
-import {MdOutlineDelete} from "react-icons/md";
+import { MdOutlineDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
@@ -14,6 +14,7 @@ const Impressora = () => {
   const [deviceType, setDeviceType] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [tipoUsuario, setTipoUsuario] = useState(""); // Verificação de tipo de usuário
   const router = useRouter();
 
   const getDeviceType = () => {
@@ -49,7 +50,13 @@ const Impressora = () => {
     };
     fetchImpressoras();
   }, []);
-  
+
+  // Carregar o tipo de usuário do localStorage
+  useEffect(() => {
+    const tipo = localStorage.getItem("tipoUsuario");
+    setTipoUsuario(tipo);
+  }, []);
+
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/impressora/${id}`);
@@ -58,14 +65,14 @@ const Impressora = () => {
       setError("Erro ao excluir impressora. Tente novamente.");
     }
   };
+
   const handleEdit = (id) => {
     router.push(`/impressora/cadastro-impressora?id=${id}`);
-  }
+  };
+
   return (
-
     <div className={style.body}>
-      <Header/>
-
+      <Header />
       <h1>Impressoras Disponíveis</h1>
       <h3>{deviceType}</h3>
       {loading ? (
@@ -78,11 +85,19 @@ const Impressora = () => {
               impressoras.map((impressora) => (
                 <li key={impressora.id} className={style.card}>
                   <img src={impressora.img} alt={impressora.nome} className={style.imagem} />
-                  <h2>{impressora.nome}</h2>
+                  <h2 className={style.title}>{impressora.nome}</h2>
                   <p>{impressora.descricao}</p>
-                  <p>{impressora.filamento}</p>
-                  <button onClick={() => handleEdit(impressora.id)} className={style.editButton}><FaRegEdit /></button>
-                  <button onClick={() => handleDelete(impressora.id)} className={style.deleteButton}><MdOutlineDelete /></button>
+                  <p>filamento: {impressora.filamento}</p>
+                  {tipoUsuario === "adm" && ( // Verificação do tipo de usuário
+                    <>
+                      <button onClick={() => handleEdit(impressora.id)} className={style.editButton}>
+                        <FaRegEdit />
+                      </button>
+                      <button onClick={() => handleDelete(impressora.id)} className={style.deleteButton}>
+                        <MdOutlineDelete />
+                      </button>
+                    </>
+                  )}
                 </li>
               ))
             ) : (
@@ -91,7 +106,7 @@ const Impressora = () => {
           </div>
         </>
       )}
-      <Footer/>
+      <Footer />
     </div>
   );
 };
