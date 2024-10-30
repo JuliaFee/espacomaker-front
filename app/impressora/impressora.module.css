@@ -25,6 +25,13 @@
  
 }
 
+.title {
+    font-family: "Chau Philomene One";
+    font-size: 30px;
+    letter-spacing: 2px;
+  }
+  
+
 .h3 {
   color: #888;
   text-align: center;
