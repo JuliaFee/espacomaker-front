@@ -34,7 +34,7 @@ const Ferramentas = () => {
   useEffect(() => {
     const fetchFerramentas = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/ferramentas");
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas`);
         if (response.data && Array.isArray(response.data.ferramentas)) {
           setFerramentas(response.data.ferramentas);
         } else {
@@ -51,7 +51,7 @@ const Ferramentas = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/ferramentas/${id}`);
+      await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas/${id}`);
       setFerramentas(ferramentas.filter((ferramenta) => ferramenta.id !== id)); 
     } catch (error) {
       setError("Erro ao excluir a ferramenta. Tente novamente.");
