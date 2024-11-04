@@ -10,7 +10,8 @@
   color: #1f3c71;
   text-align: center;
   margin: 20px 0;
-  font-size: 30px;
+  font-size: 45px;
+  margin-bottom: 40px;
  
 }
 .h2 {
@@ -49,20 +50,19 @@
   cursor: pointer;
   margin: 0;
   padding: 0;
-  color: white; /* Definir a cor do texto para branco por padrão */
+  color: white; 
 }
 
 .card:hover {
   transform: translateY(-8px);
 }
 
-/* Aqui aplicamos o estilo para preencher o card todo com cor */
 .card:nth-child(odd) {
-  background-color: #3578e5; /* Cor azul para os cards ímpares */
+  background-color: #3578e5; 
 }
 
 .card:nth-child(even) {
-  background-color: #f89c00; /* Cor laranja para os cards pares */
+  background-color: #f89c00; 
 }
 
 .card h2, .card p {
@@ -114,10 +114,10 @@
   padding: 10px;
   border: none;
   cursor: pointer;
-  background: none; /* Remover background do botão */
+  background: none; 
   border-radius: 5px;
-  transition: color 0.3s ease; /* Suave transição para o hover */
-  font-size: 24px; /* Aumenta o tamanho dos ícones */
+  transition: color 0.3s ease; 
+  font-size: 24px; 
  align-items: center;
   justify-content: center;
   margin-right: 50px;
@@ -125,19 +125,19 @@
 }
 
 .editButton {
-  color: white; /* Cor verde para o ícone de edição */
+  color: white; 
 }
 
 .editButton:hover {
-  color: green/* Verde mais escuro no hover */
+  color: green;
 }
 
 .deleteButton {
-  color: white; /* Cor vermelha para o ícone de exclusão */
+  color: white; 
 }
 
 .deleteButton:hover {
-  color: rgb(217, 17, 17); /* Vermelho mais escuro no hover */
+  color: rgb(217, 17, 17); 
 }
 
 .back {
@@ -146,8 +146,13 @@
   transition: color 0.3s ease;
   font-size: 64px;
   top: 15%;
-  left: 5%; /* Ajuste para posicionar na ponta direita */
+  left: 5%; 
 }
 .back:hover {
   color: #2E83E3;
+}
+
+.subtitle{
+  color: #fff;
+  text-align: center;
 }

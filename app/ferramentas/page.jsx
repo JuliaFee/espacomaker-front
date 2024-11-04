@@ -17,19 +17,19 @@ const Ferramentas = () => {
   const [loading, setLoading] = useState(true);
   const router = useRouter(); // Para redirecionar o usuário
 
-  const getDeviceType = () => {
-    const userAgent = navigator.userAgent;
-    return /android/i.test(userAgent) || (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) ? "Mobile" : "Desktop";
-  };
+  // const getDeviceType = () => {
+  //   const userAgent = navigator.userAgent;
+  //   return /android/i.test(userAgent) || (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) ? "Mobile" : "Desktop";
+  // };
 
-  useEffect(() => {
-    const deviceType = getDeviceType();
-    document.body.classList.add(deviceType);
-    setDeviceType(deviceType);
-    return () => {
-      document.body.classList.remove(deviceType);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const deviceType = getDeviceType();
+  //   document.body.classList.add(deviceType);
+  //   setDeviceType(deviceType);
+  //   return () => {
+  //     document.body.classList.remove(deviceType);
+  //   };
+  // }, []);
 
   useEffect(() => {
     const fetchFerramentas = async () => {
@@ -67,7 +67,7 @@ const Ferramentas = () => {
       <Header />
       <Link href={"../"} className={style.back}><IoCaretBack /></Link>
       <h1 className={style.h1}>Ferramentas Disponíveis</h1>
-      <h3 className={style.h3}>Tipo de dispositivo: {deviceType}</h3>
+      {/* <h3 className={style.h3}>Tipo de dispositivo: {deviceType}</h3> */}
       {loading ? (
         <p className={style.loading}>Carregando...</p>
       ) : (
@@ -78,7 +78,7 @@ const Ferramentas = () => {
               ferramentas.map((ferramenta) => (
                 <li key={ferramenta.id} className={style.card}>
                   <img src={ferramenta.img} alt={ferramenta.nome} className={style.imagem} />
-                  <h2>{ferramenta.nome}</h2>
+                  <h2 className={style.subtitle}>{ferramenta.nome}</h2>
                   <p>{ferramenta.descricao}</p>
                   <button onClick={() => handleEdit(ferramenta.id)} className={style.editButton}><FaRegEdit /></button>
                   <button onClick={() => handleDelete(ferramenta.id)} className={style.deleteButton}><MdOutlineDelete /></button>
