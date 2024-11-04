@@ -26,7 +26,7 @@ const CadastroImpressora = () => {
         if (editId) {
             const fetchImpressora = async () => {
                 try {
-                    const response = await axios.get(`http://localhost:5000/impressora/${editId}`);
+                    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora/${editId}`);
                     const { nome, descricao, img, filamento, statusI } = response.data.impressora;
                     setImpressora({ nome, descricao, img, filamento, statusI });
                 } catch (error) {
@@ -50,10 +50,10 @@ const CadastroImpressora = () => {
         setIsSubmitting(true);
         try {
             if (editId) {
-                await axios.put(`http://localhost:5000/impressora/${editId}`, impressora);
+                await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora/${editId}`, impressora);
                 setSuccessMessage("Impressora atualizada com sucesso!");
             } else {
-                await axios.post("http://localhost:5000/impressora", impressora);
+            await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora`, impressora);
                 setSuccessMessage("Impressora cadastrada com sucesso!");
             }
             setImpressora({ nome: "", descricao: "", img: "", filamento: "", statusI: true });
