@@ -26,7 +26,7 @@ const CadastroImpressora = () => {
         if (editId) {
             const fetchImpressora = async () => {
                 try {
-                    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora/${editId}`);
+                    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/impreslsora/${editId}`);
                     const { nome, descricao, img, filamento, statusI } = response.data.impressora;
                     setImpressora({ nome, descricao, img, filamento, statusI });
                 } catch (error) {
