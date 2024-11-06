@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const login = async (email, senha) => {
+    const handleLogin = async (email, senha) => {
         try {
             const response = await fetch('/api/auth', {
                 method: 'POST',
@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }) => {
             value={{
                 user,
                 loading,
-                login,
+                login: handleLogin,
                 logout,
                 isAuthenticated: !!user
             }}
