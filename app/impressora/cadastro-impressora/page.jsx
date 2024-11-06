@@ -15,6 +15,7 @@ const CadastroImpressora = () => {
         filamento: "",
         statusI: true
     });
+
     const router = useRouter();
     const searchParams = useSearchParams();
     const editId = searchParams.get("id");
@@ -27,7 +28,7 @@ const CadastroImpressora = () => {
             const fetchImpressora = async () => {
                 try {
                     const response = await axios.get(`http://localhost:5000/impressora/${editId}`);
-                    const { nome, descricao, img, filamento, statusI } = response.data.impressora;
+                    const { nome = "", descricao = "", img = "", filamento = "", statusI = true } = response.data.impressora;
                     setImpressora({ nome, descricao, img, filamento, statusI });
                 } catch (error) {
                     setErrorMessage("Erro ao carregar os dados da impressora");
@@ -65,6 +66,19 @@ const CadastroImpressora = () => {
             setErrorMessage("Erro ao realizar a operação. Tente novamente.");
         } finally {
             setIsSubmitting(false);
+        }
+    };
+
+    const deleteImpressora = async () => {
+        try {
+            await axios.delete(`http://localhost:5000/impressora/${editId}`);
+            setSuccessMessage("Impressora deletada com sucesso!");
+            setTimeout(() => {
+                setSuccessMessage("");
+                router.push("/impressora");
+            }, 3000);
+        } catch (error) {
+            setErrorMessage("Erro ao deletar a impressora.");
         }
     };
 
@@ -121,16 +135,15 @@ const CadastroImpressora = () => {
                             required
                         />
                     </div>
-                    
+
                     <div className={styles.formGroup}>
                         <label htmlFor="statusI" className={styles.label}>Status:</label>
                         <input
-                            type="text"
+                            type="checkbox"
                             className={styles.input}
                             id="statusI"
-                            value={impressora.statusI}
-                            onChange={handleChange}
-                            required
+                            checked={impressora.statusI}
+                            onChange={(e) => setImpressora(prev => ({ ...prev, statusI: e.target.checked }))}
                         />
                     </div>
 
@@ -141,7 +154,18 @@ const CadastroImpressora = () => {
                     >
                         {isSubmitting ? "Salvando..." : editId ? "Atualizar" : "Cadastrar"}
                     </button>
+                    
+                    {editId && (
+                        <button
+                            type="button"
+                            onClick={deleteImpressora}
+                            className={`${styles.button} ${styles.deleteButton}`}
+                        >
+                            Deletar Impressora
+                        </button>
+                    )}
                 </form>
+                
                 {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
                 {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
             </div>
