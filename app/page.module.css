@@ -1,152 +1,219 @@
-@import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap');
-
 .page {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: #f9f9f9;
   min-height: 100vh;
+  background-color: #f4f4f4;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.h1 {
+  color: #1f3c71;
+  text-align: center;
+  margin: 20px 0;
+  font-size: 45px;
+  font-family: 'Chau Philomene One', cursive;
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+  transition: color 0.3s ease;
+}
+
+/* Estilo do contêiner do carrossel */
+.carouselContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 20px;
+  flex-grow: 1;
+  border-radius: 12px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+  background-color: transparent; /* Fundo transparente para o carrossel */
+  transition: transform 0.3s ease-in-out;
+}
+
+.carouselContainer:hover {
+  transform: scale(1.02); /* Pequeno zoom no carrossel ao passar o mouse */
+}
+
+/* Estilo das imagens dentro do carrossel */
+.imageContainer {
+  width: 80%;
+  max-width: 900px;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease-in-out;
+  background-color: transparent; /* Remove qualquer fundo atrás das imagens */
+}
+
+.carouselImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+  background-color: transparent; /* Fundo transparente para a imagem */
+}
+
+/* Estilo de navegação (dots) */
+.navDots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;        /* Espaçamento entre as imagens e os dots */
+  margin-bottom: 25px;     /* Espaçamento abaixo dos dots */
+  position: relative;      /* Mantém as bolinhas dentro do carrossel */
+  z-index: 10;             /* Garante que os dots fiquem acima da imagem */
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dot:hover {
+  background-color: #ff7f32;
+  transform: scale(1.2); /* Aumenta o tamanho do dot ao passar o mouse */
+}
+
+.activeDot {
+  background-color: #007bff;
+}
+
+/* Responsividade - Ajustes para dispositivos menores */
+@media (max-width: 768px) {
+  .carouselContainer {
+    flex-direction: column;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .h1 {
+    font-size: 36px; /* Tamanho do título ajustado para telas menores */
+  }
+
+  .imageContainer {
+    width: 95%;
+    height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carouselContainer {
+    width: 100%;
+  }
+
+  .imageContainer {
+    width: 90%;
+    height: 300px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .h1 {
+    font-size: 30px;
+  }
+}
+
+/* Adicionando transição suave no carrossel ao passar o mouse */
+.carouselContainer:hover .imageContainer {
+  transform: scale(1.03); /* Aumenta suavemente a imagem do carrossel ao passar o mouse */
+}
+
+/* Estilo de transição para os títulos (hover effect) */
+.h2 {
+  color: #1f3c71;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 20px;
+  transition: color 0.3s ease;
+}
+
+.h2:hover {
+  color: #ff7f32; /* Mudança de cor ao passar o mouse */
+}
+
+/* Opções de estilo para títulos e subtítulos adicionais */
+.h3 {
+  color: #888;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.subTitle {
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+/* Foco na legibilidade */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: calc(33.33% - 20px);
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card:nth-child(odd) {
+  background-color: #3578e5;
+}
+
+.card:nth-child(even) {
+  background-color: #f89c00;
+}
+
+.card h2,
+.card p {
+  margin: 0;
+  padding: 10px;
+  font-size: 18px;
 }
 
 .title {
-  font-size: 1.5rem;
-  color: white;
-  font-weight: bold;
+  font-family: "Chau Philomene One", cursive;
+  font-size: 30px;
+  letter-spacing: 2px;
 }
 
-.imagecontainer {
+.imagem {
   width: 100%;
-  margin-top: 10px;
-}
-
-.imgBanner {
-  width: 67%;
-  max-width: 100%;
-  border-radius: 20px;
-  align-items: center;
-  margin-top: 5%;
-  margin-left: 17%;
-  margin-right: 17%;
-  margin-bottom: 2%;
-}
-
-.section1 {
-  width: 100%;
-  padding: 20px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.title2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 67%;
-  background-color: #2E83E3;
-  color: white;
-  padding: 30px;
-  text-align: center;
-  font-size: 50px;
-  font-family: "Chau Philomene One";
-  max-width: 100%;
-  border-radius: 20px;
-  align-items: center;
-  margin-top: 5%;
-  margin-top: 2%;
-}
-.link2:hover {
-  background-color: rgba(46, 131, 227, 0.8); 
-  transform: scale(1.05); 
-  transition: background-color 0.3s ease, transform 0.3s ease; 
-}
-
-
-.linkSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4rem;
-  padding: 70px 0;
-  position: relative;
-}
-
-.reserva-section {
-  margin-bottom: 50px;
-}
-
-.link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 65%;
-  background-color: #2E83E3;
-  color: white;
-  padding: 30px;
-  text-align: center;
-  border-radius: 20px;
-  text-decoration: none;
-  font-size: 50px;
-  font-family: "Chau Philomene One";
-  position: relative;
-
-}
-
-.link2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 80rem;
-  max-width: 100%;
-  background-color: #2E83E3;
-  color: white;
-  padding: 60px;
-  text-align: center;
-  border-radius: 20px;
-  text-decoration: none;
-  font-size: 50px;
-  font-family: "Chau Philomene One";
-  position: relative;
-  margin-bottom: 5%;
-  margin-top: 2%;
-}
-
-.link:hover {
-  background-color: #2E83E3;
-}
-
-.img1,
-.img2,
-.img3 {
-  width: 10rem;
-  position: absolute;
-  z-index: 2;
-}
-
-.img1 {
-  width: 28%;
-  right: -3rem;
-  bottom: 1rem;
-
-}
-
-.img2 {
-  top: 1rem;
-  right: -4rem;
-  width: 28%;
-}
-
-.img3 {
-  top: -5rem;
-  right: -5rem;
-}
-
-.reserva-content {
-  position: relative;
-  margin-bottom: 6rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 67%;
-
+  height: 390px;
+  object-fit: cover;
+  background-color: #ececec;
 }

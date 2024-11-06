@@ -1,44 +1,63 @@
-"use client"
-import styles from "./page.module.css";
-import { useRouter } from 'next/navigation';  
+"use client";
+import React, { useState, useEffect } from 'react';
+import styles from './page.module.css';
 import Header from "./components/header/page";
 import Footer from "./components/footer/page";
 
-export default function Home() {
-  const router = useRouter(); 
+const Carousel = () => {
+  const images = [
+    '/img1.jpeg',
+    '/img2.jpeg',
+    '/img3.jpeg',
+    '/img4.jpeg',
+    '/img5.jpeg',
+    '/img6.jpeg',
+  ]; 
 
-  const handleUserClick = () => {
-    localStorage.setItem("tipoUsuario", "user");
-    router.push("/login"); 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextImage = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
-  const handleAdminClick = () => {
-    localStorage.setItem("tipoUsuario", "adm");
-    router.push("/login"); 
+  const prevImage = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      nextImage();
+    }, 2000); 
+    return () => clearInterval(intervalId); 
+  }, []);
 
   return (
     <div className={styles.page}>
-      <Header />
-      <div className={styles.imagecontainer}>
-        <div className={styles.linkSection}>
-          <div className="reservaContent">
-            <button className={styles.link2} onClick={handleUserClick}>
-              SOU USUÁRIO
-            </button>
-            <img className={styles.img1} src="controlar_andamentos.png" alt="Ferramentas" />
-          </div>
-
-          <div className="reservaContent">
-            <button className={styles.link2} onClick={handleAdminClick}>
-              SOU ADMINISTRADOR
-            </button>
-            <img className={styles.img2} src="reserva.png" alt="Ferramentas" />
-          </div>
+      <Header /> 
+      <h1 className={styles.h1}>CONHEÇA O ESPAÇO MAKER</h1>
+      <div className={styles.carouselContainer}>
+        <div className={styles.imageContainer}>
+          <img
+            src={images[currentIndex]}
+            alt={`Imagem ${currentIndex + 1}`}
+            className={styles.carouselImage}
+          />
         </div>
       </div>
 
-      <Footer />
+      <div className={styles.navDots}>
+        {images.map((_, index) => (
+          <span
+            key={index}
+            className={`${styles.dot} ${currentIndex === index ? styles.activeDot : ''}`}
+            onClick={() => setCurrentIndex(index)} 
+          ></span>
+        ))}
+      </div>
+
+      <Footer /> 
     </div>
   );
-}
+};
+
+export default Carousel;
