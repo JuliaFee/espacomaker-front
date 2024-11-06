@@ -15,6 +15,7 @@ const CadastroImpressora = () => {
         filamento: "",
         statusI: true
     });
+
     const router = useRouter();
     const searchParams = useSearchParams();
     const editId = searchParams.get("id");
@@ -26,8 +27,10 @@ const CadastroImpressora = () => {
         if (editId) {
             const fetchImpressora = async () => {
                 try {
-                    const response = await axios.get(`http://localhost:5000/impressora/${editId}`);
+
+                    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora/${editId}`);
                     const { nome, descricao, img, filamento, statusI } = response.data.impressora;
+
                     setImpressora({ nome, descricao, img, filamento, statusI });
                 } catch (error) {
                     setErrorMessage("Erro ao carregar os dados da impressora");
@@ -50,10 +53,10 @@ const CadastroImpressora = () => {
         setIsSubmitting(true);
         try {
             if (editId) {
-                await axios.put(`http://localhost:5000/impressora/${editId}`, impressora);
+                await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora/${editId}`, impressora);
                 setSuccessMessage("Impressora atualizada com sucesso!");
             } else {
-                await axios.post("http://localhost:5000/impressora", impressora);
+            await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora`, impressora);
                 setSuccessMessage("Impressora cadastrada com sucesso!");
             }
             setImpressora({ nome: "", descricao: "", img: "", filamento: "", statusI: true });
@@ -67,6 +70,19 @@ const CadastroImpressora = () => {
             setIsSubmitting(false);
         }
     };
+
+    // const deleteImpressora = async () => {
+    //     try {
+    //         await axios.delete(`http://localhost:5000/impressora/${editId}`);
+    //         setSuccessMessage("Impressora deletada com sucesso!");
+    //         setTimeout(() => {
+    //             setSuccessMessage("");
+    //             router.push("/impressora");
+    //         }, 3000);
+    //     } catch (error) {
+    //         setErrorMessage("Erro ao deletar a impressora.");
+    //     }
+    // };
 
     return (
         <div className={styles.pageContainer}>
@@ -121,16 +137,15 @@ const CadastroImpressora = () => {
                             required
                         />
                     </div>
-                    
+
                     <div className={styles.formGroup}>
                         <label htmlFor="statusI" className={styles.label}>Status:</label>
                         <input
-                            type="text"
+                            type="checkbox"
                             className={styles.input}
                             id="statusI"
-                            value={impressora.statusI}
-                            onChange={handleChange}
-                            required
+                            checked={impressora.statusI}
+                            onChange={(e) => setImpressora(prev => ({ ...prev, statusI: e.target.checked }))}
                         />
                     </div>
 
@@ -141,7 +156,18 @@ const CadastroImpressora = () => {
                     >
                         {isSubmitting ? "Salvando..." : editId ? "Atualizar" : "Cadastrar"}
                     </button>
+                    
+                    {editId && (
+                        <button
+                            type="button"
+                            onClick={deleteImpressora}
+                            className={`${styles.button} ${styles.deleteButton}`}
+                        >
+                            Deletar Impressora
+                        </button>
+                    )}
                 </form>
+                
                 {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
                 {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
             </div>

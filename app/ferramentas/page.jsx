@@ -9,34 +9,23 @@ import { MdOutlineDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { useRouter } from 'next/navigation'; // Adicionando o hook para redirecionar
 import Link from "next/link";
+import { FaSearch } from "react-icons/fa";
 
 const Ferramentas = () => {
   const [ferramentas, setFerramentas] = useState([]);
-  const [deviceType, setDeviceType] = useState("");
+  const [ferramentasFiltradas, setFerramentasFiltradas] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); // Estado para armazenar o texto da pesquisa
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter(); // Para redirecionar o usuário
 
-  const getDeviceType = () => {
-    const userAgent = navigator.userAgent;
-    return /android/i.test(userAgent) || (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) ? "Mobile" : "Desktop";
-  };
-
-  useEffect(() => {
-    const deviceType = getDeviceType();
-    document.body.classList.add(deviceType);
-    setDeviceType(deviceType);
-    return () => {
-      document.body.classList.remove(deviceType);
-    };
-  }, []);
-
   useEffect(() => {
     const fetchFerramentas = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/ferramentas");
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas`);
         if (response.data && Array.isArray(response.data.ferramentas)) {
           setFerramentas(response.data.ferramentas);
+          setFerramentasFiltradas(response.data.ferramentas); // Inicializa as ferramentas filtradas
         } else {
           setError("Formato de dados inesperado!");
         }
@@ -51,8 +40,9 @@ const Ferramentas = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/ferramentas/${id}`);
+      await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas/${id}`);
       setFerramentas(ferramentas.filter((ferramenta) => ferramenta.id !== id)); 
+      setFerramentasFiltradas(ferramentasFiltradas.filter((ferramenta) => ferramenta.id !== id)); // Atualiza a lista filtrada
     } catch (error) {
       setError("Erro ao excluir a ferramenta. Tente novamente.");
     }
@@ -62,23 +52,46 @@ const Ferramentas = () => {
     router.push(`/ferramentas/cadastro-ferramentas?id=${id}`); 
   };
 
+  const handleSearch = (event) => {
+    const searchValue = event.target.value.toLowerCase();
+    setSearchTerm(searchValue);
+
+    // Filtra as ferramentas com base no nome
+    const filteredTools = ferramentas.filter((ferramenta) =>
+      ferramenta.nome.toLowerCase().includes(searchValue)
+    );
+    setFerramentasFiltradas(filteredTools);
+  };
+
   return (
     <div className={style.body}>
       <Header />
       <Link href={"../"} className={style.back}><IoCaretBack /></Link>
       <h1 className={style.h1}>Ferramentas Disponíveis</h1>
-      <h3 className={style.h3}>Tipo de dispositivo: {deviceType}</h3>
+      
+      <div className={style.search}>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleSearch}
+        placeholder="Busque aqui..."
+        className={style.searchInput}
+        
+      />
+      </div>
+      
+
       {loading ? (
         <p className={style.loading}>Carregando...</p>
       ) : (
         <>
           {error && <p className={style.error}>{error}</p>}
           <ul className={style.container}>
-            {ferramentas.length > 0 ? (
-              ferramentas.map((ferramenta) => (
+            {ferramentasFiltradas.length > 0 ? (
+              ferramentasFiltradas.map((ferramenta) => (
                 <li key={ferramenta.id} className={style.card}>
                   <img src={ferramenta.img} alt={ferramenta.nome} className={style.imagem} />
-                  <h2>{ferramenta.nome}</h2>
+                  <h2 className={style.subtitle}>{ferramenta.nome}</h2>
                   <p>{ferramenta.descricao}</p>
                   <button onClick={() => handleEdit(ferramenta.id)} className={style.editButton}><FaRegEdit /></button>
                   <button onClick={() => handleDelete(ferramenta.id)} className={style.deleteButton}><MdOutlineDelete /></button>

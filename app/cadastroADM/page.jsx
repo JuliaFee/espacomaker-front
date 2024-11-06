@@ -24,7 +24,7 @@ const CadastroADM = () => {
 
         console.log(novoUsuario); 
         try {
-            const response = await axios.post("http://localhost:5000/users", novoUsuario);
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/users`, novoUsuario);
             console.log('Usuário cadastrado:', response.data);
             setNome('');
             setEmail('');

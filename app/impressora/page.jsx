@@ -51,22 +51,12 @@ const Impressora = () => {
     fetchImpressoras();
   }, []);
 
-  const handleDelete = async (id) => {
-    console.log(`Deleting impressora with ID: ${id}`);
-    try {
-      const response = await axios.delete(`/api/impressora/${id}`);
-      if (response.status === 200) {
-        setImpressoras(impressoras.filter((impressora) => impressora.id !== id));
-      } else {
-        setError("Erro ao excluir impressora. Tente novamente.");
-      }
+  const handleDelete = async (id) =>{
+    try  {
+      await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora/${id}`);
+      setImpressoras(impressoras.filter((impressora) => impressora.id !== id));
     } catch (error) {
-      console.error("Erro ao excluir impressora:", error.response ? error.response.data : error.message);
-      if (error.response && error.response.status === 404) {
-        setError("Impressora não encontrada.");
-      } else {
-        setError("Erro ao excluir impressora. Tente novamente.");
-      }
+      setError("erro ao excluir a impressora, tente novamente");
     }
   };
 

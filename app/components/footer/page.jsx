@@ -5,13 +5,13 @@ const Footer = () => {
     return (
         <div className={style.global}>
             <div className={style.container}>
-            <p><span className={style.senai}>SENAI</span> <span className={style.lab}>lab</span></p>
+            <a href="./"><img className={style.logo} src="../../logoSenaiLab.png" alt="Logo" style={{width: "200px"}}/></a>
             </div>
             <div>
 
             </div>
             <div className={style.escrito}>
-                <p> ©Todos os Direitos Reservados - 2024 <span className={style.span}>By Inova Tech</span></p>
+                <p> ©Todos os Direitos Reservados - 2024 by <a url="#"><img src="../../LOGO2.png" alt="inova" style={{width: "50px"}}/></a></p>
             </div>
         </div>
     )

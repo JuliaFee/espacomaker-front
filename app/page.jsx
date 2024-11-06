@@ -1,43 +1,63 @@
-import styles from "./page.module.css";
-import Link from "next/link";
+"use client";
+import React, { useState, useEffect } from 'react';
+import styles from './page.module.css';
 import Header from "./components/header/page";
 import Footer from "./components/footer/page";
 
+const Carousel = () => {
+  const images = [
+    '/img1.jpeg',
+    '/img2.jpeg',
+    '/img3.jpeg',
+    '/img4.jpeg',
+    '/img5.jpeg',
+    '/img6.jpeg',
+  ]; 
 
-export default function Home() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextImage = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      nextImage();
+    }, 2000); 
+    return () => clearInterval(intervalId); 
+  }, []);
+
   return (
     <div className={styles.page}>
-
-      <Header></Header>
-      <div className={styles.imagecontainer}>
-        <img className={styles.imgBanner} src="bannerSM.png"></img>
-      </div>
-      <div className={styles.section1}>
-        <div className={styles.title2}>
-          <p className={styles.link}>SERVIÇOS</p>
+      <Header /> 
+      <h1 className={styles.h1}>CONHEÇA O ESPAÇO MAKER</h1>
+      <div className={styles.carouselContainer}>
+        <div className={styles.imageContainer}>
+          <img
+            src={images[currentIndex]}
+            alt={`Imagem ${currentIndex + 1}`}
+            className={styles.carouselImage}
+          />
         </div>
-
-        <div className={styles.linkSection}>
-
-          <div className="reservaContent">
-            <Link className={styles.link2} href={"./reserva"}>REALIZAR RESERVA</Link>
-            <img className={styles.img1} src="controlar_andamentos.png" alt="Ferramentas" />
-          </div>
-
-          <div className="reservaContent">
-            <Link className={styles.link2} href={"./andamento"}>ACOMPANHAR ANDAMENTO</Link>
-            <img className={styles.img2} src="reserva.png" alt="Ferramentas" />
-          </div>
-        
-        </div>
-
       </div>
 
+      <div className={styles.navDots}>
+        {images.map((_, index) => (
+          <span
+            key={index}
+            className={`${styles.dot} ${currentIndex === index ? styles.activeDot : ''}`}
+            onClick={() => setCurrentIndex(index)} 
+          ></span>
+        ))}
+      </div>
 
-
-
-      <Footer></Footer>
+      <Footer /> 
     </div>
   );
-}
+};
 
+export default Carousel;

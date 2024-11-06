@@ -1,18 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap');
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+}
+
+.imagecontainer {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.imgBanner {
+  width: 67%;
+  max-width: 100%;
+  border-radius: 20px;
+  align-items: center;
+  margin-top: 5%;
+  margin-left: 17%;
+  margin-right: 17%;
+  margin-bottom: 2%;
+}
+
+.section1 {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 67%;
+  background-color: #2E83E3;
+  color: white;
+  padding: 30px;
+  text-align: center;
+  font-size: 50px;
+  font-family: "Chau Philomene One";
+  max-width: 100%;
+  border-radius: 20px;
+  align-items: center;
+  margin-top: 5%;
+  margin-top: 2%;
+}
+.link2:hover {
+  background-color: rgba(46, 131, 227, 0.8); 
+  transform: scale(1.05); 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+}
 
 
-.body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: red;
-  }
-  
-@media screen and (max-width: 480px) {
-  .body {
-    background-color: blue;
-  }  
+.linkSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+  padding: 70px 0;
+  position: relative;
+}
+
+.reserva-section {
+  margin-bottom: 50px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 65%;
+  background-color: #2E83E3;
+  color: white;
+  padding: 30px;
+  text-align: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 50px;
+  font-family: "Chau Philomene One";
+  position: relative;
+
+}
+
+.link2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80rem;
+  max-width: 100%;
+  background-color: #2E83E3;
+  color: white;
+  padding: 60px;
+  text-align: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 50px;
+  font-family: "Chau Philomene One";
+  position: relative;
+  margin-bottom: 5%;
+  margin-top: 2%;
+}
+
+.link:hover {
+  background-color: #2E83E3;
+}
+
+.img1,
+.img2,
+.img3 {
+  width: 10rem;
+  position: absolute;
+  z-index: 2;
+}
+
+.img1 {
+  width: 28%;
+  right: -3rem;
+  bottom: 1rem;
+
+}
+
+.img2 {
+  top: 1rem;
+  right: -4rem;
+  width: 28%;
+}
+
+.img3 {
+  top: -5rem;
+  right: -5rem;
+}
+
+.reserva-content {
+  position: relative;
+  margin-bottom: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 67%;
+
 }

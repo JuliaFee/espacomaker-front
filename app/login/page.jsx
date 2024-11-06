@@ -1,53 +1,40 @@
+// app/login/page.jsx
 "use client";
 import React, { useState } from 'react';
 import styles from './login.module.css';
-import axios from 'axios';
-import Header from "./../components/header/page";
-import Footer from "./../components/footer/page";
-import { IoCaretBack } from "react-icons/io5";
-import { useRouter } from 'next/router';
 import Link from "next/link";
+import Header from "../components/header/page.jsx";
+import Footer from "../components/footer/page.jsx";
+import { useAuth } from '../context/authContext.js';
+
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-    const [mensagem, setMensagem] = useState('');
-    const [usuario, setUsuario] = useState(null);
-
+    const [error, setError] = useState('');
+    const { login } = useAuth();
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
         
-        const trimmedEmail = email.trim();
-        const trimmedSenha = senha.trim();
+        const result = await login(email, senha);
         
-        try {
-            const response = await axios.post('http://localhost:5000/login', {
-                email: trimmedEmail,
-                senha: trimmedSenha,
-            });
-    
-            const { tipo } = response.data; // Assumindo que o backend retorna o tipo de usuário
-            setUsuario(response.data);
-            localStorage.setItem("tipoUsuario", tipo); // Salvando o tipo de usuário no localStorage
-            
-            router.push('/app'); 
-            
-        } catch (error) {
-            setMensagem(error.response ? error.response.data.message : 'Erro ao tentar logar. Tente novamente.');
+        if (!result.success) {
+            setError(result.error);
         }
     };
-    
 
     return (
         <div className={styles.pageContainer}>
-            <Header/>
-            <Link href={"../"} className={styles.back}><IoCaretBack/></Link>
+            <Header />
+            {/* <Link href={"../"} className={styles.back}>Ir para home</Link> */}
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
-                        <p className={styles.title}>Login de usuário</p>
-
+                        <p className={styles.title}>Login</p>
+                        {error && <p className={styles.error}>{error}</p>}
+                        
                         <div className={styles.formGroup}>
-                            <label htmlFor="email" className={styles.label}>Email:</label>
+                            <label htmlFor="email" className={styles.title2}>Email:</label>
                             <input
                                 type="email"
                                 className={styles.input}
@@ -59,7 +46,7 @@ const LoginForm = () => {
                         </div>
 
                         <div className={styles.formGroup}>
-                            <label htmlFor="senha" className={styles.label}>Senha:</label>
+                            <label htmlFor="senha" className={styles.title2}>Senha:</label>
                             <input
                                 type="password"
                                 className={styles.input}
@@ -77,20 +64,9 @@ const LoginForm = () => {
                             Entrar
                         </button>
                     </div>
-
-                    {mensagem && <p className={styles.message}>{mensagem}</p>}
                 </form>
-
-                {usuario && (
-                    <div className={styles.profile}>
-                        <h2>Perfil do Usuário</h2>
-                        <p><strong>Nome:</strong> {usuario.nome}</p>
-                        <p><strong>Email:</strong> {usuario.email}</p>
-                        <p><strong>Tipo:</strong> {usuario.tipo === 'adm' ? 'Admin' : 'Usuário'}</p>
-                    </div>
-                )}
             </div>
-            <Footer/>
+            <Footer />
         </div>
     );
 };
