@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import style from "./reservalista.module.css";
+import Header from "@/app/components/header/page";
+import Footer from "@/app/components/footer/page";
 
 const reservaLista = () => {
   const [reservas, setReservas] = useState([]);
@@ -47,7 +49,8 @@ const reservaLista = () => {
 
   return (
     <div className={style.body}>
-      <h1>Reservas agurdando aprovação</h1>
+      <Header />
+      <h1 className={style.title}>Reservas agurdando aprovação</h1>
       {loading ? (
         <p>Carregando...</p>
       ) : (
@@ -67,11 +70,12 @@ const reservaLista = () => {
                
               ))
             ) : (
-              <li>Nenhuma reserva foi feita ainda.</li>
+              <li className={style.message}>Ops! Nenhuma reserva foi feita ainda...</li>
             )}
           </ul>
         </>
       )}
+      <Footer className={style.footer}/>
     </div>
   );
 };
