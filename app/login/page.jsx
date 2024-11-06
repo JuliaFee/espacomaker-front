@@ -12,7 +12,6 @@ const LoginForm = () => {
     const [senha, setSenha] = useState('');
     const [error, setError] = useState('');
     const { login } = useAuth();
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
