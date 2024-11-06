@@ -1,74 +1,43 @@
-"use client";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import style from "./home.module.css";
+import styles from "./home.module.css";
+import Link from "next/link";
+import Header from "../components/header/page";
+import Footer from "../components/footer/page";
 
-const Home = () => {
-  const [ferramentas, setFerramentas] = useState([]);
-  const [deviceType, setDeviceType] = useState("");
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  const getDeviceType = () => {
-    const userAgent = navigator.userAgent;
-    return /android/i.test(userAgent) || (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) ? "Mobile" : "Desktop";
-  };
-
-  useEffect(() => {
-    const deviceType = getDeviceType();
-    document.body.classList.add(deviceType);
-    setDeviceType(deviceType);
-    return () => {
-      document.body.classList.remove(deviceType);
-    };
-  }, []);
-
-  useEffect(() => {
-    const fetchFerramentas = async () => {
-      try {
-        console.log("Buscando ferramentas...");
-        const response = await axios.get("http://localhost:3000/api/ferramentas");
-        console.log("Response:", response);
-
-        if (response.data && Array.isArray(response.data.ferramentas)) {
-          setFerramentas(response.data.ferramentas);
-        } else {
-          console.error("Dados inesperados:", response.data);
-          setError("Formato de dados inesperado!");
-        }
-      } catch (error) {
-        console.error("Erro ao buscar dados:", error);
-        setError("Erro interno do servidor!");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchFerramentas();
-  }, []);
-
+export default function Home() {
   return (
-    <div className={style.body}>
-      <h1>Ferramentas Disponíveis</h1>
-      <h3>{deviceType}</h3>
-      {loading ? (
-        <p>Carregando...</p>
-      ) : (
-        <>
-          {error && <p className={style.error}>{error}</p>}
-          <ul>
-            {ferramentas.length > 0 ? (
-              ferramentas.map((ferramenta, index) => (
-                <li key={index}>{ferramenta.nome}</li>
-               
-              ))
-            ) : (
-              <li>Nenhuma ferramenta encontrada.</li>
-            )}
-          </ul>
-        </>
-      )}
+    <div className={styles.page}>
+
+      <Header></Header>
+      <div className={styles.imagecontainer}>
+        <img className={styles.imgBanner} src="bannerSM.png"></img>
+      </div>
+      <div className={styles.section1}>
+        <div className={styles.title2}>
+          <p className={styles.link}>SERVIÇOS</p>
+        </div>
+
+        <div className={styles.linkSection}>
+
+          <div className="reservaContent">
+            <Link className={styles.link2} href={"./reserva"}>REALIZAR RESERVA</Link>
+            <img className={styles.img1} src="controlar_andamentos.png" alt="Ferramentas" />
+          </div>
+
+          <div className="reservaContent">
+            <Link className={styles.link2} href={"./andamento"}>ACOMPANHAR ANDAMENTO</Link>
+            <img className={styles.img2} src="reserva.png" alt="Ferramentas" />
+          </div>
+        
+        </div>
+
+      </div>
+
+
+
+
+      <Footer></Footer>
     </div>
   );
-};
+}
 
-export default Home;
