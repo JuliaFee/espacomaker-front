@@ -26,7 +26,7 @@ const LoginForm = () => {
     return (
         <div className={styles.pageContainer}>
             <Header />
-            <Link href={"../"} className={styles.back}>Ir para home</Link>
+            {/* <Link href={"../"} className={styles.back}>Ir para home</Link> */}
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
@@ -34,7 +34,7 @@ const LoginForm = () => {
                         {error && <p className={styles.error}>{error}</p>}
                         
                         <div className={styles.formGroup}>
-                            <label htmlFor="email" className={styles.label}>Email:</label>
+                            <label htmlFor="email" className={styles.title2}>Email:</label>
                             <input
                                 type="email"
                                 className={styles.input}
@@ -46,7 +46,7 @@ const LoginForm = () => {
                         </div>
 
                         <div className={styles.formGroup}>
-                            <label htmlFor="senha" className={styles.label}>Senha:</label>
+                            <label htmlFor="senha" className={styles.title2}>Senha:</label>
                             <input
                                 type="password"
                                 className={styles.input}
