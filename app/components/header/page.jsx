@@ -8,7 +8,7 @@ const Header = () => {
     return (
         <div className={styles.global}>
             <div className={styles.nav}>
-                <a href="./"><img className={styles.logo} src="../../logoSenaiLab.png" alt="Logo" style={{width: "300px"}}/></a>
+                <a href="./"><img className={styles.logo} src="../../logoSenaiLab.png" alt="Logo" style={{width: "250px"}}/></a>
             </div>
             <div className={styles.tools}>
                 <a href="./ferramentas"><VscTools className={styles.icon}/></a>
