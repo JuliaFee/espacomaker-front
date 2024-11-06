@@ -13,7 +13,7 @@ const CadastroImpressora = () => {
         descricao: "",
         img: "",
         filamento: "",
-        statusI: true
+        statusI: "disponivel"  // Define como disponível por padrão
     });
 
     const router = useRouter();
@@ -27,10 +27,8 @@ const CadastroImpressora = () => {
         if (editId) {
             const fetchImpressora = async () => {
                 try {
-
                     const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora/${editId}`);
                     const { nome, descricao, img, filamento, statusI } = response.data.impressora;
-
                     setImpressora({ nome, descricao, img, filamento, statusI });
                 } catch (error) {
                     setErrorMessage("Erro ao carregar os dados da impressora");
@@ -48,6 +46,13 @@ const CadastroImpressora = () => {
         }));
     };
 
+    const handleStatusChange = (e) => {
+        setImpressora((prev) => ({
+            ...prev,
+            statusI: e.target.value
+        }));
+    };
+
     const updateImpressora = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
@@ -56,10 +61,10 @@ const CadastroImpressora = () => {
                 await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora/${editId}`, impressora);
                 setSuccessMessage("Impressora atualizada com sucesso!");
             } else {
-            await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora`, impressora);
+                await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora`, impressora);
                 setSuccessMessage("Impressora cadastrada com sucesso!");
             }
-            setImpressora({ nome: "", descricao: "", img: "", filamento: "", statusI: true });
+            setImpressora({ nome: "", descricao: "", img: "", filamento: "", statusI: "disponivel" });
             setTimeout(() => {
                 setSuccessMessage("");
                 router.push("/impressora");
@@ -71,26 +76,14 @@ const CadastroImpressora = () => {
         }
     };
 
-    // const deleteImpressora = async () => {
-    //     try {
-    //         await axios.delete(`http://localhost:5000/impressora/${editId}`);
-    //         setSuccessMessage("Impressora deletada com sucesso!");
-    //         setTimeout(() => {
-    //             setSuccessMessage("");
-    //             router.push("/impressora");
-    //         }, 3000);
-    //     } catch (error) {
-    //         setErrorMessage("Erro ao deletar a impressora.");
-    //     }
-    // };
-
     return (
         <div className={styles.pageContainer}>
             <Header />
             <div className={styles.container}>
                 <form onSubmit={updateImpressora}>
+                    <p className={styles.title}>{editId ? "Editar Impressora" : "Cadastro de Impressora"}</p>
+
                     <div className={styles.formGroup}>
-                        <p className={styles.title}>{editId ? "Editar Impressora" : "Cadastro de Impressora"}</p>
                         <label htmlFor="nome" className={styles.label}>Nome:</label>
                         <input
                             type="text"
@@ -138,15 +131,32 @@ const CadastroImpressora = () => {
                         />
                     </div>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="statusI" className={styles.label}>Status:</label>
-                        <input
-                            type="checkbox"
-                            className={styles.input}
-                            id="statusI"
-                            checked={impressora.statusI}
-                            onChange={(e) => setImpressora(prev => ({ ...prev, statusI: e.target.checked }))}
-                        />
+                    <div className={styles.formGroupCheckbox}>
+                        <label className={styles.label}>Status:</label>
+                        <div>
+                            <label>
+                                <input
+                                    type="radio"
+                                    className={styles.radio}
+                                    name="statusI"
+                                    value="disponivel"
+                                    checked={impressora.statusI === "disponivel"}
+                                    onChange={handleStatusChange}
+                                />
+                                <span className={styles.statusLabel}>Disponível</span>
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    className={styles.radio}
+                                    name="statusI"
+                                    value="indisponivel"
+                                    checked={impressora.statusI === "indisponivel"}
+                                    onChange={handleStatusChange}
+                                />
+                                <span className={styles.statusLabel}>Indisponível</span>
+                            </label>
+                        </div>
                     </div>
 
                     <button
@@ -156,18 +166,8 @@ const CadastroImpressora = () => {
                     >
                         {isSubmitting ? "Salvando..." : editId ? "Atualizar" : "Cadastrar"}
                     </button>
-                    
-                    {editId && (
-                        <button
-                            type="button"
-                            onClick={deleteImpressora}
-                            className={`${styles.button} ${styles.deleteButton}`}
-                        >
-                            Deletar Impressora
-                        </button>
-                    )}
                 </form>
-                
+
                 {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
                 {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
             </div>

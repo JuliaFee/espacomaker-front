@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap');
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f9f9f9;
+    background-image: url(../../../public/bckg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.container {
+    background: linear-gradient(to bottom, #FFAD23, #FA9D02);
+    padding: 20px;
+    border-radius: 10px;
+    width: 30rem;
+    text-align: center;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.title {
+    font-family: 'Chau Philomene One';
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.label {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: white;
+    font-family: 'Chau Philomene One';
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.button {
+    background-color: #2E83E3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 100%;
+    height: 3rem;
+    font-family: 'Chau Philomene One';
+    margin-top: 0.5rem;
+}
+
+.submitButton:hover {
+    background-color: #236ABF;
+}
+
+.successMessage {
+    color: rgb(62, 164, 62);
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+.back {
+    color: #124B8D;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-size: 2rem;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+}
+
+.back:hover {
+    color: #2E83E3;
+}
+
+/* Estilos para os botões de status */
+.formGroupCheckbox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.radioContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre o botão e o texto */
+    margin-bottom: 8px;
+}
+
+.radio {
+    accent-color: #2E83E3; /* Cor dos radio buttons */
+}
+
+.statusLabel {
+    font-size: 1rem;
+    color: white;
+    font-family: 'Chau Philomene One';
+}

@@ -85,6 +85,7 @@ const Impressora = () => {
                   <h2>{impressora.nome}</h2>
                   <p>{impressora.descricao}</p>
                   <p>{impressora.filamento}</p>
+                  
                   <button onClick={() => handleEdit(impressora.id)} className={style.editButton}>
                     <FaRegEdit />
                   </button>
