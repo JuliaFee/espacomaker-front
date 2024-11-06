@@ -16,7 +16,7 @@ const CadastroForm = () => {
     useEffect (() => {
         const fetchData = async () => {
             try {
-                const response = await axios.post("http://localhost:5000/users");
+                const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/users`);
                 console.log('Dados recebidos na API:', response.data);
                 console.log('Esta funfando tomaaa macetabdo');
                 setDados(response.data);
@@ -43,7 +43,7 @@ const CadastroForm = () => {
     
         try {
             // Envie o objeto como o segundo argumento para a requisição POST
-            const response = await axios.post("http://localhost:5000/users", novoUsuario);
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/users`, novoUsuario);
             console.log('Usuário cadastrado:', response.data);
         } catch (error) {
             console.error('Erro ao cadastrar usuário:', error);
