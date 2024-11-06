@@ -60,13 +60,18 @@ const BookingForm = () => {
         } 
 
         try { 
-            const horarioResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/horarios`, { 
-                id_ferramenta: selectedFerramenta || null, 
-                id_impressora: selectedImpressora || null, 
-                hora_inicio: horaInicio, 
-                hora_fim: horaFim, 
-            }); 
+            // Converter os valores de horaInicio e horaFim para o formato correto
+            const horaInicioFormatada = `${horaInicio}:00`;
+            const horaFimFormatada = `${horaFim}:00`;
 
+            const horarioResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/horarios`, {
+                id_ferramenta: Number(selectedFerramenta) || null,
+                id_impressora: Number(selectedImpressora) || null,
+                hora_inicio: horaInicioFormatada,
+                hora_fim: horaFimFormatada,
+              });
+
+              console.log(horarioResponse);
             const idHorario = horarioResponse.data.id; 
 
             const reservaResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reservas`, { 
@@ -77,6 +82,7 @@ const BookingForm = () => {
                 data_reserva: dataReserva.toISOString().split('T')[0], 
                 status_reserva: true, 
             }); 
+            console.log(horaInicioFormatada, horaFimFormatada, horarioResponse, reservaResponse);
 
             console.log("Reserva realizada:", reservaResponse.data); 
             setError(null); 
@@ -136,22 +142,22 @@ const BookingForm = () => {
 
                 <Calendar onChange={setDataReserva} value={dataReserva} className={styles.calendar} /> 
                 <label htmlFor="horaInicio" className={styles.label}>Hora de Início:</label>
-    <input 
-        type="time" 
-        id="horaInicio"
-        value={horaInicio} 
-        onChange={(e) => setHoraInicio(e.target.value)} 
-        className={styles.input} 
-    /> 
+                <input 
+                    type="time" 
+                    id="horaInicio"
+                    value={horaInicio} 
+                    onChange={(e) => setHoraInicio(e.target.value)} 
+                    className={styles.input} 
+                /> 
 
-    <label htmlFor="horaFim" className={styles.label2}>Hora de Término:</label>
-    <input 
-        type="time" 
-        id="horaFim"
-        value={horaFim} 
-        onChange={(e) => setHoraFim(e.target.value)} 
-        className={styles.input} 
-    /> 
+                <label htmlFor="horaFim" className={styles.label2}>Hora de Término:</label>
+                <input 
+                    type="time" 
+                    id="horaFim"
+                    value={horaFim} 
+                    onChange={(e) => setHoraFim(e.target.value)} 
+                    className={styles.input} 
+                /> 
                 <button type="submit" className={styles.button}>Realizar Reserva</button> 
             </form> 
             <Footer /> 
@@ -159,4 +165,4 @@ const BookingForm = () => {
     ); 
 }; 
 
-export default BookingForm; 
+export default BookingForm;
