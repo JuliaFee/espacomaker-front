@@ -6,8 +6,7 @@ const Footer = () => {
         <div className={style.global}>
             <div className={style.container}>
             <a href="./"><img className={style.logo} src="../../logoSenaiLab.png" alt="Logo" style={{width: "200px"}}/></a>
-            </div>
-            <div>
+        
 
             </div>
             <div className={style.escrito}>

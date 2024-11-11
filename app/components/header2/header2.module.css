@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     background-image: linear-gradient(to right, #2365b1, #328bf1);
-    padding: 10px 30px;
+    /* padding: 10px 30px; */
     height: 130px;
     width: 100%;
 }
@@ -42,3 +42,16 @@
 .icon:hover {
     color: #E6AC47; 
 }
+
+.escrito {
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-right: 30px;
+}
+
+.nav{
+    margin-top: 15px;
+}
+
