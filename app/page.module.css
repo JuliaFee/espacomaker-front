@@ -6,7 +6,7 @@
   min-height: 100vh; 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
-  background-image: url('/bckg.png'); 
+  background-image: url('/fundo-1.png'); 
   background-size: cover; 
   background-position: center center; 
   background-repeat: no-repeat; 
@@ -36,13 +36,13 @@
   box-shadow: none; /* Remover qualquer sombra */
   background-color: transparent;
   transition: transform 0.3s ease-in-out;
+  height: 500px; /* Definindo uma altura fixa para o contêiner */
 }
-
 
 .imageContainer {
   width: 80%;
   max-width: 900px;
-  height: 500px;
+  height: 100%; /* A altura agora será 100% do contêiner pai */
   overflow: hidden;
   border-radius: 8px;
   position: relative;
@@ -53,12 +53,13 @@
 
 .carouselImage {
   width: 100%;
-  height: 100%;
-  object-fit: cover; 
+  height: 100%; /* As imagens agora terão altura 100% do contêiner */
+  object-fit: cover; /* Faz a imagem cobrir a área sem distorcer a proporção */
   transition: opacity 0.5s ease-in-out;
   opacity: 1;
   background-color: transparent; 
 }
+
 
 
 .navDots {
@@ -89,6 +90,70 @@
 .activeDot {
   background-color: #007bff;
 }
+
+.link2:hover {
+  background-color: rgba(46, 131, 227, 0.8); 
+  transform: scale(1.05); 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+
+.linkSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+  padding: 70px 0;
+  position: relative;
+}
+
+
+
+
+
+.link2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80rem;
+  max-width: 100%;
+  background-color: #2E83E3;
+  color: white;
+  padding: 60px;
+  text-align: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 50px;
+  font-family: "Chau Philomene One";
+  position: relative;
+  margin-bottom: 5%;
+  margin-top: 2%;
+}
+
+.link:hover {
+  background-color: #2E83E3;
+}
+
+.img1,
+.img2,
+.img3 {
+  width: 10rem;
+  position: absolute;
+  z-index: 2;
+}
+
+
+.reserva-content {
+  position: relative;
+  margin-bottom: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 67%;
+
+}
+
+
 
 @media (max-width: 768px) {
   .carouselContainer {
@@ -214,3 +279,4 @@
   object-fit: cover;
   background-color: #ececec;
 }
+

@@ -9,6 +9,9 @@ const Header = () => {
         <div className={styles.global}>
             <div className={styles.nav}>
                 <a href="./"><img className={styles.logo} src="../../logoSenaiLab.png" alt="Logo" style={{width: "250px"}}/></a>
+                <div className={styles.escrito}>
+                <img src="../../LOGO2.png" alt="inova" style={{width: "60px"}}/>
+            </div>
             </div>
             <div className={styles.tools}>
                 <a href="./ferramentas"><VscTools className={styles.icon}/></a>

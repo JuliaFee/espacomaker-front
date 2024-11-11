@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import styles from './page.module.css';
-import Header from "./components/header/page";
+import Header from "./components/header2/page";
 import Footer from "./components/footer/page";
+import Link from "next/link";
 
 const Carousel = () => {
   const images = [
@@ -34,7 +35,7 @@ const Carousel = () => {
   return (
     <div className={styles.page}>
       <Header /> 
-      <h1 className={styles.h1}>CONHEÇA O ESPAÇO MAKER</h1>
+      <h1 className={styles.h1}>Bem-vindo(a) ao Espaço Maker</h1>
       <div className={styles.carouselContainer}>
         <div className={styles.imageContainer}>
           <img
@@ -55,9 +56,20 @@ const Carousel = () => {
         ))}
       </div>
 
+      <div className={styles.linkSection}>
+        <div className="reservaContent">
+          <Link className={styles.link2} href={"./login"}>SOU ADMINISTRADOR</Link>
+        </div>
+
+        <div className="reservaContent">
+          <Link className={styles.link2} href={"./login"}>SOU CLIENTE</Link>
+        </div>
+      </div>
+
       <Footer /> 
     </div>
   );
 };
+
 
 export default Carousel;
