@@ -1,13 +1,11 @@
-// app/api/auth/route.js
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 
 export async function POST(request) {
     try {
         const { email, senha } = await request.json();
 
-        // Fazer a validação com sua API existente
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/login`, {
+        
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,25 +19,12 @@ export async function POST(request) {
             throw new Error(data.message || 'Erro na autenticação');
         }
 
-        // Assumindo que sua API retorna os dados do usuário
-        const user = data.user;
-
-        const apiResponse = NextResponse.json(
-            { success: true, user },
-            { status: 200 }
-        );
-
-        // Definindo o cookie com o token retornado da sua API
-        apiResponse.cookies.set({
-            name: 'auth_token',
-            value: data.token, // Assumindo que sua API retorna um token
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-            maxAge: 86400 // 1 dia
-        });
-
-        return apiResponse;
+      
+        return NextResponse.json({
+            success: true,
+            user: data.user,
+            token: data.token
+        }, { status: 200 });
 
     } catch (error) {
         return NextResponse.json(
@@ -49,22 +34,21 @@ export async function POST(request) {
     }
 }
 
-export async function GET() {
+export async function GET(request) {
     try {
-        const cookieStore = cookies();
-        const token = cookieStore.get('auth_token');
-
-        if (!token) {
-            return NextResponse.json(
-                { success: false, error: 'Não autenticado' },
-                { status: 401 }
-            );
+    
+        const authorization = request.headers.get('authorization');
+        
+        if (!authorization || !authorization.startsWith('Bearer ')) {
+            throw new Error('Token não fornecido');
         }
 
-        // Validar o token com sua API
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/me`, {
+        const token = authorization.split(' ')[1];
+
+      
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/${id}`, {
             headers: {
-                'Authorization': `Bearer ${token.value}`
+                'Authorization': `Bearer ${token}`
             }
         });
 
@@ -72,12 +56,12 @@ export async function GET() {
             throw new Error('Token inválido');
         }
 
-        const user = await response.json();
-        return NextResponse.json({ success: true, user });
+        const userData = await response.json();
+        return NextResponse.json({ success: true, user: userData });
 
     } catch (error) {
         return NextResponse.json(
-            { success: false, error: 'Token inválido' },
+            { success: false, error: error.message || 'Não autorizado' },
             { status: 401 }
         );
     }
