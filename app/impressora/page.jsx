@@ -9,6 +9,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
 import { IoCaretBack } from "react-icons/io5";
 import Link from "next/link";
+import Loading from "../components/loading/page";
 
 const Impressora = () => {
   const [impressoras, setImpressoras] = useState([]);
@@ -73,7 +74,7 @@ const Impressora = () => {
       {/* <h1>Impressoras Disponíveis</h1> */}
       {/* <h3>{deviceType}</h3> */}
       {loading ? (
-        <p>Carregando...</p>
+        <p><Loading/></p>
       ) : (
         <>
           {error && <p className={style.error}>{error}</p>}
