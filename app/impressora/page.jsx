@@ -74,7 +74,7 @@ const Impressora = () => {
       {/* <h1>Impressoras Disponíveis</h1> */}
       {/* <h3>{deviceType}</h3> */}
       {loading ? (
-        <p><Loading/></p>
+        <div><Loading/></div>
       ) : (
         <>
           {error && <p className={style.error}>{error}</p>}
