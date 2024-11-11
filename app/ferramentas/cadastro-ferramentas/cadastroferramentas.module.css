@@ -1,95 +1,186 @@
-/* module.css */
-
 @import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap');
-
 .pageContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #f9f9f9;
     min-height: 100vh;
+    overflow: hidden;
+    justify-content: space-between;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
 }
 
-.container {
-    background: linear-gradient(to bottom, #FFAD23, #FA9D02);
-    /* Gradient based on image */
+/* Conteúdo principal */
+.mainContent {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    margin: 0 auto;
     padding: 20px;
-    border-radius: 10px;
-    width: 30rem;
-    height: 30rem;
-   text-align: center;
-   margin-top: 5rem;
-   margin-bottom: 5rem;
+    max-width: 1200px;
+    width: 100%;
+    z-index: 10;
+    animation: fadeIn 1s ease-out;
 }
 
+/* Formulário sobre o degradê */
+.formOverlay {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Formulário */
+.formContainer {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95); /* Fundo translúcido com maior opacidade */
+    padding: 35px 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    animation: slideIn 1s ease-out;
+}
+
+.formContainer:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+/* Título do formulário */
+/* Título do formulário */
 .title {
-    font-family: 'Chau Philomene One';
-    font-size: 2rem;
-    color: white;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2575fc;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease, transform 0.3s ease;
+    font-family: "Chau Philomene One";
 }
 
+.title:hover {
+    color: #FFAD23; /* Altera a cor para um tom mais quente ao passar o mouse */
+    transform: scale(1.1); /* Aumenta o título ao passar o mouse */
+}
+
+
+/* Grupos do formulário */
+.formGroup {
+    margin-bottom: 20px;
+}
 
 .label {
     display: block;
-    margin-bottom: 10px;
-    font-size: 1.5rem;
-    color: white;
-    font-family: 'Chau Philomene One';
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: #2575fc;
+    text-align: center;
+}
+.label:hover {
+    color: #FFAD23; 
 }
 
-.input {
-    margin-bottom: 20px;
-    border-radius: 5px;
-    width: 25rem;
-    height: 3rem;
-    border: none;
+/* Inputs do formulário */
+.inputText {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+    text-align: center;
 }
 
-.button {
-    background-color: #2E83E3;
-    /* Blue button color from the image */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.8rem;
-    cursor: pointer;
-    width: 20rem;
-    height: 3rem;
-    font-family: 'Chau Philomene One';
-    margin-top: 0.5rem;
+.inputText:focus {
+    border-color: #2575fc;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(37, 117, 252, 0.5);
 }
 
+/* Botão de envio */
 .submitButton {
-    width: 20rem;
-    height: 3rem;
-    margin-top: 0.5rem;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(to bottom, #FFAD23, #FA9D02);
+    background-color: ;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .submitButton:hover {
-    background-color: #236ABF;
-    /* Darker shade of blue for hover effect */
+    background: linear-gradient(to bottom, #2575fc, rgba(37, 117, 252, 0.5));
+    transform: scale(1.05);
 }
 
-.Header {
-    position: absolute;
-    margin: 0 auto;
 
+/* Footer */
+.footer {
+    background-color: #2575fc;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 16px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
 }
-.successMessage{
-    color: rgb(62, 164, 62);
+
+
+
+
+
+/* Efeitos de transição */
+.transition {
+    transition: all 0.3s ease-in-out;
 }
-.errorMessage{
-    color: red;
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
-.back {
-    color: #124B8D;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    font-size: 64px;
-    top: 15%;
-    left: 5%; /* Ajuste para posicionar na ponta direita */
-  }
-  .back:hover {
-    color: #2E83E3;
-  }
-  
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

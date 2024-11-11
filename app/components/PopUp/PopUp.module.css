@@ -1,10 +1,6 @@
 .sucesso, .erro {
-    width: 30%;
-    max-width: 400px;
-    min-width: 250px;
     height: auto;
     position: fixed;
-    bottom: 20%;
     text-align: center;
     padding: 12px 20px;
     border-radius: 8px;
@@ -12,20 +8,28 @@
     transform: translateX(-50%);
     color: white;
     font-family: Arial, sans-serif;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 500;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: none; /* Remover sombra */
     opacity: 0;
     animation: fadeIn 0.5s forwards, fadeOut 0.5s 2.5s forwards;
-    z-index: 1000;
+    
+    top: 15%;
+    font-weight: bold;
+    z-index: 9999; /* Garantir que o popup esteja acima de outros elementos */
 }
 
 .sucesso {
-    background-color: #4CAF50; /* Tom de verde mais suave */
+   color: #28a745; /* Cor de fundo para sucesso (verde) */
 }
 
 .erro {
-    background-color: #F44336; /* Tom de vermelho mais suave */
+    color: #dc3545; /* Cor de fundo para erro (vermelho) */
+}
+
+/* Adicionando z-index para o formContainer para evitar que ele fique atrás do popup */
+.formContainer {
+    z-index: 1; /* z-index menor para garantir que o popup fique em cima */
 }
 
 @keyframes fadeIn {
