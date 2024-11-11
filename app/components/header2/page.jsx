@@ -10,7 +10,7 @@ const Header2 = () => {
             <div className={styles.tools}>
                 
             <div className={styles.escrito}>
-                <img src="../../LOGO2.png" alt="inova" style={{width: "125px"}}/>
+                <img src="../../LOGO2.png" alt="inova" style={{width: "120px"}}/>
             </div>
               
             </div>
