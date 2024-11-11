@@ -1,32 +1,52 @@
-// app/login/page.jsx
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './login.module.css';
-import Link from "next/link";
+import { useRouter } from 'next/navigation';
 import Header from "../components/header/page.jsx";
 import Footer from "../components/footer/page.jsx";
-import { useAuth } from '../context/authContext.js';
-
+import { useAuth } from '../context/authContext';
+import Loading from '../components/loading/page';
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [error, setError] = useState('');
-    const { login } = useAuth();
+    const [isLoading, setIsLoading] = useState(false);
+    const { login, user } = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (user) {
+            router.push('/dashboard');
+        }
+    }, [user, router]);
+
+    //funcao de login
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-        
-        const result = await login(email, senha);
-        
-        if (!result.success) {
-            setError(result.error);
+        setIsLoading(true);
+
+        try {
+            if (!email || !senha) {
+                throw new Error('Por favor, preencha todos os campos');
+            }
+
+            const result = await login(email, senha);
+            
+            if (!result.success) {
+                setError(result.error);
+            }
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
         }
     };
 
+    //html
     return (
         <div className={styles.pageContainer}>
             <Header />
-            {/* <Link href={"../"} className={styles.back}>Ir para home</Link> */}
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
@@ -42,6 +62,7 @@ const LoginForm = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
+                                disabled={isLoading}
                             />
                         </div>
 
@@ -54,14 +75,16 @@ const LoginForm = () => {
                                 value={senha}
                                 onChange={(e) => setSenha(e.target.value)}
                                 required
+                                disabled={isLoading}
                             />
                         </div>
 
                         <button
                             type="submit"
                             className={`${styles.button} ${styles.submitButton}`}
+                            disabled={isLoading}
                         >
-                            Entrar
+                            {isLoading ? {Loading} : 'Entrar'}
                         </button>
                     </div>
                 </form>

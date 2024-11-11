@@ -1,40 +1,34 @@
-// app/context/AuthContext.js
-"use client";
-import React, { createContext, useState, useContext, useEffect } from 'react';
+'use client';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-const AuthContext = createContext({});
 
-export const AuthProvider = ({ children }) => {
+const AuthContext = createContext({
+    user: null,
+    login: async () => {},
+    logout: () => {},
+    loading: true
+});
+
+
+export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const router = useRouter();
 
     useEffect(() => {
-        checkAuthState();
+ 
+        const storedUser = localStorage.getItem('user');
+        const storedToken = localStorage.getItem('token');
+        
+        if (storedUser && storedToken) {
+            setUser(JSON.parse(storedUser));
+        }
+        
+        setLoading(false);
     }, []);
 
-    const checkAuthState = async () => {
-        try {
-            const response = await fetch('/api/auth', {
-                method: 'GET',
-                credentials: 'include'
-            });
-            const data = await response.json();
-            
-            if (data.success) {
-                setUser(data.user);
-            } else {
-                setUser(null);
-            }
-        } catch (error) {
-            setUser(null);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleLogin = async (email, senha) => {
+    const login = async (email, senha) => {
         try {
             const response = await fetch('/api/auth', {
                 method: 'POST',
@@ -42,62 +36,61 @@ export const AuthProvider = ({ children }) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ email, senha }),
-                credentials: 'include',
             });
 
             const data = await response.json();
 
-            if (data.success) {
-                setUser(data.user);
-                router.push('/home'); // Alterado para sua rota home
-                return { success: true };
-            } else {
-                return {
-                    success: false,
-                    error: data.error || 'Erro ao fazer login'
-                };
+            if (!response.ok) {
+                throw new Error(data.error || 'Erro na autenticação');
             }
+
+        
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            
+      
+            setUser(data.user);
+            
+            
+            router.push('/home');
+
+            return { success: true };
         } catch (error) {
-            return {
-                success: false,
-                error: 'Erro ao conectar ao servidor'
+            console.error('Erro no login:', error);
+            return { 
+                success: false, 
+                error: error.message || 'Erro ao fazer login. Verifique suas credenciais.'
             };
         }
     };
 
-    const logout = async () => {
-        try {
-            await fetch('/api/auth/logout', {
-                method: 'POST',
-                credentials: 'include',
-            });
-        } catch (error) {
-            console.error('Erro ao fazer logout:', error);
-        } finally {
-            setUser(null);
-            router.push('/login');
-        }
+    const logout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setUser(null);
+        router.push('/login');
+    };
+
+  
+    const value = {
+        user,
+        login,
+        logout,
+        loading
     };
 
     return (
-        <AuthContext.Provider 
-            value={{
-                user,
-                loading,
-                login: handleLogin,
-                logout,
-                isAuthenticated: !!user
-            }}
-        >
+        <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     );
-};
+}
 
-export const useAuth = () => {
+
+export function useAuth() {
     const context = useContext(AuthContext);
     if (!context) {
-        throw new Error('useAuth must be used within an AuthProvider');
+        throw new Error('useAuth deve ser usado dentro de um AuthProvider');
     }
     return context;
-};
+}
