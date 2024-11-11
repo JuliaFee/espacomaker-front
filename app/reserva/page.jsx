@@ -53,27 +53,28 @@ const BookingForm = () => {
 
     const handleSubmit = async (e) => { 
         e.preventDefault(); 
-
+    
         if ((!selectedFerramenta && !selectedImpressora) || (selectedFerramenta && selectedImpressora)) { 
             setError("Por favor, selecione apenas uma Ferramenta ou uma Impressora."); 
             return; 
         } 
-
+    
         try { 
             // Converter os valores de horaInicio e horaFim para o formato correto
             const horaInicioFormatada = `${horaInicio}:00`;
             const horaFimFormatada = `${horaFim}:00`;
-
+    
+            // Requisição para a rota /api/horarios
             const horarioResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/horarios`, {
-                id_ferramenta: Number(selectedFerramenta) || null,
-                id_impressora: Number(selectedImpressora) || null,
+                id_ferramenta: selectedFerramenta ? Number(selectedFerramenta) : null,
+                id_impressora: selectedImpressora ? Number(selectedImpressora) : null,
                 hora_inicio: horaInicioFormatada,
                 hora_fim: horaFimFormatada,
-              });
-
-              console.log(horarioResponse);
+            });
+    
             const idHorario = horarioResponse.data.id; 
-
+    
+            // Requisição para a rota /api/reservas
             const reservaResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reservas`, { 
                 id_user: 1, 
                 id_ferramenta: selectedFerramenta || null, 
@@ -82,15 +83,17 @@ const BookingForm = () => {
                 data_reserva: dataReserva.toISOString().split('T')[0], 
                 status_reserva: true, 
             }); 
-            console.log(horaInicioFormatada, horaFimFormatada, horarioResponse, reservaResponse);
-
+    
             console.log("Reserva realizada:", reservaResponse.data); 
-            setError(null); 
+            setError(null);  // Limpa o erro após uma reserva bem-sucedida
         } catch (error) { 
-            console.error("Erro ao realizar reserva:", error.response ? error.response.data : error.message); 
-            setError("Erro ao realizar reserva."); 
+            // Verifica o tipo de erro e exibe uma única mensagem de erro
+            const errorMessage = error.response?.data?.message || error.message || "Erro desconhecido.";
+            console.error("Erro ao realizar reserva:", errorMessage); 
+            setError("Erro ao realizar reserva: " + errorMessage); 
         } 
-    }; 
+
+    };
 
     const handleFerramentaChange = (e) => { 
         setSelectedFerramenta(e.target.value); 
