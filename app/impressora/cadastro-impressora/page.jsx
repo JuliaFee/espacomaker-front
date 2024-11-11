@@ -11,8 +11,13 @@ const CadastroImpressora = () => {
         nome: "",
         descricao: "",
         img: "",
-        filamento: "",
-        statusI: "disponivel"  // Define como disponível por padrão
+        filamento: {
+            tipo: "",
+            cor: "",
+            quantidade: 0,
+            valor_por_kg: 0
+        },
+        statusI: "disponivel"
     });
 
     const router = useRouter();
@@ -28,7 +33,7 @@ const CadastroImpressora = () => {
                 try {
                     const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora/${editId}`);
                     const { nome, descricao, img, filamento, statusI } = response.data.impressora;
-                    setImpressora({ nome, descricao, img, filamento, statusI });
+                    setImpressora({ nome, descricao, img, filamento: filamento || {}, statusI });
                 } catch (error) {
                     setErrorMessage("Erro ao carregar os dados da impressora");
                 }
@@ -39,10 +44,18 @@ const CadastroImpressora = () => {
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-        setImpressora((prev) => ({
-            ...prev,
-            [id]: value
-        }));
+        if (id.startsWith("filamento.")) {
+            const filamentoField = id.split(".")[1];
+            setImpressora((prev) => ({
+                ...prev,
+                filamento: { ...prev.filamento, [filamentoField]: value }
+            }));
+        } else {
+            setImpressora((prev) => ({
+                ...prev,
+                [id]: value
+            }));
+        }
     };
 
     const handleStatusChange = (e) => {
@@ -55,6 +68,8 @@ const CadastroImpressora = () => {
     const updateImpressora = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setErrorMessage("");
+
         try {
             if (editId) {
                 await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora/${editId}`, impressora);
@@ -63,13 +78,22 @@ const CadastroImpressora = () => {
                 await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora`, impressora);
                 setSuccessMessage("Impressora cadastrada com sucesso!");
             }
-            setImpressora({ nome: "", descricao: "", img: "", filamento: "", statusI: "disponivel" });
+
+            setImpressora({
+                nome: "",
+                descricao: "",
+                img: "",
+                filamento: { tipo: "", cor: "", quantidade: 0, valor_por_kg: 0 },
+                statusI: "disponivel"
+            });
+
             setTimeout(() => {
                 setSuccessMessage("");
                 router.push("/impressora");
             }, 3000);
+
         } catch (error) {
-            setErrorMessage("Erro ao realizar a operação. Tente novamente.");
+            setErrorMessage(error.response?.data?.message || "Erro ao realizar a operação. Verifique sua conexão.");
         } finally {
             setIsSubmitting(false);
         }
@@ -118,13 +142,50 @@ const CadastroImpressora = () => {
                         />
                     </div>
 
+                    <p className={styles.subtitle}>Filamento</p>
                     <div className={styles.formGroup}>
-                        <label htmlFor="filamento" className={styles.label}>Filamento:</label>
+                        <label htmlFor="filamento.tipo" className={styles.label}>Tipo:</label>
                         <input
                             type="text"
                             className={styles.input}
-                            id="filamento"
-                            value={impressora.filamento}
+                            id="filamento.tipo"
+                            value={impressora.filamento.tipo || ""}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className={styles.formGroup}>
+                        <label htmlFor="filamento.cor" className={styles.label}>Cor:</label>
+                        <input
+                            type="text"
+                            className={styles.input}
+                            id="filamento.cor"
+                            value={impressora.filamento.cor || ""}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className={styles.formGroup}>
+                        <label htmlFor="filamento.quantidade" className={styles.label}>Quantidade:</label>
+                        <input
+                            type="number"
+                            className={styles.input}
+                            id="filamento.quantidade"
+                            value={impressora.filamento.quantidade || 0}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className={styles.formGroup}>
+                        <label htmlFor="filamento.valor_por_kg" className={styles.label}>Valor por Kg:</label>
+                        <input
+                            type="number"
+                            className={styles.input}
+                            id="filamento.valor_por_kg"
+                            value={impressora.filamento.valor_por_kg || 0}
                             onChange={handleChange}
                             required
                         />
