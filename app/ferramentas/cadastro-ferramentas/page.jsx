@@ -5,7 +5,6 @@ import styles from './cadastroferramentas.module.css';
 import Header from '@/app/components/header/page';
 import Footer from '@/app/components/footer/page';
 import PopUp from "@/app/components/popUp/PopUp";
-import { IoCaretBack } from "react-icons/io5";
 import Link from 'next/link';
 import axios from 'axios';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -72,60 +71,70 @@ const CadastroFerramentas = () => {
     return (
         <div className={styles.pageContainer}>
             <Header />
-            <div className={styles.container}>
-                <form onSubmit={updateFerramenta}>
-                    <div className={styles.formGroup}>
-                    <Link href={"../"} className={styles.back}><IoCaretBack /></Link>
+            
+            <div className={styles.mainContent}>
+                {/* Exibe a imagem de fundo
+                <div className={styles.imgBackground}>
+                <img src="/foto-cadastro.jfif" alt="Pré-visualização" className={styles.imagePreview} />
+                </div> */}
+    
+                {/* Formulário sobre a imagem */}
+                <div className={styles.formOverlay}>
+                    <form onSubmit={updateFerramenta} className={styles.formContainer}>
+                      
                         <p className={styles.title}>{editId ? 'Editar Ferramenta' : 'Cadastro de Ferramentas'}</p>
-                        <label htmlFor="nome" className={styles.label}>Nome:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="nome"
-                            value={ferramenta.nome}
-                            onChange={(e) => setFerramenta({ ...ferramenta, nome: e.target.value })}
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label htmlFor="descricao" className={styles.label}>Descrição:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="descricao"
-                            value={ferramenta.descricao}
-                            onChange={(e) => setFerramenta({ ...ferramenta, descricao: e.target.value })}
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label htmlFor="img" className={styles.label}>Imagem:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="img"
-                            value={ferramenta.img}
-                            onChange={(e) => setFerramenta({ ...ferramenta, img: e.target.value })}
-                            required
-                        />
-                    </div>
-
-                    <button
-                        type="submit"
-                        className={`${styles.button} ${styles.submitButton}`}
-                    >
-                        {editId ? 'Atualizar' : 'Cadastrar'}
-                    </button>
-                </form>
+                        
+                        <div className={styles.formGroup}>
+                            <label htmlFor="nome" className={styles.label}>Nome:</label>
+                            <input
+                                type="text"
+                                className={`${styles.input} ${styles.inputText}`}
+                                id="nome"
+                                value={ferramenta.nome}
+                                onChange={(e) => setFerramenta({ ...ferramenta, nome: e.target.value })}
+                                required
+                            />
+                        </div>
+    
+                        <div className={styles.formGroup}>
+                            <label htmlFor="descricao" className={styles.label}>Descrição:</label>
+                            <input
+                                type="text"
+                                className={`${styles.input} ${styles.inputText}`}
+                                id="descricao"
+                                value={ferramenta.descricao}
+                                onChange={(e) => setFerramenta({ ...ferramenta, descricao: e.target.value })}
+                                required
+                            />
+                        </div>
+    
+                        <div className={styles.formGroup}>
+                            <label htmlFor="img" className={styles.label}>Imagem:</label>
+                            <input
+                                type="text"
+                                className={`${styles.input} ${styles.inputText}`}
+                                id="img"
+                                value={ferramenta.img}
+                                onChange={(e) => setFerramenta({ ...ferramenta, img: e.target.value })}
+                                required
+                            />
+                        </div>
+    
+                        <button type="submit" className={`${styles.button} ${styles.submitButton}`}>
+                            {editId ? 'Atualizar' : 'Cadastrar'}
+                        </button>
+                    </form>
+                </div>
+    
                 {isPopupOpen && <PopUp message={popupMessage} typeColor={popupTypeColor} onClose={() => setIsPopupOpen(false)} />}
-
             </div>
-
+    
             <Footer />
         </div>
     );
+    
+    
+    
 };
 
 export default CadastroFerramentas;
