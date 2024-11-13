@@ -6,6 +6,7 @@ import Header from "../components/header/page.jsx";
 import Footer from "../components/footer/page.jsx";
 import { useAuth } from '../context/authContext';
 import Loading from '../components/loading/page';
+
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -20,7 +21,6 @@ const LoginForm = () => {
         }
     }, [user, router]);
 
-    //funcao de login
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -43,7 +43,6 @@ const LoginForm = () => {
         }
     };
 
-    //html
     return (
         <div className={styles.pageContainer}>
             <Header />
@@ -84,7 +83,7 @@ const LoginForm = () => {
                             className={`${styles.button} ${styles.submitButton}`}
                             disabled={isLoading}
                         >
-                            {isLoading ? {Loading} : 'Entrar'}
+                            {isLoading ? "Carregando..." : 'Entrar'}
                         </button>
                     </div>
                 </form>

@@ -2,7 +2,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-
 const AuthContext = createContext({
     user: null,
     login: async () => {},
@@ -10,19 +9,17 @@ const AuthContext = createContext({
     loading: true
 });
 
-
 export function AuthProvider({ children }) {
-    const [user, setUser] = useState(null);
+    const [user, setUser ] = useState(null);
     const [loading, setLoading] = useState(true);
     const router = useRouter();
 
     useEffect(() => {
- 
-        const storedUser = localStorage.getItem('user');
+        const storedUser  = localStorage.getItem('user');
         const storedToken = localStorage.getItem('token');
         
-        if (storedUser && storedToken) {
-            setUser(JSON.parse(storedUser));
+        if (storedUser  && storedToken ) {
+            setUser (JSON.parse(storedUser ));
         }
         
         setLoading(false);
@@ -38,20 +35,15 @@ export function AuthProvider({ children }) {
                 body: JSON.stringify({ email, senha }),
             });
 
-            const data = await response.json();
-
             if (!response.ok) {
-                throw new Error(data.error || 'Erro na autenticação');
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Erro na autenticação');
             }
 
-        
+            const data = await response.json();
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
-            
-      
-            setUser(data.user);
-            
-            
+            setUser (data.user);
             router.push('/home');
 
             return { success: true };
@@ -67,11 +59,10 @@ export function AuthProvider({ children }) {
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        setUser(null);
+        setUser (null);
         router.push('/login');
     };
 
-  
     const value = {
         user,
         login,
@@ -85,7 +76,6 @@ export function AuthProvider({ children }) {
         </AuthContext.Provider>
     );
 }
-
 
 export function useAuth() {
     const context = useContext(AuthContext);
