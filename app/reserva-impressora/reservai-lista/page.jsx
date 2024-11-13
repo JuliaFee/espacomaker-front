@@ -4,12 +4,15 @@ import axios from "axios";
 import style from "./reservalista.modules.css";
 import Header from "@/app/components/header/page";
 import Footer from "@/app/components/footer/page";
+import PopUp2 from "@/app/components/popUp2/popUp2";
 
 const ImpressoraList = () => {
   const [reservas, setReservas] = useState([]);
   const [impressoras, setImpressoras] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showPopUp, setShowPopUp] = useState(false); // Estado para controlar o popup
+  const [popUpMessage, setPopUpMessage] = useState(""); // Mensagem do popup
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,6 +55,15 @@ const ImpressoraList = () => {
     return impressora ? impressora.nome : "Impressora não encontrada";
   };
 
+  const handlePopUpClose = () => {
+    setShowPopUp(false); // Fecha o popup
+  };
+
+  const handlePopUpOpen = (message) => {
+    setPopUpMessage(message); // Define a mensagem do popup
+    setShowPopUp(true); // Abre o popup
+  };
+
   return (
     <div className={style.body}>
       <Header />
@@ -65,10 +77,14 @@ const ImpressoraList = () => {
             {reservas.length > 0 ? (
               reservas.map((reserva, index) => (
                 <li key={index}>
-                  Usuário ID: {reserva.id_user}, 
                   Impressora: {getImpressoraNomeById(reserva.id_impressora)}, 
-                  Data: {reserva.data_reserva}, 
-                  Status: {reserva.status_reserva ? "Ativa" : "Inativa"}
+                  Data: {reserva.data_reserva}
+                  <button 
+                    onClick={() => handlePopUpOpen(`Detalhes da reserva: Impressora ${getImpressoraNomeById(reserva.id_impressora)}, Data ${reserva.data_reserva}`)} 
+                    className={style.detailsButton}
+                  >
+                    Ver detalhes
+                  </button>
                 </li>
               ))
             ) : (
@@ -77,6 +93,10 @@ const ImpressoraList = () => {
           </ul>
         </>
       )}
+
+      {/* PopUp2 */}
+      {showPopUp && <PopUp2 message={popUpMessage} onClose={handlePopUpClose} />}
+
       <Footer className={style.footer} />
     </div>
   );

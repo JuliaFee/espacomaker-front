@@ -6,8 +6,12 @@ import 'react-calendar/dist/Calendar.css';
 import styles from './reservai.modules.css';
 import Header from '../components/header/page';
 import Footer from '../components/footer/page';
+import PopUp from "@/app/components/popUp/PopUp"; // Importando o PopUp
 
 const ImpressoraForm = () => {
+    const [isPopupOpen, setIsPopupOpen] = useState(false); // Estado para controlar o PopUp
+    const [popupMessage, setPopupMessage] = useState(''); // Mensagem do PopUp
+    const [popupTypeColor, setPopupTypeColor] = useState(''); // Cor do PopUp (sucesso/erro)
     const [impressoras, setImpressoras] = useState([]);
     const [selectedImpressora, setSelectedImpressora] = useState(""); // Inicializado como string vazia
     const [dataReserva, setDataReserva] = useState(new Date());
@@ -52,10 +56,29 @@ const ImpressoraForm = () => {
 
             console.log("Reserva realizada:", reservaResponse.data);
             setError(null);  // Limpa o erro após uma reserva bem-sucedida
+
+            // Exibindo o PopUp de sucesso
+            setPopupMessage("Sua reserva foi realizada com sucesso!");
+            setPopupTypeColor('sucesso');
+            setIsPopupOpen(true);
+
+            setTimeout(() => {
+                setIsPopupOpen(false);
+            }, 3000);
+
         } catch (error) {
             const errorMessage = error.response?.data?.message || error.message || "Erro desconhecido.";
             console.error("Erro ao realizar reserva:", errorMessage);
             setError("Erro ao realizar reserva: " + errorMessage);
+
+            // Exibindo o PopUp de erro
+            setPopupMessage("Houve um erro ao realizar sua reserva.");
+            setPopupTypeColor('erro');
+            setIsPopupOpen(true);
+
+            setTimeout(() => {
+                setIsPopupOpen(false);
+            }, 3000);
         }
     };
 
@@ -93,6 +116,10 @@ const ImpressoraForm = () => {
                 </div>
                 <button type="submit" className={styles.button}>Realizar Reserva</button>
             </form>
+
+            {/* Exibindo o PopUp */}
+            {isPopupOpen && <PopUp message={popupMessage} typeColor={popupTypeColor} onClose={() => setIsPopupOpen(false)} />}
+
             <Footer />
         </div>
     );
