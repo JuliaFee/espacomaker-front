@@ -41,11 +41,6 @@
   transition: background-color 0.3s, transform 0.2s;
 }
 
-.button:hover {
-  background-color: #236ABF;
-  transform: translateY(-2px);
-}
-
 /* Back Link Styles */
 .back {
   font-family: 'Chau Philomene One', sans-serif;

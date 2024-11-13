@@ -47,13 +47,13 @@ const LoginForm = () => {
     return (
         <div className={styles.pageContainer}>
             <Header />
-            <div className={styles.container}>
+            
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
                         <p className={styles.title}>Login</p>
                         {error && <p className={styles.error}>{error}</p>}
                         
-                        <div className={styles.formGroup}>
+                        <div >
                             <label htmlFor="email" className={styles.title2}>Email:</label>
                             <input
                                 type="email"
@@ -66,7 +66,7 @@ const LoginForm = () => {
                             />
                         </div>
 
-                        <div className={styles.formGroup}>
+                        <div>
                             <label htmlFor="senha" className={styles.title2}>Senha:</label>
                             <input
                                 type="password"
@@ -88,7 +88,7 @@ const LoginForm = () => {
                         </button>
                     </div>
                 </form>
-            </div>
+            
             <Footer />
         </div>
     );
