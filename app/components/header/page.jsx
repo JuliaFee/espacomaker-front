@@ -11,10 +11,10 @@ const Header = () => {
                 <a href="./"><img className={styles.logo} src="../../logoSenaiLab.png" alt="Logo" style={{width: "250px"}}/></a>
             </div>
             <div className={styles.tools}>
-                <a href="./ferramentas"><VscTools className={styles.icon}/></a>
-                <a href="./impressora"><HiOutlinePrinter className={styles.icon}/></a> 
-                <a href="./login"><IoPersonOutline className={styles.icon}/></a> 
-                <a href="./reserva"><LuCalendarDays className={styles.icon}/></a> 
+                <a href="/ferramentas"><VscTools className={styles.icon}/></a>
+                <a href="/impressora"><HiOutlinePrinter className={styles.icon}/></a> 
+                <a href="/login"><IoPersonOutline className={styles.icon}/></a> 
+                <a href="/reserva"><LuCalendarDays className={styles.icon}/></a> 
 
               
             </div>
