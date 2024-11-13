@@ -10,7 +10,7 @@ muito mais prática e intuitiva. Com telas para alunos e para administradores, o
 
 ## Conheça a equipe de desenvolvimento! 👥
 
-![Banner membros da equipe](/public//headerreadme%20(1).png)
+![Banner membros da equipe](/public//integrantes.png)
 
 @isarmendes || @Amandamoonchild || @leticiabizaglio || @Mariavalonga || @JuliaFee
 
