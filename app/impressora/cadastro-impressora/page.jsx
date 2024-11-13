@@ -104,130 +104,132 @@ const CadastroImpressora = () => {
             <Header />
             <div className={styles.container}>
                 <form onSubmit={updateImpressora}>
-                    <p className={styles.title}>{editId ? "Editar Impressora" : "Cadastro de Impressora"}</p>
+                    <div className={styles.form}>
+                        <p className={styles.title}>{editId ? "Editar Impressora" : "Cadastro de Impressora"}</p>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="nome" className={styles.label}>Nome:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="nome"
-                            value={impressora.nome}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label htmlFor="descricao" className={styles.label}>Descrição:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="descricao"
-                            value={impressora.descricao}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label htmlFor="img" className={styles.label}>Imagem:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="img"
-                            value={impressora.img}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
-                    <p className={styles.subtitle}>Filamento</p>
-                    <div className={styles.formGroup}>
-                        <label htmlFor="filamento.tipo" className={styles.label}>Tipo:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="filamento.tipo"
-                            value={impressora.filamento.tipo || ""}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label htmlFor="filamento.cor" className={styles.label}>Cor:</label>
-                        <input
-                            type="text"
-                            className={styles.input}
-                            id="filamento.cor"
-                            value={impressora.filamento.cor || ""}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label htmlFor="filamento.quantidade" className={styles.label}>Quantidade:</label>
-                        <input
-                            type="number"
-                            className={styles.input}
-                            id="filamento.quantidade"
-                            value={impressora.filamento.quantidade || 0}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label htmlFor="filamento.valor_por_kg" className={styles.label}>Valor por Kg:</label>
-                        <input
-                            type="number"
-                            className={styles.input}
-                            id="filamento.valor_por_kg"
-                            value={impressora.filamento.valor_por_kg || 0}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.formGroupCheckbox}>
-                        <label className={styles.label}>Status:</label>
-                        <div>
-                            <label>
-                                <input
-                                    type="radio"
-                                    className={styles.radio}
-                                    name="statusI"
-                                    value="disponivel"
-                                    checked={impressora.statusI === "disponivel"}
-                                    onChange={handleStatusChange}
-                                />
-                                <span className={styles.statusLabel}>Disponível</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    className={styles.radio}
-                                    name="statusI"
-                                    value="indisponivel"
-                                    checked={impressora.statusI === "indisponivel"}
-                                    onChange={handleStatusChange}
-                                />
-                                <span className={styles.statusLabel}>Indisponível</span>
-                            </label>
+                        <div className={styles.formGroup}>
+                            <label htmlFor="nome" className={styles.label}>Nome:</label>
+                            <input
+                                type="text"
+                                className={styles.input}
+                                id="nome"
+                                value={impressora.nome}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="descricao" className={styles.label}>Descrição:</label>
+                            <input
+                                type="text"
+                                className={styles.input}
+                                id="descricao"
+                                value={impressora.descricao}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="img" className={styles.label}>Imagem:</label>
+                            <input
+                                type="text"
+                                className={styles.input}
+                                id="img"
+                                value={impressora.img}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <p className={`${styles.label} ${styles.centered}`}>Filamento</p>
+                        <div className={styles.formGroup}>
+                            <label htmlFor="filamento.tipo" className={styles.label}>Tipo:</label>
+                            <input
+                                type="text"
+                                className={styles.input}
+                                id="filamento.tipo"
+                                value={impressora.filamento.tipo || ""}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="filamento.cor" className={styles.label}>Cor:</label>
+                            <input
+                                type="text"
+                                className={styles.input}
+                                id="filamento.cor"
+                                value={impressora.filamento.cor || ""}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="filamento.quantidade" className={styles.label}>Quantidade:</label>
+                            <input
+                                type="number"
+                                className={styles.input}
+                                id="filamento.quantidade"
+                                value={impressora.filamento.quantidade || 0}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="filamento.valor_por_kg" className={styles.label}>Valor por Kg:</label>
+                            <input
+                                type="number"
+                                className={styles.input}
+                                id="filamento.valor_por_kg"
+                                value={impressora.filamento.valor_por_kg || 0}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label className={styles.label}>Status:</label>
+                            <div className={styles.radioContainer}>
+                                <label className={styles.radioLabel}>
+                                    <input
+                                        type="radio"
+                                        className={styles.radio}
+                                        name="statusI"
+                                        value="disponivel"
+                                        checked={impressora.statusI === "disponivel"}
+                                        onChange={handleStatusChange}
+                                    />
+                                    Disponível
+                                </label>
+                                <label className={styles.radioLabel}>
+                                    <input
+                                        type="radio"
+                                        className={styles.radio}
+                                        name="statusI"
+                                        value="indisponivel"
+                                        checked={impressora.statusI === "indisponivel"}
+                                        onChange={handleStatusChange}
+                                    />
+                                    Indisponível
+                                </label>
+                            </div>
+                        </div>
+
+                        <button
+                            type="submit"
+                            className={`${styles.button} ${styles.submitButton}`}
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? "Salvando..." : editId ? "Atualizar" : "Cadastrar"}
+                        </button>
                     </div>
-
-                    <button
-                        type="submit"
-                        className={`${styles.button} ${styles.submitButton}`}
-                        disabled={isSubmitting}
-                    >
-                        {isSubmitting ? "Salvando..." : editId ? "Atualizar" : "Cadastrar"}
-                    </button>
                 </form>
-
+                
                 {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
                 {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
             </div>

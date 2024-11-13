@@ -3,118 +3,145 @@
 .pageContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #f9f9f9;
-    background-image: url(../../../public/bckg.png);
-    background-repeat: no-repeat;
-    background-size: cover;
     min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
 }
 
-.container {
-    background: linear-gradient(to bottom, #FFAD23, #FA9D02);
-    padding: 20px;
-    border-radius: 10px;
-    width: 30rem;
+/* Card do Formulário */
+.form {
+    background-color: #fff;
+    padding: 35px 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    max-width: 400px;
+    width: 100%;
     text-align: center;
-    margin-top: 5rem;
-    margin-bottom: 5rem;
+    position: relative;
+    overflow: hidden;
+    margin: 20px;
 }
 
+/* Título */
 .title {
-    font-family: 'Chau Philomene One';
-    font-size: 2rem;
-    color: white;
-    margin-bottom: 1.5rem;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: #FFAD23;
+    text-transform: uppercase;
+    font-family: 'Chau Philomene One', sans-serif;
 }
 
+/* Campos do formulário */
 .formGroup {
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
 }
 
 .label {
-    margin-bottom: 10px;
-    font-size: 1.5rem;
-    color: white;
-    font-family: 'Chau Philomene One';
+    font-weight: 600;
+    font-size: 16px;
+    color: #FFAD23;
+    margin-bottom: 8px;
+    text-align: left;
 }
 
 .input {
     width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
 }
 
-.button {
-    background-color: #2E83E3;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    cursor: pointer;
+/* Efeito ao focar no campo de entrada */
+.input:focus {
+    border-color: #2575fc;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(37, 117, 252, 0.3);
+}
+
+/* Botão de envio */
+.submitButton {
     width: 100%;
-    height: 3rem;
-    font-family: 'Chau Philomene One';
-    margin-top: 0.5rem;
+    padding: 12px;
+    background: linear-gradient(to bottom, #FFAD23, #FA9D02);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
 }
 
-.submitButton:hover {
-    background-color: #236ABF;
+.submitButton:active {
+    transform: scale(0.98);
+}
+
+/* Mensagens de sucesso e erro */
+.successMessage, .errorMessage {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 20px;
 }
 
 .successMessage {
-    color: rgb(62, 164, 62);
-    font-size: 1rem;
-    margin-top: 1rem;
+    color: #28a745;
 }
 
 .errorMessage {
-    color: red;
-    font-size: 1rem;
-    margin-top: 1rem;
+    color: #dc3545;
 }
 
-.back {
-    color: #124B8D;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    font-size: 2rem;
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-}
-
-.back:hover {
-    color: #2E83E3;
-}
-
-/* Estilos para os botões de status */
-.formGroupCheckbox {
+/* Espaçamento e alinhamento de "Disponível" e "Indisponível" */
+.radioGroup {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
+    gap: 15px; /* Ajusta o espaçamento entre os itens */
 }
 
+
+
+.radioLabel {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Estilo de "Filamento" */
+.filamentLabel {
+    font-weight: 600;
+    font-size: 16px;
+    color: #FFAD23;
+}
+
+/* Centraliza o título Filamento */
+.centered {
+    text-align: center;
+}
+
+/* Define o layout para o container de status */
 .radioContainer {
     display: flex;
-    align-items: center;
-    gap: 8px; /* Espaço entre o botão e o texto */
-    margin-bottom: 8px;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
 }
 
-.radio {
-    accent-color: #2E83E3; /* Cor dos radio buttons */
-}
-
-.statusLabel {
-    font-size: 1rem;
-    color: white;
-    font-family: 'Chau Philomene One';
+/* Define o layout para o container de status com opções lado a lado */
+.radioContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 15px; /* Espaçamento entre as opções */
+    margin-top: 5px;
+    justify-content: start;
 }
