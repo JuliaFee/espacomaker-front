@@ -56,4 +56,6 @@ Figma:
 
 Imgur:
 
-## Conclusão
+## Conclusão 💬
+
+Conseguimos tornar o uso do Espaço Maker não apenas uma ação, mas uma experiência para ambas as partes que agora podem usufruir de um sistema fluído e prático, otimizando tempo, materiais e recursos.
