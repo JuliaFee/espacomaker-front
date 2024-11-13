@@ -48,7 +48,7 @@ const CadastroADM = () => {
     return (
         <div className={styles.pageContainer}>
             <Header />
-            <div className={styles.container}>
+            
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
                         <p className={styles.title}>Cadastro de Usuário</p>
@@ -61,9 +61,7 @@ const CadastroADM = () => {
                             onChange={(e) => setNome(e.target.value)}
                             required
                         />
-                    </div>
-
-                    <div className={styles.formGroup}>
+                  
                         <label htmlFor="email" className={styles.label}>Email:</label>
                         <input
                             type="email"
@@ -73,9 +71,6 @@ const CadastroADM = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
-                    </div>
-
-                    <div className={styles.formGroup}>
                         <label htmlFor="senha" className={styles.label}>Senha:</label>
                         <input
                             type="password"
@@ -84,13 +79,10 @@ const CadastroADM = () => {
                             value={senha}
                             onChange={(e) => setSenha(e.target.value)}
                             required
-                        />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label htmlFor="tipo" className={styles.label}>Tipo:</label>
+                            ></input>
+                            <label htmlFor="tipo" className={styles.label}>Tipo:</label>
                         <select
-                            className={styles.input}
+                            className={styles.inputS}
                             id="tipo"
                             value={tipo}
                             onChange={(e) => setTipo(e.target.value)}
@@ -100,18 +92,20 @@ const CadastroADM = () => {
                             <option value="adm">Admin</option>
                             <option value="user">Usuário</option>
                         </select>
-                    </div>
 
-                    {errorMessage && <p className={styles.error}>{errorMessage}</p>}
-
-                    <button
+                        <button
                         type="submit"
                         className={`${styles.button} ${styles.submitButton}`}
                     >
                         Cadastrar
                     </button>
+                    </div>
+
+                    {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+
+                    
                 </form>
-            </div>
+            
             <Footer />
         </div>
     );
