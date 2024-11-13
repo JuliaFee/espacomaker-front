@@ -1,7 +1,7 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
 
-const url = process.env.BASE_URL + "/reservas-ferramentas";
+const url = process.env.BASE_URL + "/reserva-ferramentas";
 
 export async function GET(request, { params }) {
   const { id } = params;

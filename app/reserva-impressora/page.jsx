@@ -43,7 +43,7 @@ const ImpressoraForm = () => {
         }
 
         try {
-            const reservaResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reservas`, {
+            const reservaResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reserva-impressora`, {
                 id_user: 1, // Substituir pelo ID do usuário logado
                 id_impressora: selectedImpressora,
                 data_reserva: dataReserva.toISOString().split('T')[0],
