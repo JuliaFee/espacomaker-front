@@ -9,7 +9,7 @@ export async function GET() {
         const response = await axios.get(url);
         return NextResponse.json(response.data);
     } catch (error) {
-        console.log("[ORDER_GET]", error);
+        console.log("[ORDER_POST]", error);
         return new NextResponse("Erro interno do servidor!", { status: 500 });
     }
 }
