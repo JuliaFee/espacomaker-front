@@ -38,6 +38,13 @@ O usuário pode reservar itens, indicando qual deseja utilizar e selecionar data
 
 O acervo de ferramentas e impressoras do SENAI pode ser facilmente acessada, com uma descrição detalhada de cada item.
 
+## O que voc?ê encontrará nesse repositório? 👁‍🗨
+
+- Arquivos .jsx e .module.css das páginas do projeto.
+
+- Recursos visuais do sistema (fontes, imagens, animações, icons...)
+
+
 ## Tecnologias utilizadas 🌐
 
 Vscode:
