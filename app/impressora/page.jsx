@@ -74,7 +74,7 @@ const Impressora = () => {
       {/* <h1>Impressoras Disponíveis</h1> */}
       {/* <h3>{deviceType}</h3> */}
       {loading ? (
-        <p><Loading/></p>
+        <div><Loading/></div>
       ) : (
         <>
           {error && <p className={style.error}>{error}</p>}
@@ -86,6 +86,7 @@ const Impressora = () => {
                   <h2>{impressora.nome}</h2>
                   <p>{impressora.descricao}</p>
                   <p>{impressora.filamento}</p>
+                  
                   <button onClick={() => handleEdit(impressora.id)} className={style.editButton}>
                     <FaRegEdit />
                   </button>

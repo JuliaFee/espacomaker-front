@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap');
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+/* Card do Formulário */
+.form {
+    background-color: #fff;
+    padding: 35px 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin: 20px;
+}
+
+/* Título */
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: #FFAD23;
+    text-transform: uppercase;
+    font-family: 'Chau Philomene One', sans-serif;
+}
+
+/* Campos do formulário */
+.formGroup {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-weight: 600;
+    font-size: 16px;
+    color: #FFAD23;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+/* Efeito ao focar no campo de entrada */
+.input:focus {
+    border-color: #2575fc;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(37, 117, 252, 0.3);
+}
+
+/* Botão de envio */
+.submitButton {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to bottom, #FFAD23, #FA9D02);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.submitButton:active {
+    transform: scale(0.98);
+}
+
+/* Mensagens de sucesso e erro */
+.successMessage, .errorMessage {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.successMessage {
+    color: #28a745;
+}
+
+.errorMessage {
+    color: #dc3545;
+}
+
+/* Espaçamento e alinhamento de "Disponível" e "Indisponível" */
+.radioGroup {
+    display: flex;
+    gap: 15px; /* Ajusta o espaçamento entre os itens */
+}
+
+
+
+.radioLabel {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Estilo de "Filamento" */
+.filamentLabel {
+    font-weight: 600;
+    font-size: 16px;
+    color: #FFAD23;
+}
+
+/* Centraliza o título Filamento */
+.centered {
+    text-align: center;
+}
+
+/* Define o layout para o container de status */
+.radioContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+/* Define o layout para o container de status com opções lado a lado */
+.radioContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 15px; /* Espaçamento entre as opções */
+    margin-top: 5px;
+    justify-content: start;
+}
