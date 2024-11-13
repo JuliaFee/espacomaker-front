@@ -38,3 +38,22 @@ O usuário pode reservar itens, indicando qual deseja utilizar e selecionar data
 
 O acervo de ferramentas e impressoras do SENAI pode ser facilmente acessada, com uma descrição detalhada de cada item.
 
+## Tecnologias utilizadas 🌐
+
+Vscode:
+
+Insomnia: 
+
+Joi:
+
+Cors:
+
+Capcut:
+
+Canva:
+
+Figma:
+
+Imgur:
+
+## Conclusão
