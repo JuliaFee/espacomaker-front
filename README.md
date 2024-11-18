@@ -1,5 +1,5 @@
 ## Sistema de gerenciamento do Espaço Maker do SENAI Valinhos!
-#By Inova Tech
+By Inova Tech
 
 ![Header equipe inoova tech](/public/headerreadme.png)
 
@@ -13,7 +13,7 @@ muito mais prática e intuitiva. Com telas para alunos e para administradores, o
 ![Banner membros da equipe](/public//integrantes.png)
 
 
->>User dos perfis GitHub >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+>>User dos perfis GitHub
 @isarmendes || @Amandamoonchild || @leticiabizaglio || @Mariavalonga || @JuliaFee
 
 ## Funcionalidades: Versão Administrador ⚙
