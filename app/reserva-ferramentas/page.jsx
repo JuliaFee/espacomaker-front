@@ -20,11 +20,12 @@ const ReservaFerramentaForm = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Fetch ferramentas and horarios on component mount
+    // Carregar ferramentas e horários
     useEffect(() => {
         const fetchFerramentas = async () => {
             try {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas`);
+                console.log('Ferramentas:', response.data);
                 setFerramentas(response.data.ferramentas || []);
             } catch (error) {
                 console.error("Erro ao buscar ferramentas:", error.response ? error.response.data : error.message);
@@ -34,13 +35,20 @@ const ReservaFerramentaForm = () => {
 
         const fetchHorarios = async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/horario`);
-                setHorarios(response.data.horarios || []);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/horarios`);
+                console.log('Horários:', response.data);
+
+                if (response.data && response.data.horarios) {
+                    setHorarios(response.data.horarios || []);
+                } else {
+                    setError("Formato de resposta de horários inválido.");
+                }
             } catch (error) {
                 console.error("Erro ao buscar horários:", error.response ? error.response.data : error.message);
                 setError("Erro ao carregar horários.");
             }
         };
+
 
         const fetchData = async () => {
             setLoading(true);
@@ -61,7 +69,7 @@ const ReservaFerramentaForm = () => {
 
         try {
             const reservaResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reserva-ferramenta`, {
-                id_user: 1, // Substituir pelo ID do usuário logado
+                id_user: 1,
                 id_ferramenta: selectedFerramenta,
                 id_horario: selectedHorario,
                 data_reserva: dataReserva.toISOString().split('T')[0],
@@ -109,7 +117,7 @@ const ReservaFerramentaForm = () => {
             <form onSubmit={handleSubmit} className={styles.form}>
                 <h2 className={styles.titleh2}>Reserva de Ferramenta</h2>
                 {error && <div style={{ color: 'red' }}>{error}</div>}
-                
+
                 <select onChange={handleFerramentaChange} value={selectedFerramenta} className={styles.select}>
                     <option value="">Selecionar Ferramenta</option>
                     {ferramentas.length > 0 ? (
@@ -135,6 +143,7 @@ const ReservaFerramentaForm = () => {
                         <option value="">Nenhum horário disponível</option>
                     )}
                 </select>
+
 
                 <div className={styles.calendarContainer}>
                     <label htmlFor="data" className={styles.label}>Selecionar data:</label>
