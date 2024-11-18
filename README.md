@@ -49,21 +49,28 @@ O acervo de ferramentas e impressoras do SENAI pode ser facilmente acessada, com
 
 ## Tecnologias utilizadas 🌐
 
-Vscode:
+Vscode: Usado para desenvolvimento de código.
 
-Insomnia: 
+Next.js: Framework para desenvolvimento de aplicações web.
 
-Joi:
+React-native: Biblioteca de componentes para desenvolvimento de aplicações nativas.
 
-Cors:
+Node.js: Servidor de aplicações.
 
-Capcut:
+Shell: Interface entre o usuário e o sistema operacional de um computador. 
 
-Canva:
+Insomnia: Usado para testes de rotas.
 
-Figma:
+Joi: Descrever e validar esquemas de objetos.
 
-Imgur:
+Cors: Mecanismo que permite que aplicativos de um domínio acessem recursos de outro domínio. 
+
+Canva: Criação de estética e adornoa visuais.
+
+Figma: Protipagem de baixa fidelidade.
+
+Imgur: Plataforma de hospedagem de imagens.
+
 
 ## Conclusão 💬
 
