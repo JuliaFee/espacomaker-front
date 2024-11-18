@@ -82,10 +82,12 @@ const ReservaFerramentaForm = () => {
             setPopupTypeColor('sucesso');
             setIsPopupOpen(true);
 
-            setTimeout(() => {
-                setIsPopupOpen(false);
-                router.push('reserva-ferramentas/reservaf-lista');  
-            }, 3000);
+             setTimeout(() => {
+                 setIsPopupOpen(false);
+                 router.push('reserva-ferramentas/reservaf-lista');  
+             }, 3000);
+            console.log("Reserva realizada:", reservaResponse.data);
+            
         } catch (error) {
             const errorMessage = error.response?.data?.message || error.message || "Erro desconhecido.";
             console.error("Erro ao realizar reserva:", errorMessage);

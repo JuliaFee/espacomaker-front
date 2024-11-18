@@ -5,7 +5,7 @@ import styles from './reservalista.module.css';
 import Header from '../../components/header/page';
 import Footer from '../../components/footer/page';
 
-const Reservasf_lista = () => {
+const ReservasfLista = () => {
     const [reservas, setReservas] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -13,8 +13,9 @@ const Reservasf_lista = () => {
     useEffect(() => {
         const fetchReservas = async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/reservas`);
-                setReservas(response.data.reservas || []);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/reserva-ferramenta`); // Ajuste a URL conforme necessário
+                console.log('Reservas:', response.data);
+                setReservas(response.data.reservas || []);  // Ajuste conforme a estrutura de resposta
             } catch (error) {
                 console.error("Erro ao buscar reservas:", error.response ? error.response.data : error.message);
                 setError("Erro ao carregar reservas.");
@@ -56,4 +57,4 @@ const Reservasf_lista = () => {
     );
 };
 
-export default Reservasf_lista;
+export default ReservasfLista;
