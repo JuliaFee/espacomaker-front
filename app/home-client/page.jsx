@@ -1,6 +1,6 @@
 import styles from "./homeclient.module.css";
 import Link from "next/link";
-import Header from "../components/header/page";
+import Header from "../components/header-client/page";
 import Footer from "../components/footer/page";
 
 
