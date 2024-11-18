@@ -6,11 +6,15 @@ import Footer from "../components/footer/page";
 
 export default function Home_adm() {
   return (
+
     <div className={styles.page}>
 
       <Header></Header>
+      <div className={styles.block}>
+      <div className={styles.brick}>
       <div className={styles.imagecontainer}>
-        <img className={styles.imgBanner} src="banner2.png"></img>
+        <img className={styles.imgBanner} src="CARTAZ.png"></img>
+      </div>
       </div>
       <div className={styles.section1}>
         <div className={styles.title2}>
@@ -19,10 +23,11 @@ export default function Home_adm() {
 
         <div className={styles.linkSection}>
 
-          <div className="reservaContent">
+        <div className="reservaContent">
             <Link className={styles.link2} href={"./reserva/reserva-lista"}>ADMNISTRAR RESERVAS</Link>
           
           </div>
+
 
           <div className="reservaContent">
             <Link className={styles.link2} href={"./ferramentas/cadastro-ferramentas"}>CADASTRAR FERRAMENTAS</Link>
@@ -39,10 +44,11 @@ export default function Home_adm() {
       </div>
 
 
-
+      </div>
 
       <Footer></Footer>
     </div>
+    
   );
 }
 
