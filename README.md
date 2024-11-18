@@ -49,7 +49,7 @@ O acervo de ferramentas e impressoras do SENAI pode ser facilmente acessada, com
 
 ## Tecnologias utilizadas 🌐
 
-![banner tecnologias](/public/tecnologias.png)
+![Banner tecnologias](/public/tecnologias.png)
 
 Vscode: Usado para desenvolvimento de código.
 
