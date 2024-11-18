@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import styles from './reservai.modules.css';
+import styles from './reservai.modules.css'
 import Header from '../components/header/page';
 import Footer from '../components/footer/page';
 import PopUp from "@/app/components/popUp/PopUp"; // Importando o PopUp
@@ -94,7 +94,7 @@ const ImpressoraForm = () => {
         <div className={styles.page}>
             <Header />
             <form onSubmit={handleSubmit} className={styles.form}>
-                <h2 className={styles.titleh2}>Reserva de Impressora</h2>
+            <h2 className={styles.titleh2}>Reserva Impressoras</h2>
                 {error && <div style={{ color: 'red' }}>{error}</div>}
                 <select
                     onChange={handleImpressoraChange}
