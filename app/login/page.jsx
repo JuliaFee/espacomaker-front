@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './login.module.css';
 import { useRouter } from 'next/navigation';
-import Header from "../components/header/page.jsx";
+import Header from "../components/header2/page.jsx";
 import Footer from "../components/footer/page.jsx";
 import { useAuth } from '../context/authContext';
 import Loading from '../components/loading/page';

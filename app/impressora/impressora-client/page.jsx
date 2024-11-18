@@ -1,17 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import style from "./impressora.module.css";
-import Header from "../components/header/page";
-import Footer from "../components/footer/page";
-import { MdOutlineDelete } from "react-icons/md";
-import { FaRegEdit } from "react-icons/fa";
+import Header_client from "../../components/header-client/page";
+import Footer from "../../components/footer/page";
+import style from "./impressoraclient.module.css";
+// import { MdOutlineDelete } from "react-icons/md";
+// import { FaRegEdit } from "react-icons/fa";
+import { LuCalendarDays } from "react-icons/lu";
 import { useRouter } from 'next/navigation';
 import { IoCaretBack } from "react-icons/io5";
 import Link from "next/link";
-import Loading from "../components/loading/page";
+import Loading from "../../components/loading/page";
 
-const Impressora = () => {
+const Impressora_client = () => {
   const [impressoras, setImpressoras] = useState([]);
   const [deviceType, setDeviceType] = useState("");
   const [error, setError] = useState(null);
@@ -52,25 +53,25 @@ const Impressora = () => {
     fetchImpressoras();
   }, []);
 
-  const handleDelete = async (id) =>{
-    try  {
-      await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora/${id}`);
-      setImpressoras(impressoras.filter((impressora) => impressora.id !== id));
-    } catch (error) {
-      setError("erro ao excluir a impressora, tente novamente");
-    }
-  };
+//   const handleDelete = async (id) =>{
+//     try  {
+//       await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora/${id}`);
+//       setImpressoras(impressoras.filter((impressora) => impressora.id !== id));
+//     } catch (error) {
+//       setError("erro ao excluir a impressora, tente novamente");
+//     }
+//   };
 
-  const handleEdit = (id) => {
-    router.push(`/impressora/cadastro-impressora?id=${id}`);
-  };
+//   const handleEdit = (id) => {
+//     router.push(`/impressora/cadastro-impressora?id=${id}`);
+//   };
 
   return (
     <div className={style.body}>
-      <Header />
+      <Header_client />
       <Link href="../" className={style.back}> <IoCaretBack /> </Link>
       <h1 className={style.h1}>Impressoras Disponíveis</h1>
-      <h3 className={style.h3}>Tipo de dispositivo: {deviceType}</h3>
+      {/* <h3 className={style.h3}>Tipo de dispositivo: {deviceType}</h3> */}
       {/* <h1>Impressoras Disponíveis</h1> */}
       {/* <h3>{deviceType}</h3> */}
       {loading ? (
@@ -87,12 +88,15 @@ const Impressora = () => {
                   <p>{impressora.descricao}</p>
                   <p>{impressora.filamento}</p>
                   
-                  <button onClick={() => handleEdit(impressora.id)} className={style.editButton}>
+                  <a href={`../../reserva-impressora`} className={style.agendarButton}>
+                    <LuCalendarDays />
+                  </a>
+                  {/* <button onClick={() => handleEdit(impressora.id)} className={style.editButton}>
                     <FaRegEdit />
                   </button>
                   <button onClick={() => handleDelete(impressora.id)} className={style.deleteButton}>
                     <MdOutlineDelete />
-                  </button>
+                  </button> */}
                 </div>
               ))
             ) : (
@@ -106,4 +110,4 @@ const Impressora = () => {
   );
 };
 
-export default Impressora;
+export default Impressora_client;

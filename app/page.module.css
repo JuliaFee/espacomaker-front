@@ -6,11 +6,10 @@
   min-height: 100vh; 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
-  background-image: url('/bckg.png'); 
+ background-image: url('/bckg.png');   
   background-size: cover; 
   background-position: center center; 
   background-repeat: no-repeat; 
-
 }
 .h1 {
   color: #1f3c71;
@@ -33,16 +32,16 @@
   margin-top: 20px;
   flex-grow: 1;
   border-radius: 12px;
-  box-shadow: none; /* Remover qualquer sombra */
+  box-shadow: none; 
   background-color: transparent;
   transition: transform 0.3s ease-in-out;
-  height: 500px; /* Definindo uma altura fixa para o contêiner */
+  height: 500px; 
 }
 
 .imageContainer {
   width: 80%;
   max-width: 900px;
-  height: 100%; /* A altura agora será 100% do contêiner pai */
+  height: 100%; 
   overflow: hidden;
   border-radius: 8px;
   position: relative;
@@ -53,8 +52,8 @@
 
 .carouselImage {
   width: 100%;
-  height: 100%; /* As imagens agora terão altura 100% do contêiner */
-  object-fit: cover; /* Faz a imagem cobrir a área sem distorcer a proporção */
+  height: 100%; 
+  object-fit: cover; 
   transition: opacity 0.5s ease-in-out;
   opacity: 1;
   background-color: transparent; 

@@ -4,15 +4,15 @@ import { IoPersonOutline } from "react-icons/io5";
 import { HiOutlinePrinter } from "react-icons/hi2";
 import styles from './header.module.css'; 
 
-const Header = () => {
+const Header_client = () => {
     return (
         <div className={styles.global}>
             <div className={styles.nav}>
                 <a href="./"><img className={styles.logo} src="../../logoSenaiLab.png" alt="Logo" style={{width: "250px"}}/></a>
             </div>
             <div className={styles.tools}>
-                <a href="/ferramentas"><VscTools className={styles.icon}/></a>
-                <a href="/impressora"><HiOutlinePrinter className={styles.icon}/></a> 
+                <a href="/ferramentas/ferramentas-client"><VscTools className={styles.icon}/></a>
+                <a href="/impressora/impressora-client"><HiOutlinePrinter className={styles.icon}/></a> 
                 <a href="/login"><IoPersonOutline className={styles.icon}/></a> 
                 <a href="/reserva"><LuCalendarDays className={styles.icon}/></a> 
 
@@ -22,4 +22,4 @@ const Header = () => {
     );
 }
 
-export default Header;
+export default Header_client;
