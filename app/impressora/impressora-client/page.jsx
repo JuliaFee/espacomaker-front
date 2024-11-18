@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import style from "./impressora.module.css";
-import Header from "../components/header/page";
-import Footer from "../components/footer/page";
+import Header_client from "../../components/header-client/page";
+import Footer from "../../components/footer/page";
+import style from "./impressoraclient.module.css";
 import { MdOutlineDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
@@ -11,7 +11,7 @@ import { IoCaretBack } from "react-icons/io5";
 import Link from "next/link";
 import Loading from "../components/loading/page";
 
-const Impressora = () => {
+const Impressora_client = () => {
   const [impressoras, setImpressoras] = useState([]);
   const [deviceType, setDeviceType] = useState("");
   const [error, setError] = useState(null);
@@ -67,7 +67,7 @@ const Impressora = () => {
 
   return (
     <div className={style.body}>
-      <Header />
+      <Header_client />
       <Link href="../" className={style.back}> <IoCaretBack /> </Link>
       <h1 className={style.h1}>Impressoras Disponíveis</h1>
       <h3 className={style.h3}>Tipo de dispositivo: {deviceType}</h3>
@@ -106,4 +106,4 @@ const Impressora = () => {
   );
 };
 
-export default Impressora;
+export default Impressora_client;

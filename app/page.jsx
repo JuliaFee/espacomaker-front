@@ -58,11 +58,11 @@ const Carousel = () => {
 
       <div className={styles.linkSection}>
         <div className="reservaContent">
-          <Link className={styles.link2} href={"./login"}>SOU ADMINISTRADOR</Link>
+          <Link className={styles.link2} href={"./home-adm"}>SOU ADMINISTRADOR</Link>
         </div>
 
         <div className="reservaContent">
-          <Link className={styles.link2} href={"./login"}>SOU CLIENTE</Link>
+          <Link className={styles.link2} href={"./home-client"}>SOU CLIENTE</Link>
         </div>
       </div>
 
