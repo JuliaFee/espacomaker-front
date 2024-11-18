@@ -5,9 +5,10 @@ import Header_client from "../../components/header-client/page";
 import Footer from "../../components/footer/page";
 import style from "./ferramentaclient.module.css";
 import { IoCaretBack } from "react-icons/io5";
-import { MdOutlineDelete } from "react-icons/md";
-import { FaRegEdit } from "react-icons/fa";
-import { useRouter } from 'next/navigation'; // Adicionando o hook para redirecionar
+// import { MdOutlineDelete } from "react-icons/md";
+// import { FaRegEdit } from "react-icons/fa";
+import { LuCalendarDays } from "react-icons/lu";
+import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
 
@@ -46,21 +47,21 @@ useEffect(() => {
     setUser ({ tipo: user.tipo }); 
   }
 }, []);
-  //delete
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas/${id}`);
-      setFerramentas(ferramentas.filter((ferramenta) => ferramenta.id !== id)); 
-      setFerramentasFiltradas(ferramentasFiltradas.filter((ferramenta) => ferramenta.id !== id));
-    } catch (error) {
-      setError("Erro ao excluir a ferramenta. Tente novamente.");
-    }
-  };
+  // //delete
+  // const handleDelete = async (id) => {
+  //   try {
+  //     await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas/${id}`);
+  //     setFerramentas(ferramentas.filter((ferramenta) => ferramenta.id !== id)); 
+  //     setFerramentasFiltradas(ferramentasFiltradas.filter((ferramenta) => ferramenta.id !== id));
+  //   } catch (error) {
+  //     setError("Erro ao excluir a ferramenta. Tente novamente.");
+  //   }
+  // };
 
-  //edit
-  const handleEdit = (id) => {
-    router.push(`/ferramentas/cadastro-ferramentas?id=${id}`); 
-  };
+  // //edit
+  // const handleEdit = (id) => {
+  //   router.push(`/ferramentas/cadastro-ferramentas?id=${id}`); 
+  // };
 
   //filtro
   const handleSearch = (event) => {
@@ -107,8 +108,11 @@ useEffect(() => {
                   <img src={ferramenta.img} alt={ferramenta.nome} className={style.imagem} />
                   <h2 className={style.subtitle}>{ferramenta.nome}</h2>
                   <p>{ferramenta.descricao}</p>
-                  <button onClick={() => handleEdit(ferramenta.id)} className={style.editButton}><FaRegEdit /></button>
-                  <button onClick={() => handleDelete(ferramenta.id)} className={style.deleteButton}><MdOutlineDelete /></button>
+                  {/* <button onClick={() => handleEdit(ferramenta.id)} className={style.editButton}><FaRegEdit /></button>
+                  <button onClick={() => handleDelete(ferramenta.id)} className={style.deleteButton}><MdOutlineDelete /></button> */}
+                   <a href={`../../reserva-ferramentas`} className={style.agendarButton}>
+                    <LuCalendarDays />
+                  </a>
                 </li>
               ))
             ) : (

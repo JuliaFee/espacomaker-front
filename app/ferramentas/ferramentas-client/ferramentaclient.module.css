@@ -85,7 +85,19 @@
   object-fit: cover;
   background-color: #ececec;
 }
+.agendarButton {
+  color: white;
+   font-size: 200%;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   margin-left : 45%;
+}
 
+.agendarButton:hover {
+  color: rgb(255, 244, 207);
+  transition: 0.3s ease;
+}
 @media (max-width: 768px) {
   .container {
       flex-direction: column;
