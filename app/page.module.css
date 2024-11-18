@@ -36,6 +36,7 @@
   background-color: transparent;
   transition: transform 0.3s ease-in-out;
   height: 500px; 
+
 }
 
 .imageContainer {
@@ -96,6 +97,12 @@
   transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 
+.link22:hover {
+  background-color: rgba(46, 131, 227, 0.8); 
+  transform: scale(1.05); 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
 
 .linkSection {
   display: flex;
@@ -104,9 +111,8 @@
   gap: 4rem;
   padding: 70px 0;
   position: relative;
+  width: 40%;
 }
-
-
 
 
 
@@ -114,7 +120,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80rem;
+  width: 35rem;
   max-width: 100%;
   background-color: #2E83E3;
   color: white;
@@ -127,11 +133,33 @@
   position: relative;
   margin-bottom: 5%;
   margin-top: 2%;
+  margin-left: 10%;
+}
+
+.link22 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35rem;
+  max-width: 100%;
+  background-color: #2E83E3;
+  color: white;
+  padding: 60px;
+  text-align: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 50px;
+  font-family: "Chau Philomene One";
+  position: relative;
+  margin-bottom: 5%;
+  margin-top: 2%;
+  margin-left: 10%;
 }
 
 .link:hover {
   background-color: #2E83E3;
 }
+
 
 .img1,
 .img2,
@@ -279,3 +307,16 @@
   background-color: #ececec;
 }
 
+.brick {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 3%;
+}
+
+.block {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 4%;
+  margin-top: 2%;
+}

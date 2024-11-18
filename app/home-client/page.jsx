@@ -9,8 +9,11 @@ export default function Home_client() {
     <div className={styles.page}>
 
       <Header></Header>
+      <div className={styles.block}>
+      <div className={styles.brick}>
       <div className={styles.imagecontainer}>
-        <img className={styles.imgBanner} src="bannerSM.png"></img>
+        <img className={styles.imgBanner} src="CARTAZ.png"></img>
+      </div>
       </div>
       <div className={styles.section1}>
         <div className={styles.title2}>
@@ -34,7 +37,7 @@ export default function Home_client() {
       </div>
 
 
-
+      </div>
 
       <Footer></Footer>
     </div>
