@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import styles from "./ferramenta.module.css"; // Import the existing CSS
+import styles from "./ferramentas.module.css"; // Import the existing CSS
 
 export default function UpdateFerramenta({ params }) {
   const [nome, setNome] = useState("");

@@ -5,7 +5,6 @@ import styles from './cadastroferramentas.module.css';
 import Header from '@/app/components/header/page';
 import Footer from '@/app/components/footer/page';
 import PopUp from "@/app/components/popUp/PopUp";
-import Link from 'next/link';
 import axios from 'axios';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -14,6 +13,7 @@ const CadastroFerramentas = () => {
         nome: '',
         descricao: '',
         img: '',
+        statusF: true, // 'true' significa disponível
     });
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
@@ -22,15 +22,16 @@ const CadastroFerramentas = () => {
     const searchParams = useSearchParams();
     const editId = searchParams.get('id');
 
+    // Carregar dados da ferramenta para edição
     useEffect(() => {
         if (editId) {
             const fetchFerramenta = async () => {
                 try {
                     const response = await axios.get(`http://localhost:5000/ferramentas/${editId}`);
-                    const { nome, descricao, img } = response.data.ferramenta;
-                    setFerramenta({ nome, descricao, img });
+                    const { nome, descricao, img, statusF } = response.data.ferramenta;
+                    setFerramenta({ nome, descricao, img, statusF });
                 } catch (error) {
-                    console.error('Erro ao carregar a ferramenta:', error);
+                    console.error('Erro ao carregar a ferramenta:', error.response?.data || error.message);
                     setPopupMessage('Erro ao carregar os dados da ferramenta.');
                     setPopupTypeColor('erro');
                     setIsPopupOpen(true);
@@ -40,29 +41,52 @@ const CadastroFerramentas = () => {
         }
     }, [editId]);
 
+    // Atualizar status da ferramenta
+    const handleStatusChange = (e) => {
+        const newValue = e.target.value === 'true';  // Converter para booleano
+        setFerramenta((prev) => ({
+            ...prev,
+            statusF: newValue,
+        }));
+    };
+    
+    // Exibir o status corretamente
+    const statusTexto = ferramenta.statusF ? "Disponível" : "Indisponível";
+    
+    // Salvar ou atualizar ferramenta
     const updateFerramenta = async (e) => {
         e.preventDefault();
-
+        
+        // Verificar os dados antes de enviar
+        console.log("Dados da ferramenta antes de enviar para o backend:", ferramenta);
+        
         try {
+            const data = { ...ferramenta, statusF: ferramenta.statusF }; // Garantir que statusF seja booleano
+
             if (editId) {
-                await axios.put(`http://localhost:5000/ferramentas/${editId}`, ferramenta);
+                // Atualização
+                await axios.put(`http://localhost:5000/ferramentas/${editId}`, data);
                 setPopupMessage('Ferramenta atualizada com sucesso!');
                 setPopupTypeColor('sucesso');
             } else {
-                await axios.post("http://localhost:5000/ferramentas", ferramenta);
+                // Criação
+                await axios.post("http://localhost:5000/ferramentas", data);
                 setPopupMessage('Ferramenta cadastrada com sucesso!');
                 setPopupTypeColor('sucesso');
             }
-            setFerramenta({ nome: '', descricao: '', img: '' });
+
+            setFerramenta({ nome: '', descricao: '', img: '', statusF: true }); // Reset após operação
             setIsPopupOpen(true);
 
+            // Redirecionar após 3 segundos
             setTimeout(() => {
                 setIsPopupOpen(false);
                 router.push("/ferramentas");
             }, 3000);
         } catch (error) {
-            console.error('Erro ao realizar a operação:', error);
-            setPopupMessage('Erro ao realizar a operação. Tente novamente.');
+            console.error('Erro ao realizar a operação:', error.response?.data || error.message);
+            const mensagemErro = error.response?.data?.message || 'Erro ao realizar a operação. Tente novamente.';
+            setPopupMessage(mensagemErro);
             setPopupTypeColor('erro');
             setIsPopupOpen(true);
         }
@@ -71,19 +95,10 @@ const CadastroFerramentas = () => {
     return (
         <div className={styles.pageContainer}>
             <Header />
-            
             <div className={styles.mainContent}>
-                {/* Exibe a imagem de fundo
-                <div className={styles.imgBackground}>
-                <img src="/foto-cadastro.jfif" alt="Pré-visualização" className={styles.imagePreview} />
-                </div> */}
-    
-                {/* Formulário sobre a imagem */}
                 <div className={styles.formOverlay}>
                     <form onSubmit={updateFerramenta} className={styles.formContainer}>
-                      
                         <p className={styles.title}>{editId ? 'Editar Ferramenta' : 'Cadastro de Ferramentas'}</p>
-                        
                         <div className={styles.formGroup}>
                             <label htmlFor="nome" className={styles.label}>Nome:</label>
                             <input
@@ -95,7 +110,6 @@ const CadastroFerramentas = () => {
                                 required
                             />
                         </div>
-    
                         <div className={styles.formGroup}>
                             <label htmlFor="descricao" className={styles.label}>Descrição:</label>
                             <input
@@ -107,7 +121,6 @@ const CadastroFerramentas = () => {
                                 required
                             />
                         </div>
-    
                         <div className={styles.formGroup}>
                             <label htmlFor="img" className={styles.label}>Imagem:</label>
                             <input
@@ -119,22 +132,43 @@ const CadastroFerramentas = () => {
                                 required
                             />
                         </div>
-    
+                        <div className={styles.formGroup}>
+                            <label>Status:</label>
+                            <label className={styles.radioLabel}>
+                                <input
+                                    type="radio"
+                                    className={styles.radio}
+                                    name="statusF"
+                                    value="true"
+                                    checked={ferramenta.statusF === true}
+                                    onChange={handleStatusChange}
+                                />
+                                Disponível
+                            </label>
+                            <label className={styles.radioLabel}>
+                                <input
+                                    type="radio"
+                                    className={styles.radio}
+                                    name="statusF"
+                                    value="false"
+                                    checked={ferramenta.statusF === false}
+                                    onChange={handleStatusChange}
+                                />
+                                Indisponível
+                            </label>
+                            <p>Status atual: {statusTexto}</p> {/* Aqui estamos exibindo o texto do status */}
+                        </div>
+
                         <button type="submit" className={`${styles.button} ${styles.submitButton}`}>
                             {editId ? 'Atualizar' : 'Cadastrar'}
                         </button>
                     </form>
                 </div>
-    
                 {isPopupOpen && <PopUp message={popupMessage} typeColor={popupTypeColor} onClose={() => setIsPopupOpen(false)} />}
             </div>
-    
             <Footer />
         </div>
     );
-    
-    
-    
 };
 
 export default CadastroFerramentas;
