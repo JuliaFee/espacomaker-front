@@ -81,7 +81,7 @@ const Impressora = () => {
           <div className={style.container}>
             {impressoras.length > 0 ? (
               impressoras.map((impressora) => (
-                <li key={impressora.id} className={style.card}>
+                <div key={impressora.id} className={style.card}>
                   <img src={impressora.img} alt={impressora.nome} className={style.imagem} />
                   <h2>{impressora.nome}</h2>
                   <p>{impressora.descricao}</p>
@@ -93,7 +93,7 @@ const Impressora = () => {
                   <button onClick={() => handleDelete(impressora.id)} className={style.deleteButton}>
                     <MdOutlineDelete />
                   </button>
-                </li>
+                </div>
               ))
             ) : (
               <li>Nenhuma Impressora encontrada.</li>
