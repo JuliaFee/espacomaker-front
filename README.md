@@ -18,25 +18,25 @@ muito mais prática e intuitiva. Com telas para alunos e para administradores, o
 
 ## Funcionalidades: Versão Administrador ⚙
 
-1- Adicionar, editar e excluir
+1- Adicionar, editar e excluir.
 
 Nas páginas de ferramentas e de impressoras 3D, é possível adicionar editar e excluir itens do acervo do SENAI.
 
-2- Controle sobre reservas
+2- Controle sobre reservas.
 
 É possível gerenciar quais reservas foram feitas e informações sobre cada uma.
 
-3- Gestão de materiais
+3- Gestão de materiais.
 
 Matérias primas como os filamentos das impressões 3D podem ter seu estoque gerenciado.
 
 ## Funcionalidades: Versão Usuário 🖱
 
-1- Reservas Itens
+1- Reservas Itens.
 
 O usuário pode reservar itens, indicando qual deseja utilizar e selecionar data e horário.
 
-2- Consultar Acervo
+2- Consultar Acervo.
 
 O acervo de ferramentas e impressoras do SENAI pode ser facilmente acessada, com uma descrição detalhada de cada item.
 
