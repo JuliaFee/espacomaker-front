@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../components/header/page";
@@ -18,47 +19,29 @@ const Ferramentas = () => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  // Função para normalizar o status (tornar um valor booleano consistente)
-  const normalizeStatus = (status) => {
-    console.log("Status original recebido:", status); // Log para depuração
-
-    // Verifica o tipo do status e realiza a conversão para booleano
-    if (typeof status === "string") {
-      // Trata strings que podem ser 'true', 'false', '1' ou '0'
-      if (status.toLowerCase() === "true" || status === "1") {
-        return true; // Considera como disponível
-      } else if (status.toLowerCase() === "false" || status === "0") {
-        return false; // Considera como indisponível
-      }
-    }
-    
-    // Se for booleano
-    if (typeof status === "boolean") {
-      return status;
-    }
-
-    // Se o valor for outro tipo (número, undefined, etc.), consideramos como indisponível
-    return false;
-  };
-
   // Fetch ferramentas
   useEffect(() => {
     const fetchFerramentas = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas`);
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas`
+        );
+
+        console.log("Dados recebidos do backend:", response.data); // Log para verificar dados recebidos
+
         if (response.data && Array.isArray(response.data.ferramentas)) {
-          console.log("Dados recebidos:", response.data.ferramentas); // Depuração
           setFerramentas(response.data.ferramentas);
           setFerramentasFiltradas(response.data.ferramentas);
         } else {
           setError("Formato de dados inesperado!");
         }
       } catch (error) {
-        setError("Erro interno do servidor!");
+        setError("Erro ao carregar os dados. Verifique o backend.");
       } finally {
         setLoading(false);
       }
     };
+
     fetchFerramentas();
   }, []);
 
@@ -116,8 +99,6 @@ const Ferramentas = () => {
           <ul className={style.container}>
             {ferramentasFiltradas.length > 0 ? (
               ferramentasFiltradas.map((ferramenta) => {
-                const statusDisponivel = normalizeStatus(ferramenta.statusF); // Normalizando status
-                console.log("Ferramenta statusF:", ferramenta.statusF, "Normalizado:", statusDisponivel); // Log para depuração
                 return (
                   <li key={ferramenta.id} className={style.card}>
                     <img
@@ -129,10 +110,10 @@ const Ferramentas = () => {
                     <p>{ferramenta.descricao}</p>
                     <p
                       className={
-                        statusDisponivel ? style.available : style.unavailable
+                        ferramenta.statusF ? style.available : style.unavailable
                       }
                     >
-                      {statusDisponivel ? "Disponível" : "Indisponível"}
+                      {ferramenta.statusF ? "Disponível" : "Indisponível"}
                     </p>
                     <button
                       onClick={() => handleEdit(ferramenta.id)}
