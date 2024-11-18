@@ -4,7 +4,7 @@ import { IoPersonOutline } from "react-icons/io5";
 import { HiOutlinePrinter } from "react-icons/hi2";
 import styles from './header.module.css'; 
 
-const Header = () => {
+const Header_client = () => {
     return (
         <div className={styles.global}>
             <div className={styles.nav}>
@@ -22,4 +22,4 @@ const Header = () => {
     );
 }
 
-export default Header;
+export default Header_client;

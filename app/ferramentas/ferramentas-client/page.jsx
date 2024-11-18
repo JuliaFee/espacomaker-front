@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "../components/header-client/page";
-import Footer from "../components/footer/page";
-import style from "./pageferramentas.module.css";
+import Header_client from "../../components/header-client/page";
+import Footer from "../../components/footer/page";
+import style from "./ferramentaclient.module.css";
 import { IoCaretBack } from "react-icons/io5";
 import { MdOutlineDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
@@ -79,7 +79,7 @@ useEffect(() => {
     //filtro do rogerio/adm vvvvvv
    // { user.tipo === 'adm' ? (/* rogerio ou outro adm q tem acesso as coisa */) : (/*tudo nada*/) };
     <div className={style.body}>
-      <Header />
+      <Header_client />
       <Link href={"../"} className={style.back}><IoCaretBack /></Link>
       <h1 className={style.h1}>Ferramentas Disponíveis</h1>
       
