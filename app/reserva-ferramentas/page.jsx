@@ -7,8 +7,10 @@ import styles from './reservaf.module.css';
 import Header from '../components/header/page';
 import Footer from '../components/footer/page';
 import PopUp from "@/app/components/popUp/PopUp";
+import { useRouter } from 'next/navigation';  // Importa o hook useRouter
 
 const ReservaFerramentaForm = () => {
+    const router = useRouter();  // Inicializa o hook useRouter
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
     const [popupTypeColor, setPopupTypeColor] = useState('');
@@ -49,7 +51,6 @@ const ReservaFerramentaForm = () => {
             }
         };
 
-
         const fetchData = async () => {
             setLoading(true);
             await Promise.all([fetchFerramentas(), fetchHorarios()]);
@@ -69,7 +70,7 @@ const ReservaFerramentaForm = () => {
 
         try {
             const reservaResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reserva-ferramenta`, {
-                id_user: 1,
+                id_user: 1, // O ID do usuário deve ser dinâmico, provavelmente vindo do contexto ou da autenticação
                 id_ferramenta: selectedFerramenta,
                 id_horario: selectedHorario,
                 data_reserva: dataReserva.toISOString().split('T')[0],
@@ -83,6 +84,7 @@ const ReservaFerramentaForm = () => {
 
             setTimeout(() => {
                 setIsPopupOpen(false);
+                router.push('reserva-ferramentas/reservaf-lista');  
             }, 3000);
         } catch (error) {
             const errorMessage = error.response?.data?.message || error.message || "Erro desconhecido.";
@@ -143,7 +145,6 @@ const ReservaFerramentaForm = () => {
                         <option value="">Nenhum horário disponível</option>
                     )}
                 </select>
-
 
                 <div className={styles.calendarContainer}>
                     <label htmlFor="data" className={styles.label}>Selecionar data:</label>
