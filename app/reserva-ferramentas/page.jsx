@@ -120,7 +120,7 @@ const ReservaFerramentaForm = () => {
             <Header />
             <form onSubmit={handleSubmit} className={styles.form}>
                 <h2 className={styles.titleh2}>Reserva de Ferramenta</h2>
-                {error && <div style={{ color: 'red' }}>{error}</div>}
+                {error && <div style={{ color: 'red', fontFamily: 'Chau Philomene One', textAlign: 'center'}}>{error}</div>}
 
                 <select onChange={handleFerramentaChange} value={selectedFerramenta} className={styles.select}>
                     <option value="">Selecionar Ferramenta</option>
@@ -147,7 +147,7 @@ const ReservaFerramentaForm = () => {
                         <option value="">Nenhum horário disponível</option>
                     )}
                 </select>
-
+{/* teste do edu */}
                 <div className={styles.calendarContainer}>
                     <label htmlFor="data" className={styles.label}>Selecionar data:</label>
                     <Calendar onChange={setDataReserva} value={dataReserva} className={styles.calendar} />
