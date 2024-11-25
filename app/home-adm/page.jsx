@@ -13,19 +13,16 @@ export default function Home_adm() {
       <div className={styles.block}>
       <div className={styles.brick}>
       <div className={styles.imagecontainer}>
-        <img className={styles.imgBanner} src="CARTAZ.png"></img>
+        <img className={styles.imgBanner} src="gloriatool.png"></img>
       </div>
       </div>
       <div className={styles.section1}>
-        <div className={styles.title2}>
-          <p className={styles.link}>SERVIÇOS</p>
-        </div>
 
         <div className={styles.linkSection}>
 
         <div className="reservaContent">
             <Link className={styles.link2} href={"./reserva/reserva-lista"}>ADMNISTRAR RESERVAS</Link>
-          
+            <img className={styles.img3} src="toolss.png" alt="Ferramentas" />
           </div>
 
 

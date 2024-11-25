@@ -116,7 +116,12 @@
 
 
 
-
+.img3 {
+  width: 40%; 
+  right: -15rem; 
+  bottom: 4rem;
+  position: absolute; 
+}
 
 .img1,
 .img2 {
