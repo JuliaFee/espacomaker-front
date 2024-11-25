@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import axios from "axios";
 
-const url = process.env.BASE_URL + "/reserva-ferramentas";
+const url = process.env.BASE_URL + "/horarios";
 
 export async function GET() {
     try {

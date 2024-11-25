@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../components/header/page";
@@ -7,7 +8,7 @@ import style from "./pageferramentas.module.css";
 import { IoCaretBack } from "react-icons/io5";
 import { MdOutlineDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
-import { useRouter } from 'next/navigation'; // Adicionando o hook para redirecionar
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
 import Loading from "../components/loading/page";
@@ -18,56 +19,54 @@ const Ferramentas = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  // const [user, setUser ] = useState({ tipo: 'user' }); //fica por padrao como user
-  const router = useRouter(); 
+  const router = useRouter();
 
-//fetch
+  // Fetch ferramentas
   useEffect(() => {
     const fetchFerramentas = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas`);
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas`
+        );
+
+        console.log("Dados recebidos do backend:", response.data); // Log para verificar dados recebidos
+
         if (response.data && Array.isArray(response.data.ferramentas)) {
           setFerramentas(response.data.ferramentas);
-          setFerramentasFiltradas(response.data.ferramentas); 
+          setFerramentasFiltradas(response.data.ferramentas);
         } else {
           setError("Formato de dados inesperado!");
         }
       } catch (error) {
-        setError("Erro interno do servidor!");
+        setError("Erro ao carregar os dados. Verifique o backend.");
       } finally {
         setLoading(false);
       }
     };
+
     fetchFerramentas();
   }, []);
-// pega o tipo do user pelo local storage
-useEffect(() => {
-  const userType = localStorage.getItem('user.tipo');
-  if (userType) {
-    setUser ({ tipo: user.tipo }); 
-  }
-}, []);
-  //delete
+
+  // Delete ferramenta
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas/${id}`);
-      setFerramentas(ferramentas.filter((ferramenta) => ferramenta.id !== id)); 
+      setFerramentas(ferramentas.filter((ferramenta) => ferramenta.id !== id));
       setFerramentasFiltradas(ferramentasFiltradas.filter((ferramenta) => ferramenta.id !== id));
     } catch (error) {
       setError("Erro ao excluir a ferramenta. Tente novamente.");
     }
   };
 
-  //edit
+  // Edit ferramenta
   const handleEdit = (id) => {
-    router.push(`/ferramentas/cadastro-ferramentas?id=${id}`); 
+    router.push(`/ferramentas/cadastro-ferramentas?id=${id}`);
   };
 
-  //filtro
+  // Filter ferramentas
   const handleSearch = (event) => {
     const searchValue = event.target.value.toLowerCase();
     setSearchTerm(searchValue);
-
 
     const filteredTools = ferramentas.filter((ferramenta) =>
       ferramenta.nome.toLowerCase().includes(searchValue)
@@ -75,26 +74,24 @@ useEffect(() => {
     setFerramentasFiltradas(filteredTools);
   };
 
-  //html 
+  // Render
   return (
-    //filtro do rogerio/adm vvvvvv
-   // { user.tipo === 'adm' ? (/* rogerio ou outro adm q tem acesso as coisa */) : (/*tudo nada*/) };
     <div className={style.body}>
       <Header />
-      <Link href={"../"} className={style.back}><IoCaretBack /></Link>
+      <Link href={"../"} className={style.back}>
+        <IoCaretBack />
+      </Link>
       <h1 className={style.h1}>Ferramentas Disponíveis</h1>
-      
+
       <div className={style.search}>
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={handleSearch}
-        placeholder="Busque aqui..."
-        className={style.searchInput}
-        
-      />
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={handleSearch}
+          placeholder="Busque aqui..."
+          className={style.searchInput}
+        />
       </div>
-      
 
       {loading ? (
        <Loading/>
@@ -103,15 +100,38 @@ useEffect(() => {
           {error && <p className={style.error}>{error}</p>}
           <ul className={style.container}>
             {ferramentasFiltradas.length > 0 ? (
-              ferramentasFiltradas.map((ferramenta) => (
-                <li key={ferramenta.id} className={style.card}>
-                  <img src={ferramenta.img} alt={ferramenta.nome} className={style.imagem} />
-                  <h2 className={style.subtitle}>{ferramenta.nome}</h2>
-                  <p>{ferramenta.descricao}</p>
-                  <button onClick={() => handleEdit(ferramenta.id)} className={style.editButton}><FaRegEdit /></button>
-                  <button onClick={() => handleDelete(ferramenta.id)} className={style.deleteButton}><MdOutlineDelete /></button>
-                </li>
-              ))
+              ferramentasFiltradas.map((ferramenta) => {
+                return (
+                  <li key={ferramenta.id} className={style.card}>
+                    <img
+                      src={ferramenta.img}
+                      alt={ferramenta.nome}
+                      className={style.imagem}
+                    />
+                    <h2 className={style.subtitle}>{ferramenta.nome}</h2>
+                    <p>{ferramenta.descricao}</p>
+                    <p
+                      className={
+                        ferramenta.statusF ? style.available : style.unavailable
+                      }
+                    >
+                      {ferramenta.statusF ? "Disponível" : "Indisponível"}
+                    </p>
+                    <button
+                      onClick={() => handleEdit(ferramenta.id)}
+                      className={style.editButton}
+                    >
+                      <FaRegEdit />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(ferramenta.id)}
+                      className={style.deleteButton}
+                    >
+                      <MdOutlineDelete />
+                    </button>
+                  </li>
+                );
+              })
             ) : (
               <li>Nenhuma ferramenta encontrada.</li>
             )}

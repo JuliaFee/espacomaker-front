@@ -36,6 +36,8 @@ const Carousel = () => {
     <div className={styles.page}>
       <Header /> 
       <h1 className={styles.h1}>Bem-vindo(a) ao Espaço Maker</h1>
+      <div className={styles.block}>
+      <div className={styles.brick}>
       <div className={styles.carouselContainer}>
         <div className={styles.imageContainer}>
           <img
@@ -55,15 +57,17 @@ const Carousel = () => {
           ></span>
         ))}
       </div>
+      </div>
 
       <div className={styles.linkSection}>
         <div className="reservaContent">
-          <Link className={styles.link2} href={"./login"}>SOU ADMINISTRADOR</Link>
+          <Link className={styles.link2} href={"./home-adm"}>SOU ADMINISTRADOR</Link>
         </div>
 
         <div className="reservaContent">
-          <Link className={styles.link2} href={"./login"}>SOU CLIENTE</Link>
+          <Link className={styles.link22} href={"./home-client"}>SOU CLIENTE</Link>
         </div>
+      </div>
       </div>
 
       <Footer /> 

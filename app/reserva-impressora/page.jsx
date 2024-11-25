@@ -6,10 +6,14 @@ import 'react-calendar/dist/Calendar.css';
 import styles from './reservai.modules.css';
 import Header from '../components/header/page';
 import Footer from '../components/footer/page';
+import PopUp from "@/app/components/popUp/PopUp";
 
 const ImpressoraForm = () => {
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [popupMessage, setPopupMessage] = useState('');
+    const [popupTypeColor, setPopupTypeColor] = useState('');
     const [impressoras, setImpressoras] = useState([]);
-    const [selectedImpressora, setSelectedImpressora] = useState(""); // Inicializado como string vazia
+    const [selectedImpressora, setSelectedImpressora] = useState("");
     const [dataReserva, setDataReserva] = useState(new Date());
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -22,16 +26,11 @@ const ImpressoraForm = () => {
             } catch (error) {
                 console.error("Erro ao buscar impressoras:", error.response ? error.response.data : error.message);
                 setError("Erro ao carregar impressoras.");
+            } finally {
+                setLoading(false);
             }
         };
-
-        const fetchData = async () => {
-            setLoading(true);
-            await fetchImpressoras();
-            setLoading(false);
-        };
-
-        fetchData();
+        fetchImpressoras();
     }, []);
 
     const handleSubmit = async (e) => {
@@ -43,19 +42,36 @@ const ImpressoraForm = () => {
         }
 
         try {
-            const reservaResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reservas`, {
-                id_user: 1, // Substituir pelo ID do usuário logado
+            const reservaResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reserva-impressora`, {
+                id_user: 1,
                 id_impressora: selectedImpressora,
                 data_reserva: dataReserva.toISOString().split('T')[0],
                 status_reserva: true,
             });
 
             console.log("Reserva realizada:", reservaResponse.data);
-            setError(null);  // Limpa o erro após uma reserva bem-sucedida
+            setError(null);
+
+            setPopupMessage("Sua reserva foi realizada com sucesso!");
+            setPopupTypeColor('sucesso');
+            setIsPopupOpen(true);
+
+            setTimeout(() => {
+                setIsPopupOpen(false);
+            }, 3000);
+
         } catch (error) {
             const errorMessage = error.response?.data?.message || error.message || "Erro desconhecido.";
             console.error("Erro ao realizar reserva:", errorMessage);
             setError("Erro ao realizar reserva: " + errorMessage);
+
+            setPopupMessage("Houve um erro ao realizar sua reserva.");
+            setPopupTypeColor('erro');
+            setIsPopupOpen(true);
+
+            setTimeout(() => {
+                setIsPopupOpen(false);
+            }, 3000);
         }
     };
 
@@ -85,14 +101,14 @@ const ImpressoraForm = () => {
                         </option>
                     ))}
                 </select>
-                <div className={styles.brick1}>
-                    <div className={styles.calebox}>
-                        <label htmlFor="data" className={styles.labelcale}>Selecionar data:</label>
-                        <Calendar onChange={setDataReserva} value={dataReserva} className={styles.calendar} />
-                    </div>
+                <div className={styles.calebox}>
+                    <label htmlFor="data" className={styles.labelcale}>Selecionar data:</label>
+                    <Calendar onChange={setDataReserva} value={dataReserva} className={styles.reactCalendar} />
                 </div>
                 <button type="submit" className={styles.button}>Realizar Reserva</button>
             </form>
+
+            {isPopupOpen && <PopUp message={popupMessage} typeColor={popupTypeColor} onClose={() => setIsPopupOpen(false)} />}
             <Footer />
         </div>
     );

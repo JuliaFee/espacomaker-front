@@ -6,11 +6,10 @@
   min-height: 100vh; 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
-  background-image: url('/bckg.png'); 
+ background-image: url('/bckg.png');   
   background-size: cover; 
   background-position: center center; 
   background-repeat: no-repeat; 
-
 }
 .h1 {
   color: #1f3c71;
@@ -33,16 +32,17 @@
   margin-top: 20px;
   flex-grow: 1;
   border-radius: 12px;
-  box-shadow: none; /* Remover qualquer sombra */
+  box-shadow: none; 
   background-color: transparent;
   transition: transform 0.3s ease-in-out;
-  height: 500px; /* Definindo uma altura fixa para o contêiner */
+  height: 500px; 
+
 }
 
 .imageContainer {
   width: 80%;
   max-width: 900px;
-  height: 100%; /* A altura agora será 100% do contêiner pai */
+  height: 100%; 
   overflow: hidden;
   border-radius: 8px;
   position: relative;
@@ -53,8 +53,8 @@
 
 .carouselImage {
   width: 100%;
-  height: 100%; /* As imagens agora terão altura 100% do contêiner */
-  object-fit: cover; /* Faz a imagem cobrir a área sem distorcer a proporção */
+  height: 100%; 
+  object-fit: cover; 
   transition: opacity 0.5s ease-in-out;
   opacity: 1;
   background-color: transparent; 
@@ -97,6 +97,12 @@
   transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 
+.link22:hover {
+  background-color: rgba(46, 131, 227, 0.8); 
+  transform: scale(1.05); 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
 
 .linkSection {
   display: flex;
@@ -105,9 +111,8 @@
   gap: 4rem;
   padding: 70px 0;
   position: relative;
+  width: 40%;
 }
-
-
 
 
 
@@ -115,7 +120,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80rem;
+  width: 35rem;
   max-width: 100%;
   background-color: #2E83E3;
   color: white;
@@ -128,11 +133,33 @@
   position: relative;
   margin-bottom: 5%;
   margin-top: 2%;
+  margin-left: 10%;
+}
+
+.link22 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35rem;
+  max-width: 100%;
+  background-color: #2E83E3;
+  color: white;
+  padding: 60px;
+  text-align: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 50px;
+  font-family: "Chau Philomene One";
+  position: relative;
+  margin-bottom: 5%;
+  margin-top: 2%;
+  margin-left: 10%;
 }
 
 .link:hover {
   background-color: #2E83E3;
 }
+
 
 .img1,
 .img2,
@@ -280,3 +307,16 @@
   background-color: #ececec;
 }
 
+.brick {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 3%;
+}
+
+.block {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 4%;
+  margin-top: 2%;
+}

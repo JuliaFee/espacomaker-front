@@ -1,0 +1,113 @@
+
+.page {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.form {
+    background-color: #fff;
+    padding: 20px;
+    margin: 50px auto;
+    border-radius: 8px;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.titleh2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff; /* Fundo branco para o select */
+    color: #333; /* Cor do texto em um tom escuro */
+    cursor: pointer;
+}
+
+.select option {
+    color: #333; /* Garante que o texto das opções seja escuro */
+    background-color: #fff; /* Garante que o fundo das opções seja branco */
+}
+
+/* Selecione o horário e ferramenta */
+.select:focus {
+    outline: none;
+    border-color: #4CAF50; /* Destaca a borda quando selecionado */
+}
+
+/* Estilizando a mensagem de erro */
+.error {
+    color: red;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilos para o botão */
+.button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+
+/* Estilos do calendário */
+.calendarContainer {
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.calendar {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Popup styles */
+.popUp {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+}
+
+.sucesso {
+    color: green;
+}
+
+.erro {
+    color: red;
+}
+
+
