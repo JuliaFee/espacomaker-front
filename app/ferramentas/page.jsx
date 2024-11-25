@@ -10,6 +10,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { useRouter } from 'next/navigation'; // Adicionando o hook para redirecionar
 import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
+import Loading from "../components/loading/page";
 
 const Ferramentas = () => {
   const [ferramentas, setFerramentas] = useState([]);
@@ -96,7 +97,7 @@ useEffect(() => {
       
 
       {loading ? (
-        <p className={style.loading}>Carregando...</p>
+       <Loading/>
       ) : (
         <>
           {error && <p className={style.error}>{error}</p>}
