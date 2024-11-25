@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../components/header/page";
 import Footer from "../components/footer/page";
-import style from "./pageferramentas.module.css";
+import style from "./pageferramentas.module.css"
 import { IoCaretBack } from "react-icons/io5";
 import { MdOutlineDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
@@ -23,12 +23,7 @@ const Ferramentas = () => {
   useEffect(() => {
     const fetchFerramentas = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas`
-        );
-
-        console.log("Dados recebidos do backend:", response.data); // Log para verificar dados recebidos
-
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas`);
         if (response.data && Array.isArray(response.data.ferramentas)) {
           setFerramentas(response.data.ferramentas);
           setFerramentasFiltradas(response.data.ferramentas);
@@ -41,7 +36,6 @@ const Ferramentas = () => {
         setLoading(false);
       }
     };
-
     fetchFerramentas();
   }, []);
 
@@ -61,81 +55,73 @@ const Ferramentas = () => {
     router.push(`/ferramentas/cadastro-ferramentas?id=${id}`);
   };
 
-  // Filter ferramentas
-  const handleSearch = (event) => {
-    const searchValue = event.target.value.toLowerCase();
-    setSearchTerm(searchValue);
+  // Toggle status ferramenta
+  const handleToggleStatus = async (id, currentStatus) => {
+    try {
+      const newStatus = !currentStatus; // Alterna o status
+      await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas/${id}`, {
+        statusF: newStatus,
+      });
 
-    const filteredTools = ferramentas.filter((ferramenta) =>
-      ferramenta.nome.toLowerCase().includes(searchValue)
-    );
-    setFerramentasFiltradas(filteredTools);
+      // Atualiza a lista local de ferramentas
+      setFerramentas((prevFerramentas) =>
+        prevFerramentas.map((ferramenta) =>
+          ferramenta.id === id ? { ...ferramenta, statusF: newStatus } : ferramenta
+        )
+      );
+      setFerramentasFiltradas((prevFerramentasFiltradas) =>
+        prevFerramentasFiltradas.map((ferramenta) =>
+          ferramenta.id === id ? { ...ferramenta, statusF: newStatus } : ferramenta
+        )
+      );
+    } catch (error) {
+      setError("Erro ao alterar o status. Tente novamente.");
+    }
   };
 
-  // Render
   return (
-    <div className={style.body}>
+    <div className={style.pageContainer}>
       <Header />
-      <Link href={"../"} className={style.back}>
-        <IoCaretBack />
-      </Link>
-      <h1 className={style.h1}>Ferramentas Disponíveis</h1>
+      <div className={style.mainContent}>
+        <div className={style.headerList}>
+          <Link href="/ferramentas/cadastro-ferramentas" className={style.addFerramentaButton}>
+            Adicionar ferramenta
+          </Link>
+        </div>
 
-      <div className={style.search}>
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={handleSearch}
-          placeholder="Busque aqui..."
-          className={style.searchInput}
-        />
+        {error && <p className={style.errorMessage}>{error}</p>}
+
+        {loading ? (
+          <p>Carregando...</p>
+        ) : (
+          <div className={style.ferramentasList}>
+            {ferramentasFiltradas.map((ferramenta) => (
+              <div key={ferramenta.id} className={style.ferramentaItem}>
+                <img src={ferramenta.img} alt={ferramenta.nome} className={style.ferramentaImg} />
+                <div className={style.ferramentaDetails}>
+                  <p className={style.ferramentaName}>{ferramenta.nome}</p>
+                  <p>{ferramenta.descricao}</p>
+                  <p>Status: {ferramenta.statusF ? "Disponível" : "Indisponível"}</p>
+                </div>
+                <div className={style.actions}>
+                  <button onClick={() => handleEdit(ferramenta.id)} className={style.editButton}>
+                    <FaRegEdit />
+                  </button>
+                  <button onClick={() => handleDelete(ferramenta.id)} className={style.deleteButton}>
+                    <MdOutlineDelete />
+                  </button>
+                  <button
+                    onClick={() => handleToggleStatus(ferramenta.id, ferramenta.statusF)}
+                    className={style.toggleStatusButton}
+                  >
+                    {ferramenta.statusF ? "Tornar Indisponível" : "Tornar Disponível"}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-
-      {loading ? (
-        <p className={style.loading}>Carregando...</p>
-      ) : (
-        <>
-          {error && <p className={style.error}>{error}</p>}
-          <ul className={style.container}>
-            {ferramentasFiltradas.length > 0 ? (
-              ferramentasFiltradas.map((ferramenta) => {
-                return (
-                  <li key={ferramenta.id} className={style.card}>
-                    <img
-                      src={ferramenta.img}
-                      alt={ferramenta.nome}
-                      className={style.imagem}
-                    />
-                    <h2 className={style.subtitle}>{ferramenta.nome}</h2>
-                    <p>{ferramenta.descricao}</p>
-                    <p
-                      className={
-                        ferramenta.statusF ? style.available : style.unavailable
-                      }
-                    >
-                      {ferramenta.statusF ? "Disponível" : "Indisponível"}
-                    </p>
-                    <button
-                      onClick={() => handleEdit(ferramenta.id)}
-                      className={style.editButton}
-                    >
-                      <FaRegEdit />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(ferramenta.id)}
-                      className={style.deleteButton}
-                    >
-                      <MdOutlineDelete />
-                    </button>
-                  </li>
-                );
-              })
-            ) : (
-              <li>Nenhuma ferramenta encontrada.</li>
-            )}
-          </ul>
-        </>
-      )}
       <Footer />
     </div>
   );
