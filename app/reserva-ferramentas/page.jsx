@@ -7,10 +7,10 @@ import styles from './reservaf.module.css';
 import Header from '../components/header/page';
 import Footer from '../components/footer/page';
 import PopUp from "@/app/components/popUp/PopUp";
-import { useRouter } from 'next/navigation';  // Importa o hook useRouter
+import { useRouter } from 'next/navigation';
 
 const ReservaFerramentaForm = () => {
-    const router = useRouter();  // Inicializa o hook useRouter
+    const router = useRouter();
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
     const [popupTypeColor, setPopupTypeColor] = useState('');
@@ -22,8 +22,7 @@ const ReservaFerramentaForm = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Carregar ferramentas e horários
-    useEffect(() => {
+    useEffect(() => { 
         const fetchFerramentas = async () => {
             try {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas`);
@@ -44,6 +43,7 @@ const ReservaFerramentaForm = () => {
                     setHorarios(response.data.horarios || []);
                 } else {
                     setError("Formato de resposta de horários inválido.");
+                    console.error("Erro: Formato inválido da resposta de horários.");
                 }
             } catch (error) {
                 console.error("Erro ao buscar horários:", error.response ? error.response.data : error.message);
@@ -70,7 +70,7 @@ const ReservaFerramentaForm = () => {
 
         try {
             const reservaResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reserva-ferramenta`, {
-                id_user: 1, // O ID do usuário deve ser dinâmico, provavelmente vindo do contexto ou da autenticação
+                id_user: 1, // Ajustar para o ID real do usuário
                 id_ferramenta: selectedFerramenta,
                 id_horario: selectedHorario,
                 data_reserva: dataReserva.toISOString().split('T')[0],
@@ -82,12 +82,12 @@ const ReservaFerramentaForm = () => {
             setPopupTypeColor('sucesso');
             setIsPopupOpen(true);
 
-             setTimeout(() => {
-                 setIsPopupOpen(false);
-                 router.push('reserva-ferramentas/reservaf-lista');  
-             }, 3000);
+            setTimeout(() => {
+                setIsPopupOpen(false);
+                router.push('reserva-ferramentas/reservaf-lista');
+            }, 3000);
             console.log("Reserva realizada:", reservaResponse.data);
-            
+
         } catch (error) {
             const errorMessage = error.response?.data?.message || error.message || "Erro desconhecido.";
             console.error("Erro ao realizar reserva:", errorMessage);
@@ -103,14 +103,6 @@ const ReservaFerramentaForm = () => {
         }
     };
 
-    const handleFerramentaChange = (e) => {
-        setSelectedFerramenta(e.target.value);
-    };
-
-    const handleHorarioChange = (e) => {
-        setSelectedHorario(e.target.value);
-    };
-
     if (loading) {
         return <div>Carregando...</div>;
     }
@@ -122,30 +114,22 @@ const ReservaFerramentaForm = () => {
                 <h2 className={styles.titleh2}>Reserva de Ferramenta</h2>
                 {error && <div style={{ color: 'red', fontFamily: 'Chau Philomene One', textAlign: 'center'}}>{error}</div>}
 
-                <select onChange={handleFerramentaChange} value={selectedFerramenta} className={styles.select}>
+                <select onChange={(e) => setSelectedFerramenta(e.target.value)} value={selectedFerramenta} className={styles.select}>
                     <option value="">Selecionar Ferramenta</option>
-                    {ferramentas.length > 0 ? (
-                        ferramentas.map((ferramenta) => (
-                            <option key={ferramenta.id} value={ferramenta.id}>
-                                {ferramenta.nome}
-                            </option>
-                        ))
-                    ) : (
-                        <option value="">Nenhuma ferramenta disponível</option>
-                    )}
+                    {ferramentas.map((ferramenta) => (
+                        <option key={ferramenta.id} value={ferramenta.id}>
+                            {ferramenta.nome}
+                        </option>
+                    ))}
                 </select>
 
-                <select onChange={handleHorarioChange} value={selectedHorario} className={styles.select}>
+                <select onChange={(e) => setSelectedHorario(e.target.value)} value={selectedHorario} className={styles.select}>
                     <option value="">Selecionar Horário</option>
-                    {horarios.length > 0 ? (
-                        horarios.map((horario) => (
-                            <option key={horario.id} value={horario.id}>
-                                {horario.descricao}
-                            </option>
-                        ))
-                    ) : (
-                        <option value="">Nenhum horário disponível</option>
-                    )}
+                    {horarios.map((horario) => (
+                        <option key={horario.id} value={horario.id}>
+                            {horario.hora_inicio} - {horario.hora_fim}
+                        </option>
+                    ))}
                 </select>
 {/* teste do edu */}
                 <div className={styles.calendarContainer}>

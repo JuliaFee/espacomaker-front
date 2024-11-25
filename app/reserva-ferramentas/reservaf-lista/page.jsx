@@ -10,15 +10,29 @@ const ReservasfLista = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const formatarData = (data) => {
+        const [dia, mes, ano] = data.split('/');
+        const dataAjustada = new Date(`${ano}-${mes}-${dia}`);
+        dataAjustada.setDate(dataAjustada.getDate() + 1); // Adiciona 1 dia
+        return dataAjustada.toLocaleDateString();
+      };
+
     useEffect(() => {
         const fetchReservas = async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/reserva-ferramenta`); // Ajuste a URL conforme necessário
-                console.log('Reservas:', response.data);
-                setReservas(response.data.reservas || []);  // Ajuste conforme a estrutura de resposta
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/reserva-ferramenta`);
+                console.log('Resposta da API de reservas:', response.data);
+
+                // Verifique se a API retorna a lista corretamente
+                if (response.data && response.data.reservas) {
+                    setReservas(response.data.reservas);
+                } else {
+                    setError('Erro: Estrutura inesperada na resposta da API.');
+                    console.error('Erro: Resposta inesperada da API de reservas:', response.data);
+                }
             } catch (error) {
                 console.error("Erro ao buscar reservas:", error.response ? error.response.data : error.message);
-                setError("Erro ao carregar reservas.");
+                setError("Erro ao carregar reservas. Verifique sua conexão ou contate o suporte.");
             } finally {
                 setLoading(false);
             }
@@ -35,15 +49,15 @@ const ReservasfLista = () => {
         <div className={styles.page}>
             <Header />
             <h2 className={styles.titleh2}>Minhas Reservas</h2>
-            {error && <div style={{ color: 'red' }}>{error}</div>}
+            {error && <div style={{ color: 'red', marginBottom: '20px' }}>{error}</div>}
 
             <div className={styles.reservasList}>
                 {reservas.length > 0 ? (
                     reservas.map((reserva) => (
                         <div key={reserva.id} className={styles.reservaItem}>
-                            <p><strong>Ferramenta:</strong> {reserva.ferramenta.nome}</p>
-                            <p><strong>Data:</strong> {new Date(reserva.data_reserva).toLocaleDateString()}</p>
-                            <p><strong>Horário:</strong> {reserva.horario.descricao}</p>
+                            <p><strong>Ferramenta:</strong> {reserva.id_ferramenta || 'N/A'}</p>
+                            <p><strong>Data:</strong> {reserva.data_reserva ? formatarData(reserva.data_reserva) : 'N/A'}</p>
+                            <p><strong>Horário:</strong> {reserva.id_horario || 'N/A'}</p>
                             <p><strong>Status:</strong> {reserva.status_reserva ? 'Confirmada' : 'Cancelada'}</p>
                         </div>
                     ))

@@ -69,7 +69,7 @@ const Impressora_client = () => {
   return (
     <div className={style.body}>
       <Header_client />
-      <Link href="../" className={style.back}> <IoCaretBack /> </Link>
+ 
       <h1 className={style.h1}>Impressoras Disponíveis</h1>
       {/* <h3 className={style.h3}>Tipo de dispositivo: {deviceType}</h3> */}
       {/* <h1>Impressoras Disponíveis</h1> */}

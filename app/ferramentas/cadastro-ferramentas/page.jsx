@@ -1,4 +1,4 @@
-"use client";
+"use client";  // Adicione esta linha no topo
 
 import React, { useState, useEffect } from 'react';
 import styles from './cadastroferramentas.module.css';
@@ -31,7 +31,7 @@ const CadastroFerramentas = () => {
                     const { nome, descricao, img, statusF } = response.data.ferramenta;
                     setFerramenta({ nome, descricao, img, statusF });
                 } catch (error) {
-                    console.error('Erro ao carregar a ferramenta:', error.response?.data || error.message);
+                    console.error('Erro ao carregar os dados da ferramenta:', error.response?.data || error.message);
                     setPopupMessage('Erro ao carregar os dados da ferramenta.');
                     setPopupTypeColor('erro');
                     setIsPopupOpen(true);
@@ -42,26 +42,22 @@ const CadastroFerramentas = () => {
     }, [editId]);
 
     // Atualizar status da ferramenta
-    const handleStatusChange = (e) => {
-        const newValue = e.target.value === 'true';  // Converter para booleano
+    const handleStatusChange = () => {
         setFerramenta((prev) => ({
             ...prev,
-            statusF: newValue,
+            statusF: !prev.statusF,  // Alterna entre disponível e indisponível
         }));
     };
-    
+
     // Exibir o status corretamente
     const statusTexto = ferramenta.statusF ? "Disponível" : "Indisponível";
-    
+
     // Salvar ou atualizar ferramenta
     const updateFerramenta = async (e) => {
         e.preventDefault();
-        
-        // Verificar os dados antes de enviar
-        console.log("Dados da ferramenta antes de enviar para o backend:", ferramenta);
-        
+
         try {
-            const data = { ...ferramenta, statusF: ferramenta.statusF }; // Garantir que statusF seja booleano
+            const data = { ...ferramenta, statusF: ferramenta.statusF };
 
             if (editId) {
                 // Atualização
@@ -132,32 +128,13 @@ const CadastroFerramentas = () => {
                                 required
                             />
                         </div>
-                        <div className={styles.formGroup}>
+                        {/* <div className={styles.formGroup}>
                             <label>Status:</label>
-                            <label className={styles.radioLabel}>
-                                <input
-                                    type="radio"
-                                    className={styles.radio}
-                                    name="statusF"
-                                    value="true"
-                                    checked={ferramenta.statusF === true}
-                                    onChange={handleStatusChange}
-                                />
-                                Disponível
-                            </label>
-                            <label className={styles.radioLabel}>
-                                <input
-                                    type="radio"
-                                    className={styles.radio}
-                                    name="statusF"
-                                    value="false"
-                                    checked={ferramenta.statusF === false}
-                                    onChange={handleStatusChange}
-                                />
-                                Indisponível
-                            </label>
-                            <p>Status atual: {statusTexto}</p> {/* Aqui estamos exibindo o texto do status */}
-                        </div>
+                            <p>Status atual: {statusTexto}</p>
+                            <button type="button" onClick={handleStatusChange} className={styles.toggleStatusButton}>
+                                {ferramenta.statusF ? 'Tornar Indisponível' : 'Tornar Disponível'}
+                            </button>
+                        </div> */}
 
                         <button type="submit" className={`${styles.button} ${styles.submitButton}`}>
                             {editId ? 'Atualizar' : 'Cadastrar'}
