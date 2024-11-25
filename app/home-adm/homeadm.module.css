@@ -115,16 +115,9 @@
 }
 
 
-
-.img3 {
-  width: 40%; 
-  right: -15rem; 
-  bottom: 4rem;
-  position: absolute; 
-}
-
 .img1,
-.img2 {
+.img2,
+.img3 {
   width: 10rem;
   position: absolute; 
   z-index: 1; 
@@ -140,6 +133,12 @@
   top: 1rem;
   right: -15rem;
   width: 40%; 
+}
+
+.img3 {
+  width: 42%; 
+  right: -15rem; 
+  position: absolute; 
 }
 
 
