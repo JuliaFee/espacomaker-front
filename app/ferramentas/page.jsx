@@ -1,130 +1,150 @@
-"use client";
+'use client';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import styles from './reservaf.module.css';
+import Header from '../components/header/page';
+import Footer from '../components/footer/page';
+import PopUp from "@/app/components/popUp/PopUp";
+import { useRouter } from 'next/navigation';
 
-import { useEffect, useState } from "react";
-import axios from "axios";
-import Header from "../components/header/page";
-import Footer from "../components/footer/page";
-import style from "./pageferramentas.module.css"
-import { IoCaretBack } from "react-icons/io5";
-import { MdOutlineDelete } from "react-icons/md";
-import { FaRegEdit } from "react-icons/fa";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+const ReservaFerramentaForm = () => {
+    const router = useRouter();
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [popupMessage, setPopupMessage] = useState('');
+    const [popupTypeColor, setPopupTypeColor] = useState('');
+    const [ferramentas, setFerramentas] = useState([]);
+    const [horarios, setHorarios] = useState([]);
+    const [selectedFerramenta, setSelectedFerramenta] = useState("");
+    const [selectedHorario, setSelectedHorario] = useState("");
+    const [dataReserva, setDataReserva] = useState(new Date());
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-const Ferramentas = () => {
-  const [ferramentas, setFerramentas] = useState([]);
-  const [ferramentasFiltradas, setFerramentasFiltradas] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
+    useEffect(() => { 
+        const fetchFerramentas = async () => {
+            try {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas`);
+                console.log('Ferramentas:', response.data);
+                setFerramentas(response.data.ferramentas || []);
+            } catch (error) {
+                console.error("Erro ao buscar ferramentas:", error.response ? error.response.data : error.message);
+                setError("Erro ao carregar ferramentas.");
+            }
+        };
 
-  // Fetch ferramentas
-  useEffect(() => {
-    const fetchFerramentas = async () => {
-      try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas`);
-        if (response.data && Array.isArray(response.data.ferramentas)) {
-          setFerramentas(response.data.ferramentas);
-          setFerramentasFiltradas(response.data.ferramentas);
-        } else {
-          setError("Formato de dados inesperado!");
+        const fetchHorarios = async () => {
+            try {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/horarios`);
+                console.log('Horários:', response.data);
+
+                if (response.data && response.data.horarios) {
+                    setHorarios(response.data.horarios || []);
+                } else {
+                    setError("Formato de resposta de horários inválido.");
+                    console.error("Erro: Formato inválido da resposta de horários.");
+                }
+            } catch (error) {
+                console.error("Erro ao buscar horários:", error.response ? error.response.data : error.message);
+                setError("Erro ao carregar horários.");
+            }
+        };
+
+        const fetchData = async () => {
+            setLoading(true);
+            await Promise.all([fetchFerramentas(), fetchHorarios()]);
+            setLoading(false);
+        };
+
+        fetchData();
+    }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!selectedFerramenta || !selectedHorario) {
+            setError("Por favor, selecione uma ferramenta e um horário.");
+            return;
         }
-      } catch (error) {
-        setError("Erro ao carregar os dados. Verifique o backend.");
-      } finally {
-        setLoading(false);
-      }
+
+        try {
+            const reservaResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/reserva-ferramenta`, {
+                id_user: 1, // Ajustar para o ID real do usuário
+                id_ferramenta: selectedFerramenta,
+                id_horario: selectedHorario,
+                data_reserva: dataReserva.toISOString().split('T')[0],
+                status_reserva: true,
+            });
+
+            setError(null);
+            setPopupMessage("Sua reserva foi realizada com sucesso!");
+            setPopupTypeColor('sucesso');
+            setIsPopupOpen(true);
+
+            setTimeout(() => {
+                setIsPopupOpen(false);
+                router.push('reserva-ferramentas/reservaf-lista');
+            }, 3000);
+            console.log("Reserva realizada:", reservaResponse.data);
+
+        } catch (error) {
+            const errorMessage = error.response?.data?.message || error.message || "Erro desconhecido.";
+            console.error("Erro ao realizar reserva:", errorMessage);
+            setError("Erro ao realizar reserva: " + errorMessage);
+
+            setPopupMessage("Houve um erro ao realizar sua reserva.");
+            setPopupTypeColor('erro');
+            setIsPopupOpen(true);
+
+            setTimeout(() => {
+                setIsPopupOpen(false);
+            }, 3000);
+        }
     };
-    fetchFerramentas();
-  }, []);
 
-  // Delete ferramenta
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas/${id}`);
-      setFerramentas(ferramentas.filter((ferramenta) => ferramenta.id !== id));
-      setFerramentasFiltradas(ferramentasFiltradas.filter((ferramenta) => ferramenta.id !== id));
-    } catch (error) {
-      setError("Erro ao excluir a ferramenta. Tente novamente.");
+    if (loading) {
+        return <div>Carregando...</div>;
     }
-  };
 
-  // Edit ferramenta
-  const handleEdit = (id) => {
-    router.push(`/ferramentas/cadastro-ferramentas?id=${id}`);
-  };
+    return (
+        <div className={styles.page}>
+            <Header />
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <h2 className={styles.titleh2}>Reserva de Ferramenta</h2>
+                {error && <div style={{ color: 'red' }}>{error}</div>}
 
-  // Toggle status ferramenta
-  const handleToggleStatus = async (id, currentStatus) => {
-    try {
-      const newStatus = !currentStatus; // Alterna o status
-      await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas/${id}`, {
-        statusF: newStatus,
-      });
+                <select onChange={(e) => setSelectedFerramenta(e.target.value)} value={selectedFerramenta} className={styles.select}>
+                    <option value="">Selecionar Ferramenta</option>
+                    {ferramentas.map((ferramenta) => (
+                        <option key={ferramenta.id} value={ferramenta.id}>
+                            {ferramenta.nome}
+                        </option>
+                    ))}
+                </select>
 
-      // Atualiza a lista local de ferramentas
-      setFerramentas((prevFerramentas) =>
-        prevFerramentas.map((ferramenta) =>
-          ferramenta.id === id ? { ...ferramenta, statusF: newStatus } : ferramenta
-        )
-      );
-      setFerramentasFiltradas((prevFerramentasFiltradas) =>
-        prevFerramentasFiltradas.map((ferramenta) =>
-          ferramenta.id === id ? { ...ferramenta, statusF: newStatus } : ferramenta
-        )
-      );
-    } catch (error) {
-      setError("Erro ao alterar o status. Tente novamente.");
-    }
-  };
+                <select onChange={(e) => setSelectedHorario(e.target.value)} value={selectedHorario} className={styles.select}>
+                    <option value="">Selecionar Horário</option>
+                    {horarios.map((horario) => (
+                        <option key={horario.id} value={horario.id}>
+                            {horario.hora_inicio} - {horario.hora_fim}
+                        </option>
+                    ))}
+                </select>
 
-  return (
-    <div className={style.pageContainer}>
-      <Header />
-      <div className={style.mainContent}>
-        <div className={style.headerList}>
-          <Link href="/ferramentas/cadastro-ferramentas" className={style.addFerramentaButton}>
-            Adicionar ferramenta
-          </Link>
+                <div className={styles.calendarContainer}>
+                    <label htmlFor="data" className={styles.label}>Selecionar data:</label>
+                    <Calendar onChange={setDataReserva} value={dataReserva} className={styles.calendar} />
+                </div>
+
+                <button type="submit" className={styles.button}>Realizar Reserva</button>
+            </form>
+
+            {isPopupOpen && <PopUp message={popupMessage} typeColor={popupTypeColor} onClose={() => setIsPopupOpen(false)} />}
+
+            <Footer />
         </div>
-
-        {error && <p className={style.errorMessage}>{error}</p>}
-
-        {loading ? (
-          <p>Carregando...</p>
-        ) : (
-          <div className={style.ferramentasList}>
-            {ferramentasFiltradas.map((ferramenta) => (
-              <div key={ferramenta.id} className={style.ferramentaItem}>
-                <img src={ferramenta.img} alt={ferramenta.nome} className={style.ferramentaImg} />
-                <div className={style.ferramentaDetails}>
-                  <p className={style.ferramentaName}>{ferramenta.nome}</p>
-                  <p>{ferramenta.descricao}</p>
-                  <p>Status: {ferramenta.statusF ? "Disponível" : "Indisponível"}</p>
-                </div>
-                <div className={style.actions}>
-                  <button onClick={() => handleEdit(ferramenta.id)} className={style.editButton}>
-                    <FaRegEdit />
-                  </button>
-                  <button onClick={() => handleDelete(ferramenta.id)} className={style.deleteButton}>
-                    <MdOutlineDelete />
-                  </button>
-                  <button
-                    onClick={() => handleToggleStatus(ferramenta.id, ferramenta.statusF)}
-                    className={style.toggleStatusButton}
-                  >
-                    {ferramenta.statusF ? "Tornar Indisponível" : "Tornar Disponível"}
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-      <Footer />
-    </div>
-  );
+    );
 };
 
-export default Ferramentas;
+export default ReservaFerramentaForm;

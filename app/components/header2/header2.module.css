@@ -5,6 +5,7 @@
     background-image: linear-gradient(to right, #2365b1, #328bf1);
     height: 130px;
     width: 100%;
+    border: none;
 }
 
 .nav p {
