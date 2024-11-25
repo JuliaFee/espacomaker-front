@@ -16,7 +16,8 @@
 
 .imagecontainer {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 40px;
+  margin-left: 80px;
 }
 
 .imgBanner {
@@ -59,10 +60,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4rem;
+  margin-right: 150px;
+  gap: 5rem;
   padding: 70px 0;
   position: relative;
-  width: 40%;
+  width: 60%;
 }
 
 
@@ -74,18 +76,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 65%;
+  width: 70%;
   color: #2E83E3;
   text-align: center;
   border-radius: 20px;
   text-decoration: none;
   font-size: 5rem;
+  margin-left: 50px;
   font-family: "Chau Philomene One";
   position: relative;
 
 }
 
-
+.link2:hover {
+  background-color: rgba(46, 131, 227, 0.8); 
+  transform: scale(1.05); 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+}
 
 .link2 {
   display: flex;
@@ -107,44 +114,29 @@
   margin-left: 10%;
 }
 
-.link:hover {
-  background-color: #2E83E3;
-}
+
+
+
 
 .img1,
 .img2 {
-  width: 20rem;
-  position: absolute;
-  z-index: 2;
+  width: 10rem;
+  position: absolute; 
+  z-index: 1; 
 }
 
 .img1 {
-  width: 28%;
-  right: -3rem;
+  width: 40%; 
+  right: -15rem; 
   bottom: 1rem;
-
 }
 
 .img2 {
   top: 1rem;
-  right: -4rem;
-  width: 28%;
+  right: -15rem;
+  width: 40%; 
 }
 
-.img3 {
-  top: -5rem;
-  right: -5rem;
-}
-
-.reserva-content {
-  position: relative;
-  margin-bottom: 6rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 67%;
-
-}
 
 .brick {
   display: flex;

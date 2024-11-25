@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../components/header/page";
 import Footer from "../components/footer/page";
-import style from "./pageferramentas.module.css";
+import styles from "./pageferramentas.module.css";
 import { IoCaretBack } from "react-icons/io5";
 import { MdOutlineDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
@@ -74,56 +74,56 @@ const Ferramentas = () => {
 
   // Render
   return (
-    <div className={style.body}>
+    <div className={styles.body}>
       <Header />
-      <Link href={"../"} className={style.back}>
-        <IoCaretBack />
-      </Link>
-      <h1 className={style.h1}>Ferramentas Disponíveis</h1>
+      
+      <h1 className={styles.h1}>Ferramentas Disponíveis</h1>
 
-      <div className={style.search}>
+      <div className={styles.search}>
         <input
           type="text"
           value={searchTerm}
           onChange={handleSearch}
           placeholder="Busque aqui..."
-          className={style.searchInput}
+          className={styles.searchInput}
         />
       </div>
 
       {loading ? (
-        <p className={style.loading}>Carregando...</p>
+        <p className={styles.loading}>Carregando...</p>
       ) : (
         <>
-          {error && <p className={style.error}>{error}</p>}
-          <ul className={style.container}>
+          {error && <p className={styles.error}>{error}</p>}
+          <ul className={styles.container}>
             {ferramentasFiltradas.length > 0 ? (
               ferramentasFiltradas.map((ferramenta) => {
                 return (
-                  <li key={ferramenta.id} className={style.card}>
+                  <li key={ferramenta.id} className={styles.card}>
                     <img
                       src={ferramenta.img}
                       alt={ferramenta.nome}
-                      className={style.imagem}
+                      className={styles.imagem}
                     />
-                    <h2 className={style.subtitle}>{ferramenta.nome}</h2>
+                    <h2 className={styles.subtitle}>{ferramenta.nome}</h2>
                     <p>{ferramenta.descricao}</p>
                     <p
                       className={
-                        ferramenta.statusF ? style.available : style.unavailable
+                        ferramenta.statusF ? styles.available : styles.unavailable
                       }
                     >
-                      {ferramenta.statusF ? "Disponível" : "Indisponível"}
+                      <p className={styles.status}>
+                        {ferramenta.statusF ? "Disponível" : "Indisponível"}
+                      </p>
                     </p>
                     <button
                       onClick={() => handleEdit(ferramenta.id)}
-                      className={style.editButton}
+                      className={styles.editButton}
                     >
                       <FaRegEdit />
                     </button>
                     <button
                       onClick={() => handleDelete(ferramenta.id)}
-                      className={style.deleteButton}
+                      className={styles.deleteButton}
                     >
                       <MdOutlineDelete />
                     </button>

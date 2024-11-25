@@ -107,7 +107,7 @@ useEffect(() => {
                 <li key={ferramenta.id} className={style.card}>
                   <img src={ferramenta.img} alt={ferramenta.nome} className={style.imagem} />
                   <h2 className={style.subtitle}>{ferramenta.nome}</h2>
-                  <p>{ferramenta.descricao}</p>
+                  <p className={style.description}>{ferramenta.descricao}</p>
                   {/* <button onClick={() => handleEdit(ferramenta.id)} className={style.editButton}><FaRegEdit /></button>
                   <button onClick={() => handleDelete(ferramenta.id)} className={style.deleteButton}><MdOutlineDelete /></button> */}
                    <a href={`../../reserva-ferramentas`} className={style.agendarButton}>
