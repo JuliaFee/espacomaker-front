@@ -13,25 +13,11 @@ import Loading from "../components/loading/page";
 
 const Impressora = () => {
   const [impressoras, setImpressoras] = useState([]);
-  const [deviceType, setDeviceType] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  const getDeviceType = () => {
-    const userAgent = navigator.userAgent;
-    return /android/i.test(userAgent) || (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) ? "Mobile" : "Desktop";
-  };
-
-  useEffect(() => {
-    const deviceType = getDeviceType();
-    document.body.classList.add(deviceType);
-    setDeviceType(deviceType);
-    return () => {
-      document.body.classList.remove(deviceType);
-    };
-  }, []);
-
+  // Buscar impressoras no backend (aqui ainda vai buscar do backend, mas sem modificar nada no backend)
   useEffect(() => {
     const fetchImpressoras = async () => {
       try {
@@ -52,15 +38,26 @@ const Impressora = () => {
     fetchImpressoras();
   }, []);
 
-  const handleDelete = async (id) =>{
-    try  {
+  // Alterar status de impressora no front-end (somente no estado local)
+  const handleToggleStatus = (id) => {
+    setImpressoras(impressoras.map((impressora) =>
+      impressora.id === id
+        ? { ...impressora, statusF: !impressora.statusF }
+        : impressora
+    ));
+  };
+
+  // Excluir impressora
+  const handleDelete = async (id) => {
+    try {
       await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/impressora/${id}`);
       setImpressoras(impressoras.filter((impressora) => impressora.id !== id));
     } catch (error) {
-      setError("erro ao excluir a impressora, tente novamente");
+      setError("Erro ao excluir a impressora, tente novamente.");
     }
   };
 
+  // Editar impressora
   const handleEdit = (id) => {
     router.push(`/impressora/cadastro-impressora?id=${id}`);
   };
@@ -70,9 +67,6 @@ const Impressora = () => {
       <Header />
       <Link href="../" className={style.back}> <IoCaretBack /> </Link>
       <h1 className={style.h1}>Impressoras Disponíveis</h1>
-      {/* <h3 className={style.h3}>Tipo de dispositivo: {deviceType}</h3> */}
-      {/* <h1>Impressoras Disponíveis</h1> */}
-      {/* <h3>{deviceType}</h3> */}
       {loading ? (
         <div><Loading/></div>
       ) : (
@@ -87,6 +81,25 @@ const Impressora = () => {
                   <p>{impressora.descricao}</p>
                   <p>{impressora.filamento}</p>
                   
+                  {/* Exibir status e botão para alterar */}
+                  <p
+                    className={
+                      impressora.statusF
+                        ? style.available
+                        : style.unavailable
+                    }
+                  >
+                    {impressora.statusF ? "Disponível" : "Indisponível"}
+                  </p>
+                  <button
+                    onClick={() => handleToggleStatus(impressora.id)}
+                    className={style.statusButton}
+                  >
+                    {impressora.statusF
+                      ? "Tornar Indisponível"
+                      : "Tornar Disponível"}
+                  </button>
+
                   <button onClick={() => handleEdit(impressora.id)} className={style.editButton}>
                     <FaRegEdit />
                   </button>

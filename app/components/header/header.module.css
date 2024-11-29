@@ -6,7 +6,9 @@
     padding: 30px;
     height: 130px;
     margin: 0;
-    width: 98%;
+    width: 100%; /* Altera de 98% para 100% para garantir que ocupe toda a largura da tela */
+    box-sizing: border-box; /* Garante que o padding e a borda sejam incluídos na largura */
+    overflow: hidden; /* Impede que o conteúdo vaze */
 }
 
 .nav p {
@@ -14,7 +16,6 @@
     font-weight: bold;
     margin: 0;
 }
-
 
 .tools {
     display: flex;
@@ -30,5 +31,5 @@
 }
 
 .icon:hover {
-    color: #E6AC47; 
+    color: #E6AC47;
 }

@@ -11,6 +11,7 @@
   background-position: center center; 
   background-repeat: no-repeat; 
   border: none;
+  overflow-x: hidden; /* Impede que a página vaze horizontalmente */
 }
 .h1 {
   color: #1f3c71;
@@ -117,7 +118,7 @@
 
 
 
-.link2 {
+/* .link2 {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,6 +127,49 @@
   background-color: #2E83E3;
   color: white;
   padding: 60px;
+  text-align: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 50px;
+  font-family: "Chau Philomene One";
+  position: relative;
+  margin-bottom: 5%;
+  margin-top: 2%;
+  margin-left: 10%;
+} */
+
+/* .link22 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35rem;
+  max-width: 100%;
+  background-color: #2E83E3;
+  color: white;
+  padding: 60px;
+  text-align: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 50px;
+  font-family: "Chau Philomene One";
+  position: relative;
+  margin-bottom: 5%;
+  margin-top: 2%;
+  margin-left: 10%;
+} */
+.link2, .link22 {
+  width: 100%; /* Garante que o botão ocupe 100% da largura disponível */
+  max-width: 35rem; /* Impede que o botão ultrapasse um tamanho fixo */
+  margin: 2% auto; /* Centraliza o botão e aplica uma margem razoável */
+  padding: 20px; /* Ajuste o padding para evitar grandes espaços */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28rem;
+  max-width: 100%;
+  background-color: #2E83E3;
+  color: white;
+padding: 60px;
   text-align: center;
   border-radius: 20px;
   text-decoration: none;
@@ -137,25 +181,6 @@
   margin-left: 10%;
 }
 
-.link22 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 35rem;
-  max-width: 100%;
-  background-color: #2E83E3;
-  color: white;
-  padding: 60px;
-  text-align: center;
-  border-radius: 20px;
-  text-decoration: none;
-  font-size: 50px;
-  font-family: "Chau Philomene One";
-  position: relative;
-  margin-bottom: 5%;
-  margin-top: 2%;
-  margin-left: 10%;
-}
 
 .link:hover {
   background-color: #2E83E3;

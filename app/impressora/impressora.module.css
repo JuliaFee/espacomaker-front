@@ -44,6 +44,8 @@
   margin: 0;
   padding: 0;
   color: white;
+  align-items: center;
+  text-align: center;
 }
 
 .card:hover {
@@ -70,7 +72,31 @@
   object-fit: cover;
   background-color: #ececec;
 }
+.statusButton {
+  display: block; /* O botão estará em uma linha própria */
+  margin: 15px auto; /* Centraliza horizontalmente */
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
+/* Cor Dinâmica com base nos Cards */
+.card:nth-child(odd) .statusButton {
+  background-color: #f89c00; /* Botão laranja para cards azuis */
+}
+
+.card:nth-child(even) .statusButton {
+  background-color: #3578e5; /* Botão azul para cards laranja */
+}
+
+.statusButton:hover {
+  opacity: 0.9; /* Efeito ao passar o mouse */
+}
 .error {
   color: red;
   font-weight: bold;
@@ -92,11 +118,12 @@
   background: none;
   border-radius: 5px;
   transition: color 0.3s ease;
-  font-size: 24px;
+  font-size: 34px;
   align-items: center;
   justify-content: center;
-  margin-right: 50px;
-  margin-left: 50px;
+  margin-right: 30px;
+  margin-left: 30px;
+
 }
 
 .editButton {

@@ -12,17 +12,16 @@
   margin: 20px 0;
   font-size: 45px;
   margin-bottom: 40px;
-margin-top: 5%;
- 
+  margin-top: 5%;
 }
+
 .h2 {
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  text-align: center; 
-  margin: 0; 
-  padding: 10px; 
- 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  padding: 10px;
 }
 
 .h3 {
@@ -51,7 +50,10 @@ margin-top: 5%;
   cursor: pointer;
   margin: 0;
   padding: 0;
-  color: white; 
+  color: white;
+
+ align-items: center;
+ text-align: center;
 }
 
 .card:hover {
@@ -59,18 +61,18 @@ margin-top: 5%;
 }
 
 .card:nth-child(odd) {
-  background-color: #3578e5; 
+  background-color: #3578e5; /* Azul */
 }
 
 .card:nth-child(even) {
-  background-color: #f89c00; 
+  background-color: #f89c00; /* Laranja */
 }
 
-.card h2, .card p {
+.card h2,
+.card p {
   margin: 0;
   padding: 10px;
   font-size: 18px;
-  
 }
 
 .title {
@@ -86,128 +88,113 @@ margin-top: 5%;
   background-color: #ececec;
 }
 
-.status {
-  color: #fff;
-  text-align: center;
-
+/* Grupo de Ícones */
+.iconGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px; /* Espaçamento entre os ícones */
+  margin-top: 20px;
 }
 
-@media (max-width: 768px) {
-  .container {
-      flex-direction: column;
-      align-items: center;
-  }
-
-  .card {
-      width: 90%;
-  }
-}
-
-.error {
-  color: red;
-  font-weight: bold;
-  text-align: center;
-  margin: 20px;
-}
-
-.loading {
-  text-align: center;
+/* Botão de Status */
+.statusButton {
+  display: block; /* O botão estará em uma linha própria */
+  margin: 15px auto; /* Centraliza horizontalmente */
+  padding: 10px 20px;
   font-size: 18px;
-  color: #888;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
+
+/* Cor Dinâmica com base nos Cards */
+.card:nth-child(odd) .statusButton {
+  background-color: #f89c00; /* Botão laranja para cards azuis */
+}
+
+.card:nth-child(even) .statusButton {
+  background-color: #3578e5; /* Botão azul para cards laranja */
+}
+
+.statusButton:hover {
+  opacity: 0.9; /* Efeito ao passar o mouse */
+}
+
+/* Botões de Ação */
 
 .editButton, .deleteButton {
   margin: 10px;
   padding: 10px;
   border: none;
   cursor: pointer;
-  background: none; 
+  background: none;
   border-radius: 5px;
-  transition: color 0.3s ease; 
-  font-size: 24px; 
- align-items: center;
+  transition: color 0.3s ease;
+  font-size: 34px;
+  align-items: center;
   justify-content: center;
-  margin-right: 70px;
-  margin-left: 70px;
-}
+  margin-right: 30px;
+  margin-left: 30px;
+  color: white;
 
-.editButton {
-  color: white; 
 }
 
 .editButton:hover {
   color: green;
 }
 
-.deleteButton {
-  color: white; 
-}
 
 .deleteButton:hover {
-  color: rgb(217, 17, 17); 
+  color: red;
 }
 
-.back {
-  color: #124B8D;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  font-size: 64px;
-  top: 15%;
-  left: 5%; 
-}
-.back:hover {
-  color: #2E83E3;
-}
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-.subtitle{
-  color: #fff;
-  text-align: center;
+  .card {
+    width: 90%;
+  }
 }
 
 .searchInput {
-  width: 20%; 
-  height: 50px; 
-  padding: 0 20px; 
-  font-size: 18px; 
-  border-radius: 10px; 
-  border: 2px solid #3578e5; 
-  outline: none; 
-  background-color: #f5f5f5; 
-  color: #333; 
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-  transition: all 0.3s ease; 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  width: 20%;
+  height: 50px;
+  padding: 0 20px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: 2px solid #3578e5;
+  outline: none;
+  background-color: #f5f5f5;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
 
 .searchInput:focus {
-  border-color: #3578e5; 
-  background-color: #fff; 
-  box-shadow: 0 0 10px rgba(53, 120, 229, 0.4); 
+  border-color: #3578e5;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(53, 120, 229, 0.4);
 }
 
 .searchInput::placeholder {
-  color: #aaa; 
+  color: #aaa;
   text-align: center;
-  font-style: italic; 
-  transition: color 0.3s ease; 
+  font-style: italic;
+  transition: color 0.3s ease;
 }
 
 .searchInput:focus::placeholder {
-  color: #3578e5; 
-  
-}
-
-.searchInput::-webkit-input-placeholder {
-  color: #aaa; 
-}
-
-.searchInput::-moz-placeholder {
-  color: #aaa; 
-}
-
-.searchInput:-ms-input-placeholder {
-  color: #aaa; 
+  color: #3578e5;
 }
 
 .searchInput + svg {
@@ -215,7 +202,7 @@ margin-top: 5%;
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  color: #3578e5; 
+  color: #3578e5;
   font-size: 24px;
   transition: color 0.3s ease;
 }
@@ -225,12 +212,10 @@ margin-top: 5%;
 }
 
 .search {
-  position: relative; 
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
   margin-top: 20px;
 }
-
-
