@@ -6,7 +6,9 @@
     padding: 10px 30px;
     height: 130px;
     margin: 0;
-    width: 98%;
+    width: 100%; /* Corrigido para 100% para garantir que ocupe toda a largura da tela */
+    box-sizing: border-box; /* Inclui o padding na largura total */
+    overflow: hidden; /* Impede que qualquer conteúdo vaze */
 }
 
 .nav p {

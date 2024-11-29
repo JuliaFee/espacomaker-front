@@ -1,4 +1,4 @@
-"use client";  // Adicione esta linha no topo
+"use client"; 
 
 import React, { useState, useEffect } from 'react';
 import styles from './cadastroferramentas.module.css';
@@ -28,8 +28,8 @@ const CadastroFerramentas = () => {
             const fetchFerramenta = async () => {
                 try {
                     const response = await axios.get(`http://localhost:5000/ferramentas/${editId}`);
-                    const { nome, descricao, img, statusF } = response.data.ferramenta;
-                    setFerramenta({ nome, descricao, img, statusF });
+                    const { nome, descricao, img } = response.data.ferramenta; // Status ignorado
+                    setFerramenta({ nome, descricao, img, statusF: true });
                 } catch (error) {
                     console.error('Erro ao carregar os dados da ferramenta:', error.response?.data || error.message);
                     setPopupMessage('Erro ao carregar os dados da ferramenta.');
@@ -41,48 +41,42 @@ const CadastroFerramentas = () => {
         }
     }, [editId]);
 
-    // Atualizar status da ferramenta
+    // Alternar status no front-end
     const handleStatusChange = () => {
         setFerramenta((prev) => ({
             ...prev,
-            statusF: !prev.statusF,  // Alterna entre disponível e indisponível
+            statusF: !prev.statusF,
         }));
     };
 
-    // Exibir o status corretamente
     const statusTexto = ferramenta.statusF ? "Disponível" : "Indisponível";
 
-    // Salvar ou atualizar ferramenta
     const updateFerramenta = async (e) => {
         e.preventDefault();
 
         try {
-            const data = { ...ferramenta, statusF: ferramenta.statusF };
+            const data = { ...ferramenta };
 
             if (editId) {
-                // Atualização
                 await axios.put(`http://localhost:5000/ferramentas/${editId}`, data);
                 setPopupMessage('Ferramenta atualizada com sucesso!');
                 setPopupTypeColor('sucesso');
             } else {
-                // Criação
                 await axios.post("http://localhost:5000/ferramentas", data);
                 setPopupMessage('Ferramenta cadastrada com sucesso!');
                 setPopupTypeColor('sucesso');
             }
 
-            setFerramenta({ nome: '', descricao: '', img: '', statusF: true }); // Reset após operação
+            setFerramenta({ nome: '', descricao: '', img: '', statusF: true });
             setIsPopupOpen(true);
 
-            // Redirecionar após 3 segundos
             setTimeout(() => {
                 setIsPopupOpen(false);
                 router.push("/ferramentas");
             }, 3000);
         } catch (error) {
             console.error('Erro ao realizar a operação:', error.response?.data || error.message);
-            const mensagemErro = error.response?.data?.message || 'Erro ao realizar a operação. Tente novamente.';
-            setPopupMessage(mensagemErro);
+            setPopupMessage('Erro ao realizar a operação. Tente novamente.');
             setPopupTypeColor('erro');
             setIsPopupOpen(true);
         }
@@ -128,14 +122,17 @@ const CadastroFerramentas = () => {
                                 required
                             />
                         </div>
-                        {/* <div className={styles.formGroup}>
+                        <div className={styles.formGroup}>
                             <label>Status:</label>
-                            <p>Status atual: {statusTexto}</p>
-                            <button type="button" onClick={handleStatusChange} className={styles.toggleStatusButton}>
+                            <p>Status atual: <strong>{statusTexto}</strong></p>
+                            <button
+                                type="button"
+                                onClick={handleStatusChange}
+                                className={`${styles.button} ${styles.statusButton}`}
+                            >
                                 {ferramenta.statusF ? 'Tornar Indisponível' : 'Tornar Disponível'}
                             </button>
-                        </div> */}
-
+                        </div>
                         <button type="submit" className={`${styles.button} ${styles.submitButton}`}>
                             {editId ? 'Atualizar' : 'Cadastrar'}
                         </button>
