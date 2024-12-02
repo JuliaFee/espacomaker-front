@@ -11,6 +11,7 @@ import { LuCalendarDays } from "react-icons/lu";
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
+import Loading from "@/app/components/loading/page";
 
 const Ferramentas_client = () => {
   const [ferramentas, setFerramentas] = useState([]);
@@ -33,7 +34,7 @@ const Ferramentas_client = () => {
           setError("Formato de dados inesperado!");
         }
       } catch (error) {
-        setError("Erro interno do servidor!");
+        setError();
       } finally {
         setLoading(false);
       }
@@ -81,7 +82,7 @@ useEffect(() => {
    // { user.tipo === 'adm' ? (/* rogerio ou outro adm q tem acesso as coisa */) : (/*tudo nada*/) };
     <div className={style.body}>
       <Header_client />
-      <Link href={"../"} className={style.back}><IoCaretBack /></Link>
+      {/* <Link href={"../"} className={style.back}><IoCaretBack /></Link> */}
       <h1 className={style.h1}>Ferramentas Disponíveis</h1>
       
       <div className={style.search}>
@@ -97,7 +98,7 @@ useEffect(() => {
       
 
       {loading ? (
-        <p className={style.loading}>Carregando...</p>
+        <p className={style.loading}><Loading/></p>
       ) : (
         <>
           {error && <p className={style.error}>{error}</p>}
