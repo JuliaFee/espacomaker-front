@@ -45,3 +45,16 @@
 .icon:hover {
     color: #E6AC47; 
 }
+@media screen and (max-width: 768px) {
+    .icon 
+    {
+        color: white;
+        font-size: 25px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+    .logo{
+        max-width: 200px;
+        margin-right: 10px;
+    }
+}
