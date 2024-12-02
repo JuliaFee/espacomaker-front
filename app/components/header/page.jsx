@@ -14,7 +14,7 @@ const Header = () => {
                 <a href="/ferramentas"><VscTools className={styles.icon}/></a>
                 <a href="/impressora"><HiOutlinePrinter className={styles.icon}/></a> 
                 <a href="/login"><IoPersonOutline className={styles.icon}/></a> 
-                <a href="/reserva"><LuCalendarDays className={styles.icon}/></a> 
+                {/* <a href="/reserva"><LuCalendarDays className={styles.icon}/></a>  */}
 
               
             </div>

@@ -23,12 +23,12 @@ export default function Home_client() {
         <div className={styles.linkSection}>
 
           <div className="reservaContent">
-            <Link className={styles.link2} href={"./reserva"}>REALIZAR RESERVA</Link>
+            <Link className={styles.link2} href={"./reserva-ferramentas"}>RESERVAR FERRAMENTAS</Link>
             <img className={styles.img1} src="controlar_andamentos.png" alt="Ferramentas" />
           </div>
 
           <div className="reservaContent">
-            <Link className={styles.link2} href={"./andamento"}>ACOMPANHAR ANDAMENTO</Link>
+            <Link className={styles.link2} href={"./andamento"}>RESERVAR IMPRESSORA</Link>
             <img className={styles.img2} src="reserva.png" alt="Ferramentas" />
           </div>
         

@@ -14,7 +14,7 @@ const Header_client = () => {
                 <a href="/ferramentas/ferramentas-client"><VscTools className={styles.icon}/></a>
                 <a href="/impressora/impressora-client"><HiOutlinePrinter className={styles.icon}/></a> 
                 <a href="/login"><IoPersonOutline className={styles.icon}/></a> 
-                <a href="/reserva"><LuCalendarDays className={styles.icon}/></a> 
+                {/* <a href="/reserva"><LuCalendarDays className={styles.icon}/></a>  */}
 
               
             </div>
