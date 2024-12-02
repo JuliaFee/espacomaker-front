@@ -6,6 +6,7 @@ import 'react-calendar/dist/Calendar.css';
 import styles from './reservai.module.css';
 import Header from '../components/header/page';
 import Footer from '../components/footer/page';
+import PopUp from "@/app/components/popUp/PopUp";
 
 const ImpressoraForm = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -31,6 +32,7 @@ const ImpressoraForm = () => {
         };
         fetchImpressoras();
     }, []);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -87,8 +89,14 @@ const ImpressoraForm = () => {
             <Header />
             <form onSubmit={handleSubmit} className={styles.form}>
                 <h2 className={styles.titleh2}>Reserva de Impressora</h2>
+          
+          {/* Mensagem de erro ou sucesso */}
+          {(error || popupMessage) && (
+                    <div className={`${styles.message} ${popupTypeColor === 'sucesso' ? styles.success : styles.error}`}>
+                        {error || popupMessage}
+                    </div>
+                )}
 
-                {/* Dropdown de seleção de impressoras */}
                 <select
                     onChange={handleImpressoraChange}
                     value={selectedImpressora}
@@ -101,16 +109,14 @@ const ImpressoraForm = () => {
                         </option>
                     ))}
                 </select>
-
-                {/* Calendário e data */}
                 <div className={styles.calebox}>
                     <label htmlFor="data" className={styles.labelcale}>Selecionar data:</label>
                     <Calendar onChange={setDataReserva} value={dataReserva} className={styles.reactCalendar} />
                 </div>
-
-                {/* Botão */}
                 <button type="submit" className={styles.button}>Realizar Reserva</button>
             </form>
+
+          
             <Footer />
         </div>
     );
