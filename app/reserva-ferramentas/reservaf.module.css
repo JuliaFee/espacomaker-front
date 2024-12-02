@@ -24,6 +24,25 @@
     font-family: 'Chau Philomene One', sans-serif;
 }
 
+.message {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0; /* Remove o preenchimento */
+    font-family: 'Chau Philomene One', sans-serif;
+    font-size: 1rem;
+    background: none; /* Remove a cor de fundo */
+    border: none; /* Remove a borda */
+}
+
+.success {
+    color: #28a745; /* Texto verde para sucesso */
+}
+
+.error {
+    color: red; /* Texto vermelho para erro */
+}
+
+
 .select {
     width: 100%;
     padding: 10px;
@@ -32,35 +51,16 @@
     border-radius: 4px;
     font-size: 16px;
     background-color: #fff;
-    /* Fundo branco para o select */
     color: #333;
-    /* Cor do texto em um tom escuro */
     cursor: pointer;
     font-family: 'Chau Philomene One', sans-serif;
 }
 
-.select option {
-    color: #333;
-    /* Garante que o texto das opções seja escuro */
-    background-color: #fff;
-    /* Garante que o fundo das opções seja branco */
-}
-
-/* Selecione o horário e ferramenta */
 .select:focus {
     outline: none;
     border-color: #FFAD23;
-    /* Destaca a borda quando selecionado */
 }
 
-/* Estilizando a mensagem de erro */
-.error {
-    color: red;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Estilos para o botão */
 .button {
     background-color: #FFAD23;
     color: white;
@@ -79,56 +79,12 @@
     background-color: #45a049;
 }
 
-
-/* Estilos do calendário */
 .calendarContainer {
     margin-bottom: 20px;
-    margin: 0;
     text-align: center;
-}
-
-.react-calendar__navigation button {
-    background: none;
-    border: none;
-    color: #FFAD23; 
-    font-size: 1em;
-    cursor: pointer;
-    font-family:  'Chau Philomene One', sans-serif;
-  }
-
-.label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-    font-family: 'Chau Philomene One', sans-serif;
-    font-size: 1.2rem;
 }
 
 .calendar {
     width: 100%;
     margin-top: 10px;
-    margin-left: 4.8rem;
-}
-
-/* Popup styles */
-.popUp {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    text-align: center;
-}
-
-.sucesso {
-    color: green;
-}
-
-.erro {
-    color: red;
 }
