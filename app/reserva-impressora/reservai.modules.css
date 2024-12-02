@@ -8,6 +8,7 @@
   background-color: #f9f9f9;
   min-height: 100vh;
   padding: 2rem;
+  font-family: Arial, sans-serif;
 }
 
 .form {
@@ -48,7 +49,7 @@
 }
 
 /* Select Input Styles */
-.selectImpressora {
+.selectImpressora, .selectFerramenta {
   width: 40%;
   padding: 0.5rem;
   margin: 1rem 0;
@@ -147,7 +148,7 @@
     width: 90%;
   }
 
-  .selectImpressora, .calendar, .button {
+  .selectImpressora, .selectFerramenta, .calendar, .button {
     font-size: 1.4rem;
   }
 

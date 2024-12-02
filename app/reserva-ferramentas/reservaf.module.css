@@ -54,12 +54,14 @@
     color: #333;
     cursor: pointer;
     font-family: 'Chau Philomene One', sans-serif;
+    text-align: center;
 }
 
 .select:focus {
     outline: none;
     border-color: #FFAD23;
 }
+
 
 .button {
     background-color: #FFAD23;
@@ -73,10 +75,53 @@
     font-family: 'Chau Philomene One', sans-serif;
     margin-top: 1rem;
     transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+    line-height: 3rem;
 }
 
-.button:hover {
-    background-color: #45a049;
+
+
+.calendarContainer label {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    font-family: 'Chau Philomene One', sans-serif;
+    color: #333;
+}
+
+.calendar {
+    width: 100%; /* Ajusta a largura */
+    max-width: 400px; /* Define um limite máximo para o tamanho */
+}
+
+.react-calendar__navigation button {
+    background: none;
+    border: none;
+    color: #FFAD23;
+    font-size: 1em;
+    cursor: pointer;
+    font-family: 'Chau Philomene One', sans-serif;
+}
+
+.popUp {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+}
+
+.sucesso {
+    color: green;
+}
+
+.erro {
+    color: red;
 }
 
 .calendarContainer {
@@ -88,3 +133,4 @@
     width: 100%;
     margin-top: 10px;
 }
+
