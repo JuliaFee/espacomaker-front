@@ -48,4 +48,3 @@ export default function Home_adm() {
     
   );
 }
-

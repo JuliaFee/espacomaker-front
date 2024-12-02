@@ -151,3 +151,266 @@
   margin-bottom: 4%;
   margin-top: 2%;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap');
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+}
+
+.imagecontainer {
+  width: 100%;
+  margin-top: 40px;
+  margin-left: 80px;
+}
+
+.imgBanner {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  align-items: center;
+  margin-left: 0;
+  margin-right: 17%;
+  margin-bottom: 0;
+  margin-top: 5%;
+}
+
+.section1 {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 67%;
+  color: #2E83E3;
+  text-align: center;
+  font-size: 50px;
+  font-family: "Chau Philomene One";
+  max-width: 100%;
+  border-radius: 20px;
+  align-items: center;
+  margin-top: 5%;
+  margin-left: 1rem;
+}
+
+.linkSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 150px;
+  gap: 5rem;
+  padding: 70px 0;
+  position: relative;
+  width: 60%;
+}
+
+.reserva-section {
+  margin-bottom: 50px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  color: #2E83E3;
+  text-align: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 5rem;
+  margin-left: 50px;
+  font-family: "Chau Philomene One";
+  position: relative;
+}
+
+.link2:hover {
+  background-color: rgba(46, 131, 227, 0.8); 
+  transform: scale(1.05); 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+.link2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35rem;
+  max-width: 100%;
+  background-color: #2E83E3;
+  color: white;
+  padding: 60px;
+  text-align: center;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 50px;
+  font-family: "Chau Philomene One";
+  position: relative;
+  margin-bottom: 5%;
+  margin-top: 2%;
+  margin-left: 10%;
+}
+
+.img1,
+.img2 {
+  width: 10rem;
+  position: absolute; 
+  z-index: 1; 
+}
+
+.img1 {
+  width: 40%; 
+  right: -15rem; 
+  bottom: 1rem;
+}
+
+.img2 {
+  top: 1rem;
+  right: -15rem;
+  width: 40%; 
+}
+
+.brick {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 3%;
+}
+
+.block {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 4%;
+  margin-top: 2%;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+  .imgBanner {
+    margin-right: 10%;
+  }
+
+  .title2 {
+    font-size: 40px;
+    width: 80%;
+  }
+
+  .linkSection {
+    width: 70%;
+    margin-right: 100px;
+  }
+
+  .link2 {
+    width: 90%;
+    padding: 40px;
+    font-size: 40px;
+  }
+
+  .link {
+    font-size: 3rem;
+  }
+
+  .img1,
+  .img2 {
+    width: 25%;
+    right: -10rem;
+  }
+
+  .brick {
+    width: 60%;
+  }
+}
+
+@media (max-width: 900px) {
+  .title2 {
+    font-size: 35px;
+    width: 90%;
+  }
+
+  .linkSection {
+    width: 80%;
+    margin-right: 50px;
+    gap: 3rem;
+  }
+
+  .link2 {
+    width: 100%;
+    padding: 30px;
+    font-size: 35px;
+  }
+
+  .link {
+    font-size: 2.5rem;
+  }
+
+  .img1,
+  .img2 {
+    width: 30%;
+    right: -5rem;
+  }
+
+  .brick {
+    width: 100%;
+  }
+
+  .block {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .imgBanner {
+    margin-left: -30px;
+    width: 70%;
+    height: 40%;
+  }
+
+  .title2 {
+    font-size: 30px;
+    width: 90%;
+  }
+
+  .linkSection {
+    width: 90%;
+    margin-left: -15px;
+    gap: 2rem;
+  }
+
+  .link2 {
+    width: 100%;
+    padding: 20px;
+    font-size: 30px;
+  }
+
+  .link {
+    font-size: 2,5rem;
+    margin-left: -20px;
+  }
+
+  .img1,
+  .img2 {
+    display: none;
+  }
+
+  .brick {
+    width: 100%;
+  }
+
+  .block {
+    flex-direction: column;
+  }
+}

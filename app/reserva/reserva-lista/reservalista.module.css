@@ -20,10 +20,15 @@
     position: fixed;
 }
 
-.titleh2 {
+.title {
     font-family: 'Chau Philomene One', sans-serif;
     font-size: 40px;
     margin-bottom: 10%;
     margin-top: 2%;
     color: #1f3c71;
+}
+.body{
+    align-items: center;
+    text-align: center;
+    
 }

@@ -6,14 +6,10 @@ import 'react-calendar/dist/Calendar.css';
 import styles from './reservaf.module.css';
 import Header from '../components/header/page';
 import Footer from '../components/footer/page';
-import PopUp from "@/app/components/popUp/PopUp";
 import { useRouter } from 'next/navigation';
 
 const ReservaFerramentaForm = () => {
     const router = useRouter();
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [popupMessage, setPopupMessage] = useState('');
-    const [popupTypeColor, setPopupTypeColor] = useState('');
     const [ferramentas, setFerramentas] = useState([]);
     const [horarios, setHorarios] = useState([]);
     const [selectedFerramenta, setSelectedFerramenta] = useState("");
@@ -21,15 +17,15 @@ const ReservaFerramentaForm = () => {
     const [dataReserva, setDataReserva] = useState(new Date());
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [popupMessage, setPopupMessage] = useState('');
+    const [popupTypeColor, setPopupTypeColor] = useState('');
 
     useEffect(() => { 
         const fetchFerramentas = async () => {
             try {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/ferramentas`);
-                console.log('Ferramentas:', response.data);
                 setFerramentas(response.data.ferramentas || []);
             } catch (error) {
-                console.error("Erro ao buscar ferramentas:", error.response ? error.response.data : error.message);
                 setError("Erro ao carregar ferramentas.");
             }
         };
@@ -37,16 +33,12 @@ const ReservaFerramentaForm = () => {
         const fetchHorarios = async () => {
             try {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/horarios`);
-                console.log('Horários:', response.data);
-
                 if (response.data && response.data.horarios) {
                     setHorarios(response.data.horarios || []);
                 } else {
                     setError("Formato de resposta de horários inválido.");
-                    console.error("Erro: Formato inválido da resposta de horários.");
                 }
             } catch (error) {
-                console.error("Erro ao buscar horários:", error.response ? error.response.data : error.message);
                 setError("Erro ao carregar horários.");
             }
         };
@@ -80,26 +72,15 @@ const ReservaFerramentaForm = () => {
             setError(null);
             setPopupMessage("Sua reserva foi realizada com sucesso!");
             setPopupTypeColor('sucesso');
-            setIsPopupOpen(true);
 
             setTimeout(() => {
-                setIsPopupOpen(false);
                 router.push('reserva-ferramentas/reservaf-lista');
             }, 3000);
-            console.log("Reserva realizada:", reservaResponse.data);
 
         } catch (error) {
             const errorMessage = error.response?.data?.message || error.message || "Erro desconhecido.";
-            console.error("Erro ao realizar reserva:", errorMessage);
             setError("Erro ao realizar reserva: " + errorMessage);
-
-            setPopupMessage("Houve um erro ao realizar sua reserva.");
-            setPopupTypeColor('erro');
-            setIsPopupOpen(true);
-
-            setTimeout(() => {
-                setIsPopupOpen(false);
-            }, 3000);
+            setPopupMessage('');
         }
     };
 
@@ -112,7 +93,13 @@ const ReservaFerramentaForm = () => {
             <Header />
             <form onSubmit={handleSubmit} className={styles.form}>
                 <h2 className={styles.titleh2}>Reserva de Ferramenta</h2>
-                {error && <div style={{ color: 'red', fontFamily: 'Chau Philomene One', textAlign: 'center'}}>{error}</div>}
+
+                {/* Mensagem de erro ou sucesso */}
+                {(error || popupMessage) && (
+                    <div className={`${styles.message} ${popupTypeColor === 'sucesso' ? styles.success : styles.error}`}>
+                        {error || popupMessage}
+                    </div>
+                )}
 
                 <select onChange={(e) => setSelectedFerramenta(e.target.value)} value={selectedFerramenta} className={styles.select}>
                     <option value="">Selecionar Ferramenta</option>
@@ -131,7 +118,7 @@ const ReservaFerramentaForm = () => {
                         </option>
                     ))}
                 </select>
-{/* teste do edu */}
+
                 <div className={styles.calendarContainer}>
                     <label htmlFor="data" className={styles.label}>Selecionar data:</label>
                     <Calendar onChange={setDataReserva} value={dataReserva} className={styles.calendar} />
@@ -139,9 +126,6 @@ const ReservaFerramentaForm = () => {
 
                 <button type="submit" className={styles.button}>Realizar Reserva</button>
             </form>
-
-            {isPopupOpen && <PopUp message={popupMessage} typeColor={popupTypeColor} onClose={() => setIsPopupOpen(false)} />}
-
             <Footer />
         </div>
     );

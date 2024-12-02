@@ -49,3 +49,10 @@
     margin-top: 15px;
 }
 
+@media screen and (max-width: 768px) {
+
+    .logo {
+        max-width: 150px;
+        height: 30px;
+    }
+}

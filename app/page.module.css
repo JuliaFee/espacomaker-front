@@ -208,46 +208,6 @@ padding: 60px;
 
 
 
-@media (max-width: 768px) {
-  .carouselContainer {
-    flex-direction: column;
-  }
-
-  .dot {
-    width: 10px;
-    height: 10px;
-  }
-
-  .h1 {
-    font-size: 36px; 
-  }
-
-  .imageContainer {
-    width: 95%;
-    height: 400px;
-  }
-}
-
-@media (max-width: 480px) {
-  .carouselContainer {
-    width: 100%;
-  }
-
-  .imageContainer {
-    width: 90%;
-    height: 300px;
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
-  }
-
-  .h1 {
-    font-size: 30px;
-  }
-}
-
 .carouselContainer:hover .imageContainer {
   transform: scale(1.03); 
 }
@@ -345,4 +305,74 @@ padding: 60px;
   flex-direction: row;
   margin-bottom: 4%;
   margin-top: 2%;
+}
+
+/* Responsividade: Tela menor que 768px (tablets e smartphones) */
+@media (max-width: 768px) {
+  /* Organização geral da seção */
+  .page{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .block{
+    display: flex;
+    flex-direction: column;
+  }
+  .linkSection {
+    display: flex;
+    flex-direction: column; /* Empilha os elementos */
+    align-items: center;
+    gap: 1.5rem; /* Espaçamento entre itens */
+    padding: 20px 0;
+    width: 100%; /* Ocupa toda a largura */
+  }
+
+  .carouselContainer, 
+  .imageContainer {
+    width: 350px; /* Largura total */
+    max-height: 550px; /* Altura proporcional */
+  }
+  .carouselImage{
+    height: fit-content;
+    width: fit-content;
+  }
+  .link2, .link22 {
+    max-width: 300px;
+    max-height: 500px; 
+    font-size: 40px; 
+    padding: 15px; 
+    margin: 0 auto; 
+    border-radius: 10px; 
+  }
+  .carouselContainer {
+    margin-bottom: 20px; 
+  }
+
+
+  .h1 {
+    font-size: 28px; 
+    margin-bottom: 10px; 
+}
+}
+/* Responsividade: Tela menor que 480px (smartphones pequenos) */
+@media (max-width: 480px) {
+  .linkSection {
+    gap: 1rem; /* Reduz o espaçamento entre itens */
+  }
+
+  .link2, .link22 {
+    font-size: 18px; /* Fonte ainda menor */
+    padding: 12px; /* Ajuste de padding */
+    margin-bottom: 10px; /* Espaço menor entre botões */
+  }
+
+  .imageContainer {
+    width: 100%; /* Imagem ocupa toda a largura */
+    height: auto; /* Altura proporcional */
+  }
+
+  .h1 {
+    font-size: 24px; /* Reduz o tamanho do título */
+  }
 }
