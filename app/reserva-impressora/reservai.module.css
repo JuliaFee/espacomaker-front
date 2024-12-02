@@ -1,9 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap');
-
-
-
-
-
 /* Página */
 .page {
   display: flex;
@@ -11,57 +5,77 @@
   align-items: center;
   background-color: #f9f9f9;
   min-height: 100vh;
-  padding: 2rem;
+
   font-family: Arial, sans-serif;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  background-color: #1f3c71;
+  padding: 0.8rem; /* Diminui o padding do header */
+  color: white;
+  text-align: center;
+  font-size: 1.6rem; /* Diminui o tamanho da fonte */
+  font-family: 'Chau Philomene One', sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  height: 50px; /* Diminui a altura */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Formulário */
 .form {
   background-color: rgba(255, 255, 255, 0.95);
-  padding: 35px 50px;
+  padding: 30px 45px; /* Diminui o padding do formulário */
   border-radius: 3%;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Diminui a sombra */
   transition: all 0.3s ease-in-out;
   width: 100%;
   max-width: 600px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centraliza os elementos horizontalmente */
+  align-items: center;
+  margin-top: 80px; /* Diminui o espaçamento do header */
+  margin-bottom: 80px; /* Diminui o espaçamento do footer */
 }
 
+/* Título */
 .titleh2 {
   font-family: 'Chau Philomene One', sans-serif;
-  font-size: 2rem;
+  font-size: 1.8rem; /* Diminui o tamanho da fonte */
   color: #FFAD23;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Diminui o espaçamento abaixo do título */
 }
 
 /* Selecionar Impressora */
 .selectImpressora {
-  width: 80%; /* Centraliza com largura maior */
+  width: 80%;
   padding: 0.5rem;
   margin: 1rem 0;
   border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: 1.6rem;
+  font-size: 1.5rem; /* Diminui o tamanho da fonte */
   text-align: center;
 }
 
 /* Calendário */
 .calebox {
-  width: 80%; /* Centraliza e organiza elementos */
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Diminui o espaçamento do calendário */
 }
 
-
-
 .react-calendar {
-  width: 100%; /* Ajusta largura ao contêiner */
-  max-width: 500px;
+  width: 100%;
+  max-width: 450px; /* Diminui o tamanho máximo */
   background-color: #fff;
   border-radius: 8px;
   border: 1px solid #ddd;
@@ -75,12 +89,12 @@
   color: white;
   border: none;
   border-radius: 8px;
-  font-size: 1.6rem;
+  font-size: 1.5rem; /* Diminui o tamanho da fonte */
   cursor: pointer;
   width: 100%;
-  height: 3rem;
+  height: 2.5rem; /* Diminui a altura */
   font-family: 'Chau Philomene One', sans-serif;
-  margin-top: 2rem;
+  margin-top: 1.5rem; /* Diminui o espaçamento superior */
   transition: background-color 0.3s, transform 0.2s;
 }
 
@@ -88,35 +102,34 @@
   background-color: #e6951f;
 }
 
-
 /* Label Styles */
 .labelcale {
   font-family: 'Chau Philomene One', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.5rem; /* Diminui o tamanho da fonte */
   color: #FFAD23;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1rem; /* Diminui o espaçamento abaixo */
 }
 
 .message {
   text-align: center;
-  margin-bottom: 20px;
-  padding: 0; /* Remove o preenchimento */
+  margin-bottom: 1.5rem; /* Diminui o espaçamento */
+  padding: 0;
   font-family: 'Chau Philomene One', sans-serif;
   font-size: 1rem;
-  background: none; /* Remove a cor de fundo */
-  border: none; /* Remove a borda */
+  background: none;
+  border: none;
 }
 
 .success {
-  color: #28a745; /* Texto verde para sucesso */
+  color: #28a745;
 }
 
 .error {
-  color: red; /* Texto vermelho para erro */
+  color: red;
 }
 
-
+/* Estilos do calendário */
 .react-calendar__tile--active {
   background-color: #FFAD23;
   color: white;
@@ -153,6 +166,24 @@
   color: black;
 }
 
+/* Footer */
+.footer {
+  width: 100%;
+  background-color: #1f3c71;
+  padding: 0.8rem; /* Diminui o padding do footer */
+  color: white;
+  text-align: center;
+  font-size: 1.4rem; /* Diminui o tamanho da fonte */
+  font-family: 'Chau Philomene One', sans-serif;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  height: 30px; /* Diminui a altura */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .popUp {
   position: fixed;
@@ -166,15 +197,6 @@
   z-index: 1000;
   text-align: center;
 }
-
-.sucesso {
-  color: green;
-}
-
-.erro {
-  color: red;
-}
-
 
 /* Responsividade */
 @media (max-width: 768px) {
