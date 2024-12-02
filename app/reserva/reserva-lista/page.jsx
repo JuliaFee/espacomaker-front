@@ -4,6 +4,7 @@ import axios from "axios";
 import style from "./reservalista.module.css";
 import Header from "@/app/components/header/page";
 import Footer from "@/app/components/footer/page";
+import Loading from "@/app/components/loading/page";
 
 const reservaLista = () => {
   const [reservas, setReservas] = useState([]);
@@ -39,7 +40,7 @@ const reservaLista = () => {
         }
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
-        setError();
+        setError([Loading]);
       } finally {
         setLoading(false);
       }
@@ -52,7 +53,7 @@ const reservaLista = () => {
       <Header />
       <h1 className={style.title}>Reservas agurdando aprovação</h1>
       {loading ? (
-        <p>Carregando...</p>
+        <p> <Loading /></p>
       ) : (
         <>
           {error && <p className={style.error}>{error}</p>}
@@ -70,6 +71,7 @@ const reservaLista = () => {
                
               ))
             ) : (
+            
               <li className={style.message}>Ops! Nenhuma reserva foi feita ainda...</li>
             )}
           </ul>
