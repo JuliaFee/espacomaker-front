@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from "react";
 import axios from "axios";
-import style from "./reservalista.modules.css";
+import styles from "./reservalista.modules.css";
 import Header from "@/app/components/header/page";
 import Footer from "@/app/components/footer/page";
 import PopUp2 from "@/app/components/popUp2/popUp2";
@@ -65,30 +65,25 @@ const ImpressoraList = () => {
   };
 
   return (
-    <div className={style.body}>
+    <div className={styles.body}>
       <Header />
-      <h1 className={style.title}>Reservas de Impressoras</h1>
+      <h1 className={styles.title}>Reservas de Impressoras</h1>
       {loading ? (
         <p>Carregando...</p>
       ) : (
         <>
-          {error && <p className={style.error}>{error}</p>}
+          {error && <p className={styles.error}>{error}</p>}
           <ul>
             {reservas.length > 0 ? (
               reservas.map((reserva, index) => (
                 <li key={index}>
                   Impressora: {getImpressoraNomeById(reserva.id_impressora)}, 
                   Data: {reserva.data_reserva}
-                  <button 
-                    onClick={() => handlePopUpOpen(`Detalhes da reserva: Impressora ${getImpressoraNomeById(reserva.id_impressora)}, Data ${reserva.data_reserva}`)} 
-                    className={style.detailsButton}
-                  >
-                    Ver detalhes
-                  </button>
+               
                 </li>
               ))
             ) : (
-              <li className={style.message}>Nenhuma reserva de impressora encontrada.</li>
+              <li className={styles.message}>Nenhuma reserva de impressora encontrada.</li>
             )}
           </ul>
         </>
@@ -97,7 +92,7 @@ const ImpressoraList = () => {
       {/* PopUp2 */}
       {showPopUp && <PopUp2 message={popUpMessage} onClose={handlePopUpClose} />}
 
-      <Footer className={style.footer} />
+      <Footer className={styles.footer} />
     </div>
   );
 };

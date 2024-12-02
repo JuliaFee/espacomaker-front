@@ -32,35 +32,23 @@
     border-radius: 4px;
     font-size: 16px;
     background-color: #fff;
-    /* Fundo branco para o select */
     color: #333;
-    /* Cor do texto em um tom escuro */
     cursor: pointer;
     font-family: 'Chau Philomene One', sans-serif;
+    text-align: center;
 }
 
-.select option {
-    color: #333;
-    /* Garante que o texto das opções seja escuro */
-    background-color: #fff;
-    /* Garante que o fundo das opções seja branco */
-}
-
-/* Selecione o horário e ferramenta */
 .select:focus {
     outline: none;
     border-color: #FFAD23;
-    /* Destaca a borda quando selecionado */
 }
 
-/* Estilizando a mensagem de erro */
 .error {
     color: red;
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Estilos para o botão */
 .button {
     background-color: #FFAD23;
     color: white;
@@ -73,45 +61,40 @@
     font-family: 'Chau Philomene One', sans-serif;
     margin-top: 1rem;
     transition: background-color 0.3s, transform 0.2s;
-}
-
-.button:hover {
-    background-color: #45a049;
-}
-
-
-/* Estilos do calendário */
-.calendarContainer {
-    margin-bottom: 20px;
-    margin: 0;
     text-align: center;
+    line-height: 3rem;
+}
+
+.calendarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza verticalmente */
+    margin-bottom: 20px;
+}
+
+.calendarContainer label {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    font-family: 'Chau Philomene One', sans-serif;
+    color: #333;
+}
+
+.calendar {
+    width: 100%; /* Ajusta a largura */
+    max-width: 400px; /* Define um limite máximo para o tamanho */
 }
 
 .react-calendar__navigation button {
     background: none;
     border: none;
-    color: #FFAD23; 
+    color: #FFAD23;
     font-size: 1em;
     cursor: pointer;
-    font-family:  'Chau Philomene One', sans-serif;
-  }
-
-.label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
     font-family: 'Chau Philomene One', sans-serif;
-    font-size: 1.2rem;
 }
 
-.calendar {
-    width: 100%;
-    margin-top: 10px;
-    margin-left: 4.8rem;
-}
-
-/* Popup styles */
 .popUp {
     position: fixed;
     top: 50%;

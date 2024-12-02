@@ -1,28 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap');
+
 .page {
-    padding: 20px;
-    max-width: 800px;
     margin: 0 auto;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 100vh;
+   
+
+    /* Adiciona a imagem de fundo */
+    background-image: url('/bckg.png'); /* Caminho da imagem */
+    background-size: cover; /* Faz a imagem cobrir todo o fundo */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    background-position: center; /* Centraliza a imagem no fundo */
 }
 
 .titleh2 {
-    text-align: center;
-    margin-bottom: 20px;
+      color: #1f3c71;
+  text-align: center;
+  margin: 20px 0;
+  font-size: 45px;
+  font-family: 'Chau Philomene One', cursive;
+  letter-spacing: 1px;
+  margin-top: 60px;
+  margin-bottom: 40px;
+  transition: color 0.3s ease;
+  
 }
 
 .reservasList {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .reservaItem {
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: #FFAD23;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font-size: 1rem;
+    width: 80%;
+    max-width: 600px;
+    transition: box-shadow 0.3s ease;
+}
+
+.reservaItem:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .reservaItem p {
-    margin: 5px 0;
+    margin: 8px 0;
+    font-size: 1rem;
 }
 
+.reservaItem strong {
+    font-weight: bold;
+    color: #fff;
+}
+
+.reservaItem span {
+    display: inline-block;
+    margin-left: 5px;
+    font-weight: normal;
+    color: #555;
+}
