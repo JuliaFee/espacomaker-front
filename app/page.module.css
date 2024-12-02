@@ -328,34 +328,33 @@ padding: 60px;
     width: 100%; /* Ocupa toda a largura */
   }
 
-  /* Garantir que os botões fiquem abaixo das imagens */
   .carouselContainer, 
   .imageContainer {
-    width: 100%; /* Largura total */
-    height: 100%; /* Altura proporcional */
+    width: 350px; /* Largura total */
+    max-height: 550px; /* Altura proporcional */
   }
-
+  .carouselImage{
+    height: fit-content;
+    width: fit-content;
+  }
   .link2, .link22 {
-    width: 100%; /* Botões centralizados */
-    max-width: 400px; /* Limite de largura para botões */
-    font-size: 20px; /* Ajuste de fonte para dispositivos menores */
-    padding: 15px; /* Padding adequado */
-    margin: 0 auto; /* Centraliza */
-    border-radius: 10px; /* Bordas arredondadas */
+    max-width: 300px;
+    max-height: 500px; 
+    font-size: 40px; 
+    padding: 15px; 
+    margin: 0 auto; 
+    border-radius: 10px; 
   }
-
-  /* Imagens antes dos botões */
   .carouselContainer {
-    margin-bottom: 20px; /* Espaçamento entre imagens e botões */
+    margin-bottom: 20px; 
   }
 
-  /* Títulos */
+
   .h1 {
-    font-size: 28px; /* Reduz o tamanho do título */
-    margin-bottom: 10px; /* Espaçamento reduzido */
-  }
+    font-size: 28px; 
+    margin-bottom: 10px; 
 }
-
+}
 /* Responsividade: Tela menor que 480px (smartphones pequenos) */
 @media (max-width: 480px) {
   .linkSection {
