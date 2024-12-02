@@ -3,20 +3,19 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import styles from './reservai.modules.css';
+import styles from './reservai.module.css';
 import Header from '../components/header/page';
 import Footer from '../components/footer/page';
-import PopUp from "@/app/components/popUp/PopUp";
 
 const ImpressoraForm = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [popupMessage, setPopupMessage] = useState('');
-    const [popupTypeColor, setPopupTypeColor] = useState('');
     const [impressoras, setImpressoras] = useState([]);
     const [selectedImpressora, setSelectedImpressora] = useState("");
     const [dataReserva, setDataReserva] = useState(new Date());
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [popupMessage, setPopupMessage] = useState('');
+    const [popupTypeColor, setPopupTypeColor] = useState('');
 
     useEffect(() => {
         const fetchImpressoras = async () => {
@@ -88,7 +87,8 @@ const ImpressoraForm = () => {
             <Header />
             <form onSubmit={handleSubmit} className={styles.form}>
                 <h2 className={styles.titleh2}>Reserva de Impressora</h2>
-                {error && <div style={{ color: 'red' }}>{error}</div>}
+
+                {/* Dropdown de seleção de impressoras */}
                 <select
                     onChange={handleImpressoraChange}
                     value={selectedImpressora}
@@ -101,14 +101,16 @@ const ImpressoraForm = () => {
                         </option>
                     ))}
                 </select>
+
+                {/* Calendário e data */}
                 <div className={styles.calebox}>
                     <label htmlFor="data" className={styles.labelcale}>Selecionar data:</label>
                     <Calendar onChange={setDataReserva} value={dataReserva} className={styles.reactCalendar} />
                 </div>
+
+                {/* Botão */}
                 <button type="submit" className={styles.button}>Realizar Reserva</button>
             </form>
-
-            {isPopupOpen && <PopUp message={popupMessage} typeColor={popupTypeColor} onClose={() => setIsPopupOpen(false)} />}
             <Footer />
         </div>
     );

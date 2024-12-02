@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap');
 
-/* General Styles */
+
+
+
+
+/* Página */
 .page {
   display: flex;
   flex-direction: column;
@@ -11,6 +15,7 @@
   font-family: Arial, sans-serif;
 }
 
+/* Formulário */
 .form {
   background-color: rgba(255, 255, 255, 0.95);
   padding: 35px 50px;
@@ -19,6 +24,9 @@
   transition: all 0.3s ease-in-out;
   width: 100%;
   max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza os elementos horizontalmente */
 }
 
 .titleh2 {
@@ -29,7 +37,39 @@
   margin-bottom: 2rem;
 }
 
-/* Button Styles */
+/* Selecionar Impressora */
+.selectImpressora {
+  width: 80%; /* Centraliza com largura maior */
+  padding: 0.5rem;
+  margin: 1rem 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+/* Calendário */
+.calebox {
+  width: 80%; /* Centraliza e organiza elementos */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+
+
+.react-calendar {
+  width: 100%; /* Ajusta largura ao contêiner */
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Chau Philomene One', sans-serif;
+}
+
+/* Botão */
 .button {
   background-color: #FFAD23;
   color: white;
@@ -48,20 +88,6 @@
   background-color: #e6951f;
 }
 
-/* Select Input Styles */
-.selectImpressora, .selectFerramenta {
-  width: 40%;
-  padding: 0.5rem;
-  margin: 1rem 0;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1.6rem;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin-right: 5%;
-  margin-left: 7%;
-  margin-bottom: 7%;
-}
 
 /* Label Styles */
 .labelcale {
@@ -72,23 +98,24 @@
   margin-bottom: 1rem;
 }
 
-/* Error Message Styles */
-.errorMessage {
-  color: red;
-  font-size: 1.4rem;
-  margin-top: 1rem;
+.message {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 0; /* Remove o preenchimento */
+  font-family: 'Chau Philomene One', sans-serif;
+  font-size: 1rem;
+  background: none; /* Remove a cor de fundo */
+  border: none; /* Remove a borda */
 }
 
-/* Calendar Styles */
-.react-calendar {
-  width: 100%;
-  max-width: 500px;
-  background-color: #fff;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-family: 'Chau Philomene One', sans-serif;
+.success {
+  color: #28a745; /* Texto verde para sucesso */
 }
+
+.error {
+  color: red; /* Texto vermelho para erro */
+}
+
 
 .react-calendar__tile--active {
   background-color: #FFAD23;
@@ -126,29 +153,37 @@
   color: black;
 }
 
-/* PopUp Styles */
-.popUpSuccess {
-  background-color: green;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
+
+.popUp {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  text-align: center;
 }
 
-.popUpError {
-  background-color: red;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
+.sucesso {
+  color: green;
 }
 
-/* Responsive Styles */
+.erro {
+  color: red;
+}
+
+
+/* Responsividade */
 @media (max-width: 768px) {
   .form {
     padding: 20px 30px;
     width: 90%;
   }
 
-  .selectImpressora, .selectFerramenta, .calendar, .button {
+  .selectImpressora, .button {
     font-size: 1.4rem;
   }
 
