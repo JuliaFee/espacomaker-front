@@ -39,7 +39,7 @@ const reservaLista = () => {
         }
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
-        setError("Erro interno do servidor!");
+        setError();
       } finally {
         setLoading(false);
       }
