@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap');
-
 /* General Styles */
 .body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que a altura mínima seja 100% da altura da tela */
   margin: 0 auto;
   font-family: Arial, sans-serif;
   width: 100%;
   box-sizing: border-box;
-  min-height: 100vh;
 
   /* Adiciona a imagem de fundo */
-  background-image: url('/bckg.png'); /* Caminho da imagem */
-  background-size: cover; /* Faz a imagem cobrir todo o fundo */
-  background-repeat: no-repeat; /* Impede que a imagem se repita */
-  background-position: center; /* Centraliza a imagem no fundo */
+  background-image: url('/bckg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* Título da página */
@@ -56,6 +56,8 @@
   width: 80%;
   max-width: 600px;
   transition: box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 /* Hover nos itens de reserva */
@@ -89,6 +91,9 @@
 
 /* Footer */
 .footer {
-  margin-top: 40px;
+  margin-top: auto; /* Faz o footer se posicionar na parte inferior da tela */
   text-align: center;
+  padding: 20px;
+  background-color: #1f3c71;
+  color: #fff;
 }

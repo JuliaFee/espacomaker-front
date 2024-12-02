@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from "react";
 import axios from "axios";
-import styles from "./reservalista.modules.css";
+import styles from "./reservalista.module.css";
 import Header from "@/app/components/header/page";
 import Footer from "@/app/components/footer/page";
 import PopUp2 from "@/app/components/popUp2/popUp2";
@@ -73,19 +73,19 @@ const ImpressoraList = () => {
       ) : (
         <>
           {error && <p className={styles.error}>{error}</p>}
-          <ul>
-            {reservas.length > 0 ? (
-              reservas.map((reserva, index) => (
-                <li key={index}>
-                  Impressora: {getImpressoraNomeById(reserva.id_impressora)}, 
-                  Data: {reserva.data_reserva}
-               
-                </li>
-              ))
-            ) : (
-              <li className={styles.message}>Nenhuma reserva de impressora encontrada.</li>
-            )}
-          </ul>
+          <ul className={styles.reservasList}>
+  {reservas.length > 0 ? (
+    reservas.map((reserva, index) => (
+      <li key={index} className={styles.reservaItem}>
+        Impressora: {getImpressoraNomeById(reserva.id_impressora)}, 
+        Data: {reserva.data_reserva}
+      </li>
+    ))
+  ) : (
+    <li className={styles.message}>Nenhuma reserva de impressora encontrada.</li>
+  )}
+</ul>
+
         </>
       )}
 
