@@ -310,6 +310,15 @@ padding: 60px;
 /* Responsividade: Tela menor que 768px (tablets e smartphones) */
 @media (max-width: 768px) {
   /* Organização geral da seção */
+  .page{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .block{
+    display: flex;
+    flex-direction: column;
+  }
   .linkSection {
     display: flex;
     flex-direction: column; /* Empilha os elementos */
@@ -323,11 +332,11 @@ padding: 60px;
   .carouselContainer, 
   .imageContainer {
     width: 100%; /* Largura total */
-    height: auto; /* Altura proporcional */
+    height: 100%; /* Altura proporcional */
   }
 
   .link2, .link22 {
-    width: 90%; /* Botões centralizados */
+    width: 100%; /* Botões centralizados */
     max-width: 400px; /* Limite de largura para botões */
     font-size: 20px; /* Ajuste de fonte para dispositivos menores */
     padding: 15px; /* Padding adequado */
